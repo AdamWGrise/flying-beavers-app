@@ -1,1 +1,5 @@
-# flying-beavers-app
+# The Flying Beavers Official App
+## We don't know what this is gonna be yet...
+### But we're pretty sure it's gonna be great.
+#### Just hang out here for a while...
+##### And I'm sure you won't be disappointed.
