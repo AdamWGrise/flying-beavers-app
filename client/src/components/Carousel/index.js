@@ -1,4 +1,6 @@
 import React from "react";
+import "./style.css";
+
 
 function Carousel() {
     return (
@@ -11,21 +13,21 @@ function Carousel() {
                     <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
                 </ol>
                 <div className="carousel-inner">
-                    <div className="carousel-item active">
+                    <div className="carousel-item max-height active">
                         <img src="planner.jpg" className="d-block w-100" alt="..." />
                         <div className="carousel-caption d-none d-md-block">
                             <h5 className="car-1">First slide label</h5>
                             <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                         </div>
                     </div>
-                    <div className="carousel-item">
+                    <div className="carousel-item max-height">
                         <img src="indoors-3203076_1280.jpg" className="d-block w-100" alt="..." />
                         <div className="carousel-caption d-none d-md-block">
                             <h5>Second slide label</h5>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                         </div>
                     </div>
-                    <div className="carousel-item">
+                    <div className="carousel-item max-height">
                         <img src="todo.jpg" className="d-block w-100" alt="..." />
                         <div className="carousel-caption d-none d-md-block">
                             <h5>Third slide label</h5>
