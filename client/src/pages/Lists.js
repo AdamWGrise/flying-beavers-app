@@ -15,7 +15,7 @@ class Lists extends Component {
     }
     state = {
         activeListId: 0,
-        testingLists: [["Apples", "Bananas", "Blueberries"], ["Blue", "Green"]]
+        testingLists: [["Apples", "Bananas", "Blueberries"], ["Blue", "Green", "Red"], ["Hey", "Hey", "hey"]]
     };
 
     // updateStatePanel = (listId) => {
