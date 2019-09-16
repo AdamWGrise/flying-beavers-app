@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 // import API from "../utils/API";
 import Shopping from "../components/Shopping";
-import Footer from "../components/Footer";
 import SelectBox from "../components/SelectBox";
-import './teststyles.css';
 import LeftPanel from "../components/LeftPanel";
+import Footer from "../components/Footer";
+import './teststyles.css';
 import ContentPanel from "../components/ContentPanel";
 import ListClick from "../components/ListClick"
 
@@ -28,6 +28,7 @@ class Lists extends Component {
 
     handleListClick = (event) => {
         console.log("CLICKY");
+        event.preventDefault();
         // console.log("Lists.js handleListClick function");
         // console.log("event.target: ", event.target);
         // console.log("event.target.name: ", event.target.name);
@@ -40,11 +41,6 @@ class Lists extends Component {
     render() {
         return (
             <div id="content">
-
-                <div id="state">
-                    <span>activeListId: {this.state.activeListId}</span>
-                </div>
-
                 <div className="container">
                     <div className="row">
                         <div className="col-12 my-3">
@@ -52,48 +48,33 @@ class Lists extends Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-4 my-3">
+                        <div className="col-3 my-3">
                             <ListClick
                                 activeListId={this.state.activeListId}
                                 handleListClick={this.handleListClick}
                                 testLists={this.state.testLists}
-
                             />
-                            {/* <LeftPanel /> */}
                         </div>
-                        <div className="col-8 my-3">
+                        <div className="col-9 my-3">
                             <ContentPanel
                                 activeListId={this.state.activeListId}
                                 testLists={this.state.testLists}
                             />
                         </div>
                     </div>
-                    {/* <div className="row">
-                        <div className="col-3 my-3">
-                        <Shopping />
-                            <SelectBox
-                                blah={this.state.testingLists}
-                            /> */}
-                    {/* <form>
-                                <SelectBox
-                                    value={this.state.activeListId}
-                                    onChange={this.handleInputChange}
-                                    name="testData"
-                                />
-                            </form> */}
-                    {/* <ul className="list-group">
-                                <li className="list-group-item">All</li>
-                                <li className="list-group-item">Today</li>
-                                <li className="list-group-item">This Week</li>
-                                <li className="list-group-item">Next 7 days</li>
-                            </ul> */}
-                    {/* </div> */}
-                    {/* <div className="col-9 content-area my-3">
-                            <Shopping value={this.state.testingLists} />
-                        </div> */}
-                    {/* </div> */}
+                    <div className="row">
+                        <div className="col-12 my-3">
+                            <Footer />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-12 my-3">
+                            <div id="state">
+                                <span>activeListId: {this.state.activeListId}</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                {/* <Footer /> */}
             </div>
         );
     }

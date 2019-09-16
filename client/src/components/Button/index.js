@@ -4,11 +4,9 @@ import './styles.css';
 function Button(props) {
 
   return (
-    <>
-    <button key={props.key} value={props.value} name={props.name} onClick={props.onClick}>
+    <button value={props.value} name={props.name} onClick={props.onClick} className="nav-link" href="#">
       {props.name}
     </button>
-    </>
   );
 }
 

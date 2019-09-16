@@ -1,9 +1,9 @@
 import React from "react";
 
-function Footer({ children }) {
+function Footer() {
   return (
     <div>
-      {children}
+      Credits, Whatnot
     </div>
   );
 }

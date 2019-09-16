@@ -1,5 +1,4 @@
 .list-click {
     background: rgb(185, 185, 241);
-    padding: 10px;
-    border: 3px solid #fff;
+    border-radius: 9px;
 }
