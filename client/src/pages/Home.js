@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 
 class Home extends Component {
     state = {
+        activePageTitle: "Home"
     };
 
     render() {
@@ -18,7 +19,7 @@ class Home extends Component {
                     </div>
                     <div className="row">
                         <div className="col">
-                            adadfasfd
+                            {this.state.activePageTitle}
                         </div>
                     </div>
                 </div>

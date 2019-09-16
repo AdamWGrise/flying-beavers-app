@@ -2,6 +2,7 @@
     background-image: url("./planner.jpg");
     background-size: cover;
     color: #fff;
+    max-height: 180px;
 }
 
 .jumbotron a, .jumbotron a:visited {

@@ -16,7 +16,8 @@ class Lists extends Component {
             { title: "Zeroth List", items: ["Apples", "Bananas", "Blueberries", "Pineapples", "Kiwi", "Plums"] },
             { title: "Colors List", items: ["Blue", "Green", "Red"] },
             { title: "Another List", items: ["Hey", "Hey", "hey"] }
-        ]
+        ],
+        activePageTitle: "Lists"
     };
 
     handleListClick = (event) => {
@@ -33,7 +34,7 @@ class Lists extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col">
-                            <Jumbotron pageName="Shopping Lists" />
+                            <Jumbotron pageName={this.state.activePageTitle} />
                         </div>
                     </div>
                     <div className="row">
