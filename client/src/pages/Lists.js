@@ -15,12 +15,13 @@ class Lists extends Component {
     }
     state = {
         activeListId: 0,
-        testingLists: [["Apples", "Bananas", "Blueberries"], ["Blue", "Green", "Red"], ["Hey", "Hey", "hey"]]
+        testLists: [
+            { title: "First", items: ["Apples", "Bananas", "Blueberries"] },
+            { title: "2", items: ["Blue", "Green", "Red"] },
+            { title: "3", items: ["Hey", "Hey", "hey"] }
+        ]
+        // testingLists: [["Apples", "Bananas", "Blueberries"], ["Blue", "Green", "Red"], ["Hey", "Hey", "hey"]]
     };
-
-    // updateStatePanel = (listId) => {
-    //     act
-    // }
 
     handleListClick = (event) => {
         console.log("CLICKY");
@@ -45,9 +46,7 @@ class Lists extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-12 my-3">
-                            <h1>The Lists Page -
-                                {/* Hi Skyler! I love you! */}
-                            </h1>
+                            <h1>The Lists Page</h1>
                         </div>
                     </div>
                     <div className="row">
@@ -59,9 +58,9 @@ class Lists extends Component {
                             {/* <LeftPanel /> */}
                         </div>
                         <div className="col-8 my-3">
-                            <ContentPanel 
+                            <ContentPanel
                                 activeListId={this.state.activeListId}
-                                testingLists={this.state.testingLists}
+                                testLists={this.state.testLists}
                             />
                         </div>
                     </div>
