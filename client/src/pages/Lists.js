@@ -16,24 +16,26 @@ class Lists extends Component {
     state = {
         activeListId: 0,
         testLists: [
-            { title: "First", items: ["Apples", "Bananas", "Blueberries"] },
-            { title: "2", items: ["Blue", "Green", "Red"] },
-            { title: "3", items: ["Hey", "Hey", "hey"] }
+            { title: "Zeroth List", items: ["Apples", "Bananas", "Blueberries"] },
+            { title: "Colors List", items: ["Blue", "Green", "Red"] },
+            { title: "Another List", items: ["Hey", "Hey", "hey"] }
         ]
-        // testingLists: [["Apples", "Bananas", "Blueberries"], ["Blue", "Green", "Red"], ["Hey", "Hey", "hey"]]
     };
+
+    // changeColor = () => {
+    //     this.setState({color: "blue"});
+    //   }
 
     handleListClick = (event) => {
         console.log("CLICKY");
-        console.log("Lists.js handleListClick function");
-        console.log("event.target: ", event.target);
-        console.log("event.target.name: ", event.target.name);
-        console.log("event.target.value: ", event.target.value);
+        // console.log("Lists.js handleListClick function");
+        // console.log("event.target: ", event.target);
+        // console.log("event.target.name: ", event.target.name);
+        // console.log("event.target.value: ", event.target.value);
         this.setState({
             activeListId: event.target.value
         });
     }
-
 
     render() {
         return (
@@ -54,6 +56,8 @@ class Lists extends Component {
                             <ListClick
                                 activeListId={this.state.activeListId}
                                 handleListClick={this.handleListClick}
+                                testLists={this.state.testLists}
+
                             />
                             {/* <LeftPanel /> */}
                         </div>
