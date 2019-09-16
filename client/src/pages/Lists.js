@@ -45,7 +45,9 @@ class Lists extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-12 my-3">
-                            <h1>The Lists Page - Hi Skyler! I love you!</h1>
+                            <h1>The Lists Page -
+                                {/* Hi Skyler! I love you! */}
+                            </h1>
                         </div>
                     </div>
                     <div className="row">
@@ -57,7 +59,10 @@ class Lists extends Component {
                             {/* <LeftPanel /> */}
                         </div>
                         <div className="col-8 my-3">
-                            <ContentPanel />
+                            <ContentPanel 
+                                activeListId={this.state.activeListId}
+                                testingLists={this.state.testingLists}
+                            />
                         </div>
                     </div>
                     {/* <div className="row">

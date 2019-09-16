@@ -2,12 +2,12 @@ import React from "react";
 import './styles.css';
 
 // function ContentPanel({ children }) {
-function ContentPanel() {
+function ContentPanel(props) {
 
   return (
     <div id="content-panel">
-      ContentPanel
-      {/* {children} */}
+      <h3>List Title</h3>
+      {props.testingLists[props.activeListId]}
     </div>
   );
 }
