@@ -3,20 +3,20 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./pages/Home";
 import Lists from "./pages/Lists";
 import Nav from "./components/Nav";
+import './App.css';
+
 
 function App() {
   return (
-    <Lists />
-
-    // <Router>
-    //   <div>
-    //     <Nav />
-    //     <Switch>
-    //       <Route exact path="/" component={Home} />
-    //       <Route exact path="/lists" component={Lists} />
-    //     </Switch>
-    //   </div>
-    // </Router>
+    <Router>
+      <div>
+        <Nav />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/lists" component={Lists} />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

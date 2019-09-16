@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Jumbotron from "../components/Jumbotron";
 import Carousel from "../components/Carousel";
-
+import Footer from "../components/Footer";
 
 class Home extends Component {
     state = {
@@ -9,12 +9,20 @@ class Home extends Component {
 
     render() {
         return (
-            <div>
-                <h1>The Home Page</h1>
-                <Carousel />
-                <Jumbotron>
-                    <h2>Welcome</h2>
-                </Jumbotron>
+            <div id="content">
+                <div className="container">
+                    <div className="row">
+                        <div className="col">
+                            <Carousel />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col">
+                            adadfasfd
+                        </div>
+                    </div>
+                </div>
+                <Footer />
             </div>
         );
     }

@@ -1,0 +1,9 @@
+.jumbotron {
+    background-image: url("./planner.jpg");
+    background-size: cover;
+    color: #fff;
+}
+
+.jumbotron a, .jumbotron a:visited {
+    color: #fff;
+}

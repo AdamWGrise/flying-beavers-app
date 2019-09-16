@@ -2,8 +2,7 @@ import React from "react";
 
 function Nav(props) {
     return (
-
-        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <nav className="navbar navbar-expand-lg navbar-light fixed-top py-4">
             <div className="container">
                 <a className="navbar-brand" href="/">Family Manager</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -18,17 +17,6 @@ function Nav(props) {
                         <li className="nav-item">
                             <a className="nav-link" href="/lists">Lists</a>
                         </li>
-                        {/* <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle" href="index.html" id="navbarDropdownMenuLink" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Family Info
-                    </a>
-                        <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a className="dropdown-item" href="#">Emergency</a>
-                            <a className="dropdown-item" href="#">Other</a>
-                            <a className="dropdown-item" href="#">Other</a>
-                        </div>
-                    </li> */}
                     </ul>
                 </div>
             </div>

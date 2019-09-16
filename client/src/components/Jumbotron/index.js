@@ -1,12 +1,16 @@
 import React from "react";
+import "./styles.css";
 
-function Jumbotron({ children }) {
+function Jumbotron(props) {
   return (
-    <div
-      style={{ height: 300, clear: "both", paddingTop: 120, textAlign: "center" }}
-      className="jumbotron"
-    >
-      {children}
+    <div className="container">
+      <div className="row">
+        <div className="col-12 my-3">
+          <div className="jumbotron">
+            <h1 className="display-4">{props.pageName}</h1>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
