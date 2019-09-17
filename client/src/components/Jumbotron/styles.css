@@ -1,0 +1,11 @@
+.jumbotron {
+    background-image: url("./planner.jpg");
+    background-size: cover;
+    color: #fff;
+    max-height: 180px;
+    margin-top: 20px;
+}
+
+.jumbotron a, .jumbotron a:visited {
+    color: #fff;
+}
