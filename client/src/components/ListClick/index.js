@@ -3,8 +3,6 @@ import './styles.css';
 import Button from "../Button";
 
 function ListClick(props) {
-  let activeList = props.testLists[props.activeListId];
-  console.log("activeList", activeList);
 
   return (
     <nav className="nav flex-column">
