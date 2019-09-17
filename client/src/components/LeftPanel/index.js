@@ -1,17 +1,16 @@
-import React from "react";
-import ListClick from "../ListClick";
-import './styles.css';
+import React from 'react'
+import ListClick from '../ListClick'
+import './styles.css'
 
-function LeftPanel(props) {
-
+function LeftPanel (props) {
   return (
     <>
-      <div id="left-panel">
+      <div id='left-panel'>
         LeftPanel
-      <ListClick />
+        <ListClick />
       </div>
     </>
-  );
+  )
 }
 
-export default LeftPanel;
+export default LeftPanel

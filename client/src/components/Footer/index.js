@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react'
 
-function Footer() {
+function Footer () {
   return (
-    <footer className="d-flex justify-content-center">
+    <footer className='d-flex justify-content-center'>
       - Footer | Credits -
     </footer>
-  );
+  )
 }
 
-export default Footer;
+export default Footer

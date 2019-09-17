@@ -1,13 +1,12 @@
-import React from "react";
-import './styles.css';
+import React from 'react'
+import './styles.css'
 
-function Button(props) {
-
+function Button (props) {
   return (
-    <button value={props.value} name={props.name} onClick={props.onClick} className="btn">
+    <button value={props.value} name={props.name} onClick={props.onClick} className='btn'>
       {props.name}
     </button>
-  );
+  )
 }
 
-export default Button;
+export default Button
