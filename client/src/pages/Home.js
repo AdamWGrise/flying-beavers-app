@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Jumbotron from "../components/Jumbotron";
+import ContentBlock from "../components/ContentBlock";
 import Carousel from "../components/Carousel";
 import Footer from "../components/Footer";
 
@@ -19,7 +19,10 @@ class Home extends Component {
                     </div>
                     <div className="row">
                         <div className="col">
-                            {this.state.activePageTitle}
+                            <ContentBlock
+                                heading="Manage Your Family"
+                                paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lobortis odio mi"
+                            />
                         </div>
                     </div>
                 </div>

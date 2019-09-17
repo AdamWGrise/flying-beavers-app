@@ -12,9 +12,10 @@ class Lists extends Component {
     }
     state = {
         activeListId: 0,
+        // testLists is providing test data until we are hooked up to the database.
         testLists: [
-            { title: "Zeroth List", items: ["Apples", "Bananas", "Blueberries", "Pineapples", "Kiwi", "Plums"] },
-            { title: "Colors List", items: ["Blue", "Green", "Red"] },
+            { title: "HyVee", items: ["Apples", "Bananas", "Blueberries", "Pineapples", "Kiwi", "Plums"] },
+            { title: "Costco", items: ["Tissues", "Cereal", "Dog Food", "Toothpaste", "Vitamins"] },
             { title: "Another List", items: ["Hey", "Hey", "hey"] }
         ],
         activePageTitle: "Lists"

@@ -1,0 +1,14 @@
+.content-block {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.content-block h1 {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #84c54e;
+}
+
+.content-block p {
+
+}

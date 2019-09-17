@@ -1,5 +1,7 @@
 import React from "react";
 import './styles.css';
+import CheckBox from "../CheckBox";
+
 
 function ContentPanel(props) {
   let x = props.testLists[props.activeListId];
@@ -8,7 +10,7 @@ function ContentPanel(props) {
     <div id="content-panel">
       <h3>{x.title}</h3>
       {x.items.map((item, index) => (
-        <li key={index}>{item}</li>
+        <div key={index}><CheckBox />{item}</div>
       ))}
     </div>
   );
