@@ -2,7 +2,6 @@ import React from "react";
 import './styles.css';
 import CheckBox from "../CheckBox";
 
-
 function ContentPanel(props) {
   let x = props.testLists[props.activeListId];
   console.log("x", x);
