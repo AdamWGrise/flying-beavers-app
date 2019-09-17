@@ -10,7 +10,7 @@ function ContentPanel(props) {
     <div id="content-panel">
       <h3>{x.title}</h3>
       {x.items.map((item, index) => (
-        <div key={index}><CheckBox />{item}</div>
+        <div key={index}><CheckBox id={item} item={item}/></div>
       ))}
     </div>
   );

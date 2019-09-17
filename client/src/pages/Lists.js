@@ -34,19 +34,19 @@ class Lists extends Component {
             <div id="content">
                 <div className="container">
                     <div className="row">
-                        <div className="col">
+                        <div className="col-sm">
                             <Jumbotron pageName={this.state.activePageTitle} />
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-3 my-3">
+                        <div className="col-sm-3 my-3">
                             <ListClick
                                 activeListId={this.state.activeListId}
                                 handleListClick={this.handleListClick}
                                 testLists={this.state.testLists}
                             />
                         </div>
-                        <div className="col-9 my-3">
+                        <div className="col-sm-9 my-3">
                             <ContentPanel
                                 activeListId={this.state.activeListId}
                                 testLists={this.state.testLists}
@@ -54,7 +54,7 @@ class Lists extends Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-12 my-3">
+                        <div className="col-sm-12 my-3">
                             <Footer />
                         </div>
                     </div>

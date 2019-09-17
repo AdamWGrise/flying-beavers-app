@@ -21,13 +21,13 @@ class Nav extends Component {
                                 <a className="nav-link" href="/lists" value="Shopping">Shopping</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#" value="Calendar">Calendar</a>
+                                <a className="nav-link" href="/lists" value="Calendar">Calendar</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#" value="Family Info">Family Info</a>
+                                <a className="nav-link" href="/lists" value="Family Info">Family Info</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#" value="Register">Register/Login</a>
+                                <a className="nav-link" href="/lists" value="Register">Register/Login</a>
                             </li>
                         </ul>
                     </div>
