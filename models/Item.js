@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 // Item Schema
 const ItemSchema = new Schema({
@@ -19,5 +19,5 @@ const ItemSchema = new Schema({
     type: Date,
     default: Date.now
   }
-});
-module.exports = User = mongoose.model("items", ItemSchema);
+})
+module.exports = Item = mongoose.model('items', ItemSchema)
