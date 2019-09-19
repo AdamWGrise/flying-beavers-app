@@ -2,8 +2,9 @@ const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const passport = require('passport')
+const routes = require('./routes')
 const users = require('./routes/api/users')
-const shopItems = require("./routes/api/shopItems");
+const shopItems = require('./routes/api/shopItems')
 
 const PORT = process.env.PORT || 5000
 
