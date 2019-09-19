@@ -15,10 +15,13 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // MongoDB connection
-const db = require('./config/keys').mongoURI
-mongoose.connect(db, { useNewUrlParser: true })
-  .then(() => console.log('MongoDB successfully connected'))
-  .catch(err => console.log(err));
+
+// const db = require('./config/keys').mongoURI
+// mongoose.connect(db, { useNewUrlParser: true })
+//   .then(() => console.log('MongoDB successfully connected'))
+//   .catch(err => console.log(err));
+
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/familymanager");
 
 // Passport
 app.use(passport.initialize())
