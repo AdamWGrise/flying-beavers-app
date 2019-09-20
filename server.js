@@ -21,7 +21,11 @@ app.use(bodyParser.json())
 //   .then(() => console.log('MongoDB successfully connected'))
 //   .catch(err => console.log(err));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/familymanager");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/familymanager",
+{
+  useCreateIndex: true,
+  useNewUrlParser: true
+});
 
 // Passport
 app.use(passport.initialize())
