@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-// import API from '../utils/API';
 import Footer from '../components/Footer';
 import ContentPanel from '../components/ContentPanel';
 import ListClick from '../components/ListClick';
 import Jumbotron from '../components/Jumbotron';
+import API from "../utils/API";
+import DeleteBtn from "../components/DeleteBtn";
+import { List, ListItem } from "../components/List";
 
 class Lists extends Component {
     constructor(props) {
@@ -18,7 +20,14 @@ class Lists extends Component {
             { title: 'Costco', items: ['Tissues', 'Cereal', 'Dog Food', 'Toothpaste', 'Vitamins'] },
             { title: 'Another List', items: ['Hey', 'Hey', 'hey'] }
         ],
-        activePageTitle: 'Lists'
+        activePageTitle: 'Lists',
+        // Below: Adding items for db parts of state
+        shopItems: [],
+        shoppingList: "",
+        itemName: "",
+        category: "",
+        quantity: "",
+        quantityUnits: ""
     };
 
     handleListClick = (event) => {
@@ -29,6 +38,52 @@ class Lists extends Component {
         });
     }
 
+    // ,.-~*'`'*~-.,
+    // ,.-~*'`'*~-.,
+    // This group of functions: For Mongo connection stuff; Adam 9/19
+
+    componentDidMount() {
+        this.loadShopItems();
+    }
+
+    loadShopItems = () => {
+        console.log("loading shop items");
+    API.getShopItems()
+        .then(res => this.setState({ shopItems: res.data, shoppingList: "", itemName: "", category: "", quantity: "", quantityUnits: "" })
+        )
+        .catch(err => console.log(err));
+    };
+
+    deleteShopItem = id => {
+    API.deleteShopItem(id)
+        .then(res => this.loadShopItems())
+        .catch(err => console.log(err));
+    };
+
+    handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+        [name]: value
+    });
+    };
+
+    handleFormSubmit = event => {
+    event.preventDefault();
+    if (this.state.shoppingList && this.state.itemName && this.state.quantity && this.state.quantityUnits) {
+        API.saveShopItem({
+        shoppingList: this.state.shoppingList,
+        category: this.state.category,
+        itemName: this.state.itemName,
+        quantity: this.state.quantity,
+        quantityUnits: this.state.quantityUnits,
+        })
+        .then(res => this.loadShopItems())
+        .catch(err => console.log(err));
+    }
+    };
+    // `'*~-.,.-~*'`
+    // `'*~-.,.-~*'`
+
     render() {
         return (
             <div id='content'>
@@ -38,6 +93,33 @@ class Lists extends Component {
                             <Jumbotron pageName={this.state.activePageTitle} />
                         </div>
                     </div>
+                    {/* ,.-~*'`'*~-., */}
+                    {/* ,.-~*'`'*~-., */}
+                    {/* Adam 9/19 - Test area for displaying items */}
+                    <div className='row'>
+                        <div className='col-sm-3 my-3'>
+                            <ListClick
+                                activeListId={this.state.activeListId}
+                                handleListClick={this.handleListClick}
+                                testLists={this.state.testLists}
+                            />
+                        </div>
+                        <div className='col-sm-9 my-3'>
+                        <List>
+                            {this.state.shopItems.map(shopItem => (
+                            <ListItem key={shopItem._id}>
+                                <strong>
+                                    {shopItem.itemName}, {shopItem.quantity} {shopItem.quantityUnits}
+                                </strong>
+                                <DeleteBtn onClick={() => this.deleteShopItem(shopItem._id)} />
+                            </ListItem>
+                            ))}
+                        </List>
+                        </div>
+                    </div>
+                    {/* `'*~-.,.-~*'` */}
+                    {/* `'*~-.,.-~*'` */}
+                    <p>(Original test area below - remove before go-live)</p>
                     <div className='row'>
                         <div className='col-sm-3 my-3'>
                             <ListClick

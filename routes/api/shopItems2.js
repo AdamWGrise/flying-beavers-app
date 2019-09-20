@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 // Load User model
-const Item = require('../../models/Item')
+const Item = require('../../models/shopItem')
 
 // Add Grocery Item
 router.post('/add', (req, res) => {
