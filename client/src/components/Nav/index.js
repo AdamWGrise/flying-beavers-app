@@ -27,7 +27,7 @@ class Nav extends Component {
                                 <a className="nav-link" href="/lists" value="Family Info">Family Info</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/lists" value="Register">Register/Login</a>
+                                <a className="nav-link" href="/Register" value="Register">Register/Login</a>
                             </li>
                         </ul>
                     </div>
