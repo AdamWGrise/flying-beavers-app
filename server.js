@@ -6,7 +6,7 @@ const routes = require('./routes')
 const users = require('./routes/api/users')
 const shopItems = require('./routes/api/shopItems')
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 3001
 
 const path = require('path')
 const app = express()
@@ -28,8 +28,8 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/familymanager",
 });
 
 // Passport
-app.use(passport.initialize())
-require('./config/passport')(passport)
+// app.use(passport.initialize())
+// require('./config/passport')(passport)
 
 // Routes
 app.use('/api/users', users);
