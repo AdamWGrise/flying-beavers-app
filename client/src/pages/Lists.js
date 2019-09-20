@@ -47,9 +47,9 @@ class Lists extends Component {
     }
 
     loadShopItems = () => {
+        console.log("loading shop items");
     API.getShopItems()
-        .then(res =>
-        this.setState({ shopItems: res.data, shoppingList: "", itemName: "", category: "", quantity: "", quantityUnits: "" })
+        .then(res => this.setState({ shopItems: res.data, shoppingList: "", itemName: "", category: "", quantity: "", quantityUnits: "" })
         )
         .catch(err => console.log(err));
     };

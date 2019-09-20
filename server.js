@@ -14,7 +14,7 @@ const app = express()
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-// MongoDB connection
+// MongoDB connection - this is for the authentication DB
 
 // const db = require('./config/keys').mongoURI
 // mongoose.connect(db, { useNewUrlParser: true })
