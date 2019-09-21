@@ -32,8 +32,12 @@ class Home extends Component {
                     </div>
                 </div>
                 <div>
+                    <br>
+                    </br>
                     <Icons/> 
                 </div>
+                <br>
+                </br>
                 <Footer />
             </div>
         );
