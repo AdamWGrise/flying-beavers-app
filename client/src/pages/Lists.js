@@ -33,8 +33,6 @@ class Lists extends Component {
 
 
 
-    // ,.-~*'`'*~-.,
-    // ,.-~*'`'*~-.,
     // This group of functions: For Mongo connection stuff; Adam 9/19
 
     componentDidMount() {
@@ -103,6 +101,30 @@ class Lists extends Component {
                             <Jumbotron pageName={this.state.activePageTitle} />
                         </div>
                     </div>
+
+                    <div className='row'>
+                        <div className='col-sm-3 my-3'>
+                            <ListClick
+                                activeListId={this.state.activeListId}
+                                handleListClick={this.handleListClick}
+                                testLists={this.state.testLists}
+                            />
+                        </div>
+                        <div className='col-sm-9 my-3'>
+                        <List>
+                            {this.state.shopItems.map(shopItem => (
+                            <ListItem key={shopItem._id}>
+                                <strong>
+                                    {shopItem.itemName}, {shopItem.quantity} {shopItem.quantityUnits}
+                                </strong>
+                                <DeleteBtn onClick={() => this.deleteShopItem(shopItem._id)} />
+                            </ListItem>
+                            ))}
+                        </List>
+                        </div>
+                    </div>
+
+                    <p>(Original test area below - remove before go-live)</p>
                     <div className='row'>
                         <div className='col-sm-3'>
                             <form>
@@ -153,10 +175,11 @@ class Lists extends Component {
                             </List>
                         </div>
                     </div>
-                </div>
-                <div className='row'>
-                    <div className='col-sm-12 my-3'>
-                        <Footer />
+                    
+                    <div className='row'>
+                        <div className='col-sm-12 my-3'>
+                            <Footer />
+                        </div>
                     </div>
                 </div>
             </div>
