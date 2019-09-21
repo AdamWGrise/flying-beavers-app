@@ -38,8 +38,6 @@ class Lists extends Component {
         });
     }
 
-    // ,.-~*'`'*~-.,
-    // ,.-~*'`'*~-.,
     // This group of functions: For Mongo connection stuff; Adam 9/19
 
     componentDidMount() {
@@ -81,8 +79,7 @@ class Lists extends Component {
         .catch(err => console.log(err));
     }
     };
-    // `'*~-.,.-~*'`
-    // `'*~-.,.-~*'`
+
 
     render() {
         return (
@@ -93,9 +90,7 @@ class Lists extends Component {
                             <Jumbotron pageName={this.state.activePageTitle} />
                         </div>
                     </div>
-                    {/* ,.-~*'`'*~-., */}
-                    {/* ,.-~*'`'*~-., */}
-                    {/* Adam 9/19 - Test area for displaying items */}
+
                     <div className='row'>
                         <div className='col-sm-3 my-3'>
                             <ListClick
@@ -117,8 +112,7 @@ class Lists extends Component {
                         </List>
                         </div>
                     </div>
-                    {/* `'*~-.,.-~*'` */}
-                    {/* `'*~-.,.-~*'` */}
+
                     <p>(Original test area below - remove before go-live)</p>
                     <div className='row'>
                         <div className='col-sm-3 my-3'>
