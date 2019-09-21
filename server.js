@@ -14,6 +14,11 @@ const app = express()
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+// Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'))
+}
+
 // MongoDB connection - this is for the authentication DB
 
 const db = require('./config/keys').mongoURI
@@ -40,11 +45,6 @@ require('./config/passport')(passport)
 app.use('/api/users', users);
 app.use("/api/shopItems", shopItems);
 app.use(routes);
-
-// Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'))
-}
 
 // Send every request to the React app
 // Define any API routes before this runs
