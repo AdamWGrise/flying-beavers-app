@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // Serve up static assets (usually on heroku)
+// LEAVE THIS STUFF RIGHT HERE PLEASE
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'))
 }
