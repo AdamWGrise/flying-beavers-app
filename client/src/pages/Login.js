@@ -26,7 +26,7 @@ export default class Login extends Component {
         } else {
             users ? users.filter(user =>  {
                 if (user.email !== email || user.password !== password) {
-                    this.setState({ error: "Invalid creadetials" })
+                    this.setState({ error: "Invalid credentials" })
                 } else {
                     const json = JSON.stringify(user);
                     localStorage.setItem("currentUser", json);
