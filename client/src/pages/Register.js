@@ -1,113 +1,176 @@
-import React, { Component } from "react";
-// import API from "../utils/API";
-import Footer from "../components/Footer";
-import ContentPanel from "../components/ContentPanel";
-import ListClick from "../components/ListClick";
-import Jumbotron from "../components/Jumbotron";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 class Register extends Component {
     constructor() {
-      super();
-      this.state = {
-        name: "",
-        email: "",
-        password: "",
-        password2: "",
-        errors: {}
-      };
+        super()
+        this.state = {
+            firstName: '',
+            lastName: '',
+            phoneNumber: '',
+            email: '',
+            password: '',
+            error: null,
+            users: [],
+            loading: false
+        };
     }
-  onChange = e => {
-      this.setState({ [e.target.id]: e.target.value });
+    componentDidMount() {
+        try {
+            const json = localStorage.getItem("users")
+            const users = JSON.parse(json);
+            if (users) {
+                this.setState(() => ({ users }))
+            }
+        } catch (e) {
+        }
     };
-  onSubmit = e => {
-      e.preventDefault();
-  const newUser = {
-        name: this.state.name,
-        email: this.state.email,
-        password: this.state.password,
-        password2: this.state.password2
-      };
-  console.log(newUser);
-    };
-  render() {
-      const { errors } = this.state;
-  return (
-        <div className="container">
-          <div className="row">
-            <div className="col s8 offset-s2">
-              <Link to="/" className="btn-flat waves-effect">
-                <i className="material-icons left">keyboard_backspace</i> Back to
-                home
-              </Link>
-              <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                <h4>
-                  <b>Register</b> below
-                </h4>
-                <p className="grey-text text-darken-1">
-                  Already have an account? <Link to="/login">Log in</Link>
-                </p>
-              </div>
-              <form noValidate onSubmit={this.onSubmit}>
-                <div className="input-field col s12">
-                  <input
-                    onChange={this.onChange}
-                    value={this.state.name}
-                    error={errors.name}
-                    id="name"
-                    type="text"
-                  />
-                  <label htmlFor="name">Name</label>
-                </div>
-                <div className="input-field col s12">
-                  <input
-                    onChange={this.onChange}
-                    value={this.state.email}
-                    error={errors.email}
-                    id="email"
-                    type="email"
-                  />
-                  <label htmlFor="email">Email</label>
-                </div>
-                <div className="input-field col s12">
-                  <input
-                    onChange={this.onChange}
-                    value={this.state.password}
-                    error={errors.password}
-                    id="password"
-                    type="password"
-                  />
-                  <label htmlFor="password">Password</label>
-                </div>
-                <div className="input-field col s12">
-                  <input
-                    onChange={this.onChange}
-                    value={this.state.password2}
-                    error={errors.password2}
-                    id="password2"
-                    type="password"
-                  />
-                  <label htmlFor="password2">Confirm Password</label>
-                </div>
-                <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                  <button
-                    style={{
-                      width: "150px",
-                      borderRadius: "3px",
-                      letterSpacing: "1.5px",
-                      marginTop: "1rem"
-                    }}
-                    type="submit"
-                    className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                  >
-                    Sign up
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      );
+
+    componentDidUpdate(prevState, preProps) {
+        if (preProps.users.length !== this.state.users.length) {
+            const json = JSON.stringify(this.state.users);
+            localStorage.setItem("users", json);
+        }
     }
-  }
-  export default Register;
+
+    handleOnchange = e => this.setState({ [e.target.name]: e.target.value });
+
+    handleSignUp = event => {
+        event.preventDefault()
+        this.setState({ loading: true });
+        const { firstName, lastName, phoneNumber, email, password } = this.state;
+        if (!firstName.length || !lastName.length || !phoneNumber.length || !email.length || !password.length) {
+            this.setState({ error: "please fill out all the details", loading: false })
+            return false;
+        } else if (password.length < 6) {
+            this.setState({ error: "password should contain atleast 6 charecters", loading: false })
+            return false;
+        } else {
+            const regesterData = {
+                firstName: firstName,
+                lastName: lastName,
+                phoneNumber: phoneNumber,
+                email: email,
+                password: password
+            };
+
+            this.setState({
+                error: "",
+                firstName: "",
+                lastName: "",
+                phoneNumber: "",
+                email: "",
+                password: "",
+                users: this.state.users.concat(regesterData)
+            });
+            setTimeout(() => {
+                this.props.history.push("/")
+                this.setState({ loading: false })
+            }, 2000)
+        }
+    };
+
+
+    render() {
+        const { firstName, lastName, phoneNumber, email, password, error, loading } = this.state;
+
+        return (
+            <React.Fragment>
+                <div className="container">
+                    <div className="row pt-5">
+                        <div className="col-lg-4"></div>
+                        <div className="col-lg-4">
+                            <div className="card card-body py-3 mb-3">
+                                <div className="text-center mb-3"><i className="fa fa-user fa-2x text-primary"></i></div>
+                                <h3 className="text-center mb-4">Sign up</h3>
+                                <div className="row">
+                                    <div className="col-lg-12">
+                                        <form onSubmit={this.handleSignUp}>
+                                            <div className="form-group mb-3">
+                                                <label className="font-weight-bold small" htmlFor="firstName">Firest Name:</label>
+                                                <input
+                                                    id="firstName"
+                                                    type="text"
+                                                    autoFocus
+                                                    className="form-control"
+                                                    placeholder="first name"
+                                                    name="firstName"
+                                                    onChange={this.handleOnchange}
+                                                    value={firstName}
+                                                />
+
+                                            </div>
+                                            <div className="form-group mb-3">
+                                                <label className="font-weight-bold small" htmlFor="lastName">Last Name:</label>
+                                                <input
+                                                    id="lastName"
+                                                    type="text"
+                                                    className="form-control"
+                                                    placeholder="last name"
+                                                    name="lastName"
+                                                    onChange={this.handleOnchange}
+                                                    value={lastName}
+                                                />
+
+                                            </div>
+                                            <div className="form-group mb-3">
+                                                <label className="font-weight-bold small" htmlFor="phoneNumber">Phone Number:</label>
+                                                <input
+                                                    id="phoneNumber"
+                                                    type="number"
+                                                    className="form-control"
+                                                    placeholder="phone number"
+                                                    name="phoneNumber"
+                                                    onChange={this.handleOnchange}
+                                                    value={phoneNumber}
+                                                />
+
+                                            </div>
+                                            <div className="form-group mb-3">
+                                                <label className="font-weight-bold small" htmlFor="email">Email address:</label>
+
+                                                <input
+                                                    type="email"
+                                                    id="email"
+                                                    className="form-control"
+                                                    placeholder="email"
+                                                    name="email"
+                                                    onChange={this.handleOnchange}
+                                                    value={email}
+                                                />
+
+                                            </div>
+                                            <div className="form-group mb-3">
+                                                <label className="font-weight-bold small" htmlFor="password">Password:</label>
+
+                                                <input
+                                                    id="password"
+                                                    type="password"
+                                                    className="form-control"
+                                                    placeholder="password"
+                                                    name="password"
+                                                    autoComplete=''
+                                                    onChange={this.handleOnchange}
+                                                    value={password}
+                                                />
+                                            </div>
+                                            <div className="text-center">
+                                                <button disabled={loading} className="btn btn-primary btn-block">SignUp</button>
+                                            </div>
+                                        </form>
+                                        {error && <p className="text-danger mt-3 mb-2 text-center">{error}</p>}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="card card-footer">
+                                <span className="text-center small">Have an account ? <Link to="/Login">Login</Link></span>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </React.Fragment>
+        )
+    }
+}
+export default Register;

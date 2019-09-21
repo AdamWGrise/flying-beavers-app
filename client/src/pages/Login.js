@@ -1,89 +1,101 @@
-import React, { Component } from "react";
-// import API from "../utils/API";
-import Footer from "../components/Footer";
-import ContentPanel from "../components/ContentPanel";
-import ListClick from "../components/ListClick";
-import Jumbotron from "../components/Jumbotron";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 
-class Login extends Component {
-    constructor() {
-      super();
-      this.state = {
+export default class Login extends Component {
+    state = {
         email: "",
         password: "",
-        errors: {}
-      };
-    }
-  onChange = e => {
-      this.setState({ [e.target.id]: e.target.value });
+        error: null,
+        users: null
     };
-  onSubmit = e => {
-      e.preventDefault();
-  const userData = {
-        email: this.state.email,
-        password: this.state.password
-      };
-  console.log(userData);
-    };
-  render() {
-      const { errors } = this.state;
-  return (
-        <div className="container">
-          <div style={{ marginTop: "4rem" }} className="row">
-            <div className="col s8 offset-s2">
-              <Link to="/" className="btn-flat waves-effect">
-                <i className="material-icons left">keyboard_backspace</i> Back to
-                home
-              </Link>
-              <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                <h4>
-                  <b>Login</b> below
-                </h4>
-                <p className="grey-text text-darken-1">
-                  Don't have an account? <Link to="/">Register</Link>
-                </p>
-              </div>
-              <form noValidate onSubmit={this.onSubmit}>
-                <div className="input-field col s12">
-                  <input
-                    onChange={this.onChange}
-                    value={this.state.email}
-                    error={errors.email}
-                    id="email"
-                    type="email"
-                  />
-                  <label htmlFor="email">Email</label>
-                </div>
-                <div className="input-field col s12">
-                  <input
-                    onChange={this.onChange}
-                    value={this.state.password}
-                    error={errors.password}
-                    id="password"
-                    type="password"
-                  />
-                  <label htmlFor="password">Password</label>
-                </div>
-                <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                  <button
-                    style={{
-                      width: "150px",
-                      borderRadius: "3px",
-                      letterSpacing: "1.5px",
-                      marginTop: "1rem"
-                    }}
-                    type="submit"
-                    className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                  >
-                    Login
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      );
+
+    componentDidMount() {
+        const users = localStorage.getItem("users");
+        this.setState({ users: JSON.parse(users) })
     }
-  }
-  export default Login;
+
+    handleOnchange = e => this.setState({ [e.target.name]: e.target.value });
+
+    handleSignUp = event => {
+        event.preventDefault()
+
+        const { email, password, users } = this.state;
+        if (!email.length || !password.length) {
+            this.setState({ error: "please fill out all the details" })
+            return false;
+        } else {
+            users ? users.filter(user =>  {
+                if (user.email !== email || user.password !== password) {
+                    this.setState({ error: "Invalid creadetials" })
+                } else {
+                    const json = JSON.stringify(user);
+                    localStorage.setItem("currentUser", json);
+                    this.props.history.push("/Home");
+                    window.location.reload();
+                }
+            }) : this.setState({ error: "no user found" })
+        }
+    };
+
+    render() {
+        const { email, password, error } = this.state;
+        return (
+            <React.Fragment>
+                <div className="container">
+                    <div className="row pt-5">
+                        <div className="col-lg-4"></div>
+                        <div className="col-lg-4">
+                            <div className="card card-body py-3 mb-3">
+                                <div className="text-center mb-3"><i className="fa fa-user fa-2x text-primary"></i></div>
+                                <h3 className="text-center mb-4">Sign In</h3>
+                                <div className="row">
+                                    <div className="col-lg-12">
+                                        <form onSubmit={this.handleSignUp}>
+
+                                            <div className="form-group mb-3">
+                                                <label className="font-weight-bold small" htmlFor="email">Email address:</label>
+
+                                                <input
+                                                    type="email"
+                                                    id="email"
+                                                    className="form-control"
+                                                    placeholder="email"
+                                                    name="email"
+                                                    onChange={this.handleOnchange}
+                                                    value={email}
+                                                />
+
+                                            </div>
+                                            <div className="form-group mb-3">
+                                                <label className="font-weight-bold small" htmlFor="password">Password:</label>
+
+                                                <input
+                                                    id="password"
+                                                    type="password"
+                                                    className="form-control"
+                                                    placeholder="password"
+                                                    name="password"
+                                                    autoComplete=''
+                                                    onChange={this.handleOnchange}
+                                                    value={password}
+                                                />
+                                            </div>
+                                            <div className="text-center">
+                                                <button className="btn btn-primary btn-block">SignIn</button>
+                                            </div>
+                                        </form>
+                                        {error && <p className="text-danger mt-3 mb-2 text-center">{error}</p>}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="card card-footer">
+                                <span className="text-center small">Not have an account ? <Link to="/Register">Register</Link></span>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </React.Fragment>
+        )
+    }
+}
