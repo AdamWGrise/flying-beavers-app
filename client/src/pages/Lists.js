@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import Footer from '../components/Footer';
 import ContentPanel from '../components/ContentPanel';
-import ListClick from '../components/ListClick';
 import { Input, TextArea, FormBtn } from "../components/Form";
-
 import Jumbotron from '../components/Jumbotron';
 import API from "../utils/API";
 import DeleteBtn from "../components/DeleteBtn";
@@ -24,14 +22,9 @@ class Lists extends Component {
             quantityUnits: "",
             newItem: ""
         };
-        this.handleListClick = this.handleListClick.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
-
-
-
-
 
     // This group of functions: For Mongo connection stuff; Adam 9/19
 
@@ -52,14 +45,6 @@ class Lists extends Component {
             .then(res => this.loadShopItems())
             .catch(err => console.log(err));
     };
-
-    handleListClick = (event) => {
-        console.log('CLICKY');
-        event.preventDefault();
-        this.setState({
-            activeListId: event.target.value
-        });
-    }
 
     handleInputChange = event => {
         console.log("test");
@@ -102,29 +87,6 @@ class Lists extends Component {
                         </div>
                     </div>
 
-                    <div className='row'>
-                        <div className='col-sm-3 my-3'>
-                            <ListClick
-                                activeListId={this.state.activeListId}
-                                handleListClick={this.handleListClick}
-                                testLists={this.state.testLists}
-                            />
-                        </div>
-                        <div className='col-sm-9 my-3'>
-                        <List>
-                            {this.state.shopItems.map(shopItem => (
-                            <ListItem key={shopItem._id}>
-                                <strong>
-                                    {shopItem.itemName}, {shopItem.quantity} {shopItem.quantityUnits}
-                                </strong>
-                                <DeleteBtn onClick={() => this.deleteShopItem(shopItem._id)} />
-                            </ListItem>
-                            ))}
-                        </List>
-                        </div>
-                    </div>
-
-                    <p>(Original test area below - remove before go-live)</p>
                     <div className='row'>
                         <div className='col-sm-3'>
                             <form>
