@@ -141,9 +141,12 @@ class Lists extends Component {
                             <List>
                                 {this.state.shopItems.map(shopItem => (
                                     <ListItem key={shopItem._id}>
-                                        <strong>
+                                        <span>List: {shopItem.shoppingList}<br /></span>
+                                        <span>Category: {shopItem.category}<br /></span>
+                                        <h3>
                                             {shopItem.itemName}, {shopItem.quantity} {shopItem.quantityUnits}
-                                        </strong>
+                                        </h3><br />
+                                        <small>{shopItem.date}</small>
                                         <DeleteBtn onClick={() => this.deleteShopItem(shopItem._id)} />
                                     </ListItem>
                                 ))}
