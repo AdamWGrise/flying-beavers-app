@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ContentBlock from '../components/ContentBlock';
 import Carousel from '../components/Carousel';
 import Footer from '../components/Footer';
+import Icons from '../components/Icons';
 
 class Home extends Component {
     state = {
@@ -20,11 +21,18 @@ class Home extends Component {
                     <div className='row'>
                         <div className='col'>
                             <ContentBlock
-                                heading='Manage Your Family'
-                                paragraph='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lobortis odio mi'
+                               heading="You spend time with family,"
+                               heading2="we'll take care of the organizing" 
+                               paragraph='When families are on the go it can be challenging to stay organized 
+                               Time is wasted when trying to link schedules, calendars, lists, tasks which ends up being ineffective. 
+                               Flying beavers simplifies the family life so you can spend more time together, and less time organizing. 
+                               Flying beavers syncs all the important household information so everyone can always stay on the same page!'
                             />
                         </div>
                     </div>
+                </div>
+                <div>
+                    <Icons/> 
                 </div>
                 <Footer />
             </div>
