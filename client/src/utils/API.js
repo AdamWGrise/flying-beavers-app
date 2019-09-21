@@ -15,6 +15,7 @@ export default {
   },
   // Saves a bshopItem to the database
   saveShopItem: function(shopItemData) {
+    console.log("shopItemDate", shopItemData);
     return axios.post("/api/shopItems", shopItemData);
   }
 };

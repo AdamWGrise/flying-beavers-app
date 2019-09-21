@@ -75,18 +75,33 @@ class Lists extends Component {
 
     handleFormSubmit = event => {
         console.log("clicky");
+        console.log("this.state.newItem", this.state.newItem);
         event.preventDefault();
-        if (this.state.shoppingList && this.state.itemName && this.state.quantity && this.state.quantityUnits) {
+
+        if (this.state.newItem) {
             API.saveShopItem({
-                shoppingList: this.state.shoppingList,
-                category: this.state.category,
-                itemName: this.state.itemName,
-                quantity: this.state.quantity,
-                quantityUnits: this.state.quantityUnits,
+                itemName: this.state.newItem,
+                shoppingList: "HyVee",
+                category: "Produce",
+                quantity: "6",
+                quantityUnits: "",
+                date: new Date(Date.now())
             })
                 .then(res => this.loadShopItems())
                 .catch(err => console.log(err));
         }
+
+        // if (this.state.shoppingList && this.state.itemName && this.state.quantity && this.state.quantityUnits) {
+        //     API.saveShopItem({
+        //         shoppingList: this.state.shoppingList,
+        //         category: this.state.category,
+        //         itemName: this.state.itemName,
+        //         quantity: this.state.quantity,
+        //         quantityUnits: this.state.quantityUnits,
+        //     })
+        //         .then(res => this.loadShopItems())
+        //         .catch(err => console.log(err));
+        // }
     };
     // `'*~-.,.-~*'`
     // `'*~-.,.-~*'`
@@ -110,7 +125,7 @@ class Lists extends Component {
                         <FormBtn
                             onClick={this.handleFormSubmit}
                         >
-                        Add item
+                            Add item
                         </FormBtn>
                     </form>
 
