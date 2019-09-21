@@ -6,6 +6,7 @@ import Jumbotron from '../components/Jumbotron';
 import API from "../utils/API";
 import DeleteBtn from "../components/DeleteBtn";
 import { List, ListItem } from "../components/List";
+import "./styles.css";
 
 class Lists extends Component {
     constructor(props) {
@@ -35,7 +36,7 @@ class Lists extends Component {
     loadShopItems = () => {
         console.log("loading shop items");
         API.getShopItems()
-            .then(res => this.setState({ shopItems: res.data, shoppingList: "", itemName: "", category: "", quantity: "", quantityUnits: "" })
+            .then(res => this.setState({ shopItems: res.data, shoppingList: "", itemName: "", category: "", quantity: "", quantityUnits: "", newItem: "" })
             )
             .catch(err => console.log(err));
     };
@@ -81,14 +82,14 @@ class Lists extends Component {
         return (
             <div id='content'>
                 <div className='container'>
-                    <div className='row'>
+                    {/* <div className='row'>
                         <div className='col-sm'>
                             <Jumbotron pageName={this.state.activePageTitle} />
                         </div>
-                    </div>
+                    </div> */}
 
                     <div className='row'>
-                        <div className='col-sm-3'>
+                        <div className='col-sm'>
                             <form>
                                 <Input
                                     value={this.state.newItem}
@@ -121,23 +122,22 @@ class Lists extends Component {
                         </FormBtn>
                             </form>
                         </div>
-                        <div className='col-sm-9'>
+                    </div>
+                    <div className='row'>
+                        <div className='col-sm'>
                             <List>
                                 {this.state.shopItems.map(shopItem => (
                                     <ListItem key={shopItem._id}>
-                                        <span>List: {shopItem.shoppingList}<br /></span>
-                                        <span>Category: {shopItem.category}<br /></span>
-                                        <h3>
+                                        <span>
                                             {shopItem.itemName}, {shopItem.quantity} {shopItem.quantityUnits}
-                                        </h3><br />
-                                        <small>{shopItem.date}</small>
+                                        </span>
                                         <DeleteBtn onClick={() => this.deleteShopItem(shopItem._id)} />
                                     </ListItem>
                                 ))}
                             </List>
                         </div>
                     </div>
-                    
+
                     <div className='row'>
                         <div className='col-sm-12 my-3'>
                             <Footer />
