@@ -4,7 +4,7 @@ import './styles.css'
 function Jumbotron (props) {
   return (
     <div className='jumbotron'>
-      <h1 className='display-4'>{props.pageName}</h1>
+      <h1 className='display-5'>{props.pageName}</h1>
     </div>
   )
 }

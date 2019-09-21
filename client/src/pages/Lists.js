@@ -104,7 +104,7 @@ class Lists extends Component {
                         </div>
                     </div>
                     <div className='row'>
-                        <div className='col-sm'>
+                        <div className='col-sm-3'>
                             <form>
                                 <Input
                                     value={this.state.newItem}
@@ -137,7 +137,7 @@ class Lists extends Component {
                         </FormBtn>
                             </form>
                         </div>
-                        <div className='col-sm'>
+                        <div className='col-sm-9'>
                             <List>
                                 {this.state.shopItems.map(shopItem => (
                                     <ListItem key={shopItem._id}>
