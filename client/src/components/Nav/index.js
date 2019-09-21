@@ -6,7 +6,7 @@ class Nav extends Component {
     return (
       <nav className='navbar navbar-expand-lg navbar-light fixed-top py-4'>
         <div className='container'>
-          <a className='navbar-brand' href='/'>App Name</a>
+          <a className='navbar-brand' href='/'>ClanManager</a>
           <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNavDropdown'
             aria-controls='navbarNavDropdown' aria-expanded='false' aria-label='Toggle navigation'>
             <span className='navbar-toggler-icon' />
