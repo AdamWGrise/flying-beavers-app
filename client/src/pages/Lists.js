@@ -103,27 +103,40 @@ class Lists extends Component {
                             <Jumbotron pageName={this.state.activePageTitle} />
                         </div>
                     </div>
-                    <form>
-                        <Input
-                            value={this.state.newItem}
-                            onChange={this.handleInputChange}
-                            name="newItem"
-                            placeholder="Add a new list item:"
-                        />
-                        <Input
-                            value={this.state.quantity}
-                            onChange={this.handleInputChange}
-                            name="quantity"
-                            placeholder="Qty:"
-                        />
-                        <FormBtn
-                            onClick={this.handleFormSubmit}
-                        >
-                            Add item
-                        </FormBtn>
-                    </form>
-
                     <div className='row'>
+                        <div className='col-sm'>
+                            <form>
+                                <Input
+                                    value={this.state.newItem}
+                                    onChange={this.handleInputChange}
+                                    name="newItem"
+                                    placeholder="Add an item:"
+                                />
+                                <Input
+                                    value={this.state.quantity}
+                                    onChange={this.handleInputChange}
+                                    name="quantity"
+                                    placeholder="Quantity:"
+                                />
+                                <Input
+                                    value={this.state.quantityUnits}
+                                    onChange={this.handleInputChange}
+                                    name="quantityUnits"
+                                    placeholder="Units:"
+                                />
+                                <Input
+                                    value={this.state.category}
+                                    onChange={this.handleInputChange}
+                                    name="category"
+                                    placeholder="Category:"
+                                />
+                                <FormBtn
+                                    onClick={this.handleFormSubmit}
+                                >
+                                    Add item
+                        </FormBtn>
+                            </form>
+                        </div>
                         <div className='col-sm'>
                             <List>
                                 {this.state.shopItems.map(shopItem => (
