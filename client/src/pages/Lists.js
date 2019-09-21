@@ -129,6 +129,7 @@ class Lists extends Component {
                             />
                         </div>
                     </div>
+                    
                     <div className='row'>
                         <div className='col-sm-12 my-3'>
                             <Footer />
