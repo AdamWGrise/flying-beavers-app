@@ -17,12 +17,12 @@ class Lists extends Component {
             activePageTitle: 'Lists',
             // Below: Adding items for db parts of state
             shopItems: [],
-            shoppingList: "asdf",
-            itemName: "asdf",
-            category: "asdf",
+            shoppingList: "",
+            itemName: "",
+            category: "",
             quantity: "1",
-            quantityUnits: "asdf",
-            newItem: "asdf"
+            quantityUnits: "",
+            newItem: ""
         };
         this.handleListClick = this.handleListClick.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -90,24 +90,9 @@ class Lists extends Component {
                 .then(res => this.loadShopItems())
                 .catch(err => console.log(err));
         } else {
-        console.log("this.state", this.state);
-
+            console.log("this.state", this.state);
         }
-
-        // if (this.state.shoppingList && this.state.itemName && this.state.quantity && this.state.quantityUnits) {
-        //     API.saveShopItem({
-        //         shoppingList: this.state.shoppingList,
-        //         category: this.state.category,
-        //         itemName: this.state.itemName,
-        //         quantity: this.state.quantity,
-        //         quantityUnits: this.state.quantityUnits,
-        //     })
-        //         .then(res => this.loadShopItems())
-        //         .catch(err => console.log(err));
-        // }
     };
-    // `'*~-.,.-~*'`
-    // `'*~-.,.-~*'`
 
     render() {
         return (
