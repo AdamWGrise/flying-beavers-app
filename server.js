@@ -16,20 +16,25 @@ app.use(bodyParser.json())
 
 // MongoDB connection - this is for the authentication DB
 
-// const db = require('./config/keys').mongoURI
-// mongoose.connect(db, { useNewUrlParser: true })
-//   .then(() => console.log('MongoDB successfully connected'))
-//   .catch(err => console.log(err));
+const db = require('./config/keys').mongoURI
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/familymanager",
-{
+mongoose.connect(db, {
+  useNewUrlParser: true,
   useCreateIndex: true,
-  useNewUrlParser: true
-});
+  useUnifiedTopology: true
+})
+  .then(() => console.log('MongoDB successfully connected'))
+  .catch(err => console.log(err));
+
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/familymanager",
+// {
+//   useCreateIndex: true,
+//   useNewUrlParser: true
+// });
 
 // Passport
-// app.use(passport.initialize())
-// require('./config/passport')(passport)
+app.use(passport.initialize())
+require('./config/passport')(passport)
 
 // Routes
 app.use('/api/users', users);
