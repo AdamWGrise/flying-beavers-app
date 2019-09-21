@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 const ItemSchema = new Schema({
   shoppingList: {
     type: String,
-    required: true
+    required: false
   },
   category: {
     type: String,
@@ -17,7 +17,7 @@ const ItemSchema = new Schema({
   },
   quantity: {
     type: Number,
-    required: true
+    required: false
   },
   quantityUnits: {
     type: String,
@@ -25,12 +25,12 @@ const ItemSchema = new Schema({
   },
   needed: {
     type: Boolean,
-    required: true,
+    required: false,
     default: true
   },
   onlyIfSale: {
     type: Boolean,
-    required: true,
+    required: false,
     default: false
   },
   date: {

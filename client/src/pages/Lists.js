@@ -17,12 +17,12 @@ class Lists extends Component {
             activePageTitle: 'Lists',
             // Below: Adding items for db parts of state
             shopItems: [],
-            shoppingList: "",
-            itemName: "",
-            category: "",
-            quantity: "",
-            quantityUnits: "",
-            newItem: ""
+            shoppingList: "asdf",
+            itemName: "asdf",
+            category: "asdf",
+            quantity: "1",
+            quantityUnits: "asdf",
+            newItem: "asdf"
         };
         this.handleListClick = this.handleListClick.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -69,7 +69,7 @@ class Lists extends Component {
         console.log(event.target);
 
         this.setState({
-            newItem: value
+            [name]: value
         });
     };
 
@@ -81,14 +81,17 @@ class Lists extends Component {
         if (this.state.newItem) {
             API.saveShopItem({
                 itemName: this.state.newItem,
-                shoppingList: "HyVee",
-                category: "Produce",
-                quantity: "6",
-                quantityUnits: "",
+                shoppingList: this.state.shoppingList,
+                category: this.state.category,
+                quantity: this.state.quantity,
+                quantityUnits: this.state.quantityUnits,
                 date: new Date(Date.now())
             })
                 .then(res => this.loadShopItems())
                 .catch(err => console.log(err));
+        } else {
+        console.log("this.state", this.state);
+
         }
 
         // if (this.state.shoppingList && this.state.itemName && this.state.quantity && this.state.quantityUnits) {
@@ -121,6 +124,12 @@ class Lists extends Component {
                             onChange={this.handleInputChange}
                             name="newItem"
                             placeholder="Add a new list item:"
+                        />
+                        <Input
+                            value={this.state.quantity}
+                            onChange={this.handleInputChange}
+                            name="quantity"
+                            placeholder="Qty:"
                         />
                         <FormBtn
                             onClick={this.handleFormSubmit}
