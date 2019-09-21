@@ -6,7 +6,7 @@ const routes = require('./routes')
 const users = require('./routes/api/users')
 const shopItems = require('./routes/api/shopItems')
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 5000
 
 const path = require('path')
 const app = express()
