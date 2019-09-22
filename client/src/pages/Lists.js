@@ -77,7 +77,7 @@ class Lists extends Component {
 
     // Save new shopping ITEM to the database
     handleFormSubmit = event => {
-        console.log("*Click* - save new shopping item");
+        console.log("*Click* - Save new shopping ITEM");
         event.preventDefault();
         if (this.state.newShopItem) {
             API.saveShopItem({
@@ -95,7 +95,7 @@ class Lists extends Component {
 
     // Save new shopping LIST to the database
     handleFormSubmitList = event => {
-        console.log("*Click* - Save new shopping list");
+        console.log("*Click* - Save new shopping LIST");
         event.preventDefault();
         const newShopList = this.state.newShopList;
         if (this.state.newShopList) {
@@ -113,15 +113,14 @@ class Lists extends Component {
                 <div className='container'>
                     <div className='row'>
                         <div className='col-sm-4'>
-                            {/* <select>
+                            <h4>Your Lists</h4>
+                            <select>
                                 {this.state.shopLists.map(shopList => (
                                     <option key={shopList._id} value={shopList._id} id={shopList._id}>
-                                        {shopList.listTitle}
+                                        {shopList.listName}
                                     </option>
                                 ))}
-                            </select> */}
-
-
+                            </select>
                             <form>
                                 <Input
                                     value={this.state.newShopList}
