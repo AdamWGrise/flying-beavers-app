@@ -65,7 +65,6 @@ class Lists extends Component {
     handleFormSubmit = event => {
         console.log("clicky create");
         event.preventDefault();
-
         if (this.state.newItem) {
             API.saveShopItem({
                 itemName: this.state.newItem,
@@ -84,16 +83,6 @@ class Lists extends Component {
         return (
             <div id='content'>
                 <div className='container'>
-                    <div className='row'>
-                        <div className='col-sm'>
-                            <Jumbotron pageName={this.state.activePageTitle} />
-                        </div>
-                    </div>
-                    <div className='row'>
-                        <div className='col-sm'>
-
-                        </div>
-                    </div>
                     <div className='row'>
                         <div className='col-sm-4'>
                             <select>
@@ -122,7 +111,7 @@ class Lists extends Component {
                                     ))}
                                 </List>
                                 <br />
-                                <form className="form-inline">
+                                <form>
                                     <Input
                                         value={this.state.newItem}
                                         onChange={this.handleInputChange}
@@ -130,7 +119,7 @@ class Lists extends Component {
                                         placeholder="Add an item:"
                                         className="form-control list-input-1 form-control-sm"
                                     />
-                                    <Input
+                                    {/* <Input
                                         value={this.state.quantity}
                                         onChange={this.handleInputChange}
                                         name="quantity"
@@ -150,7 +139,7 @@ class Lists extends Component {
                                         name="category"
                                         placeholder="Category:"
                                         className="form-control form-control-sm"
-                                    />
+                                    /> */}
                                     <FormBtn
                                         onClick={this.handleFormSubmit}
                                         className="form-control form-control-sm btn btn-primary list-submit-btn"
