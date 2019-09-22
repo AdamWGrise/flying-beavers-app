@@ -5,6 +5,7 @@ import { Input, TextArea, FormBtn } from "../components/Form";
 import Jumbotron from '../components/Jumbotron';
 import API from "../utils/API";
 import DeleteBtn from "../components/DeleteBtn";
+import StarBtn from "../components/StarBtn";
 import { List, ListItem } from "../components/List";
 import "./styles.css";
 
@@ -35,13 +36,21 @@ class Lists extends Component {
     loadShopItems = () => {
         console.log("loading shop items");
         API.getShopItems()
-            .then(res => this.setState({ shopItems: res.data, shoppingList: "", itemName: "", category: "", quantity: "", quantityUnits: "", newItem: "" })
+            .then(res => this.setState({ shopItems: res.data })
             )
             .catch(err => console.log(err));
     };
 
     deleteShopItem = id => {
+        console.log("clicky delete");
         API.deleteShopItem(id)
+            .then(res => this.loadShopItems())
+            .catch(err => console.log(err));
+    };
+
+    starShopItem = id => {
+        console.log("clicky update");
+        API.starShopItem(id)
             .then(res => this.loadShopItems())
             .catch(err => console.log(err));
     };
@@ -54,7 +63,7 @@ class Lists extends Component {
     };
 
     handleFormSubmit = event => {
-        console.log("clicky");
+        console.log("clicky create");
         event.preventDefault();
 
         if (this.state.newItem) {
@@ -104,6 +113,10 @@ class Lists extends Component {
                                             <span>
                                                 {shopItem.itemName}, {shopItem.quantity} {shopItem.quantityUnits}
                                             </span>
+                                            <StarBtn 
+                                            onClick={() => this.starShopItem(shopItem._id)} 
+                                            starred={shopItem.starred}
+                                            />
                                             <DeleteBtn onClick={() => this.deleteShopItem(shopItem._id)} />
                                         </ListItem>
                                     ))}
