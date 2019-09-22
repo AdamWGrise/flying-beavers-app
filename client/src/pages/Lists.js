@@ -28,7 +28,6 @@ class Lists extends Component {
     }
 
     // This group of functions: For Mongo connection stuff; Adam 9/19
-
     componentDidMount() {
         this.loadShopItems();
     }
@@ -48,10 +47,7 @@ class Lists extends Component {
     };
 
     handleInputChange = event => {
-        console.log("test");
         const { name, value } = event.target;
-        console.log(event.target);
-
         this.setState({
             [name]: value
         });
@@ -59,7 +55,6 @@ class Lists extends Component {
 
     handleFormSubmit = event => {
         console.log("clicky");
-        console.log("this.state.newItem", this.state.newItem);
         event.preventDefault();
 
         if (this.state.newItem) {
@@ -73,8 +68,6 @@ class Lists extends Component {
             })
                 .then(res => this.loadShopItems())
                 .catch(err => console.log(err));
-        } else {
-            console.log("this.state", this.state);
         }
     };
 
@@ -82,59 +75,78 @@ class Lists extends Component {
         return (
             <div id='content'>
                 <div className='container'>
-                    {/* <div className='row'>
-                        <div className='col-sm'>
-                            <Jumbotron pageName={this.state.activePageTitle} />
-                        </div>
-                    </div> */}
-
                     <div className='row'>
                         <div className='col-sm'>
-                            <form>
-                                <Input
-                                    value={this.state.newItem}
-                                    onChange={this.handleInputChange}
-                                    name="newItem"
-                                    placeholder="Add an item:"
-                                />
-                                <Input
-                                    value={this.state.quantity}
-                                    onChange={this.handleInputChange}
-                                    name="quantity"
-                                    placeholder="Quantity:"
-                                />
-                                <Input
-                                    value={this.state.quantityUnits}
-                                    onChange={this.handleInputChange}
-                                    name="quantityUnits"
-                                    placeholder="Units:"
-                                />
-                                <Input
-                                    value={this.state.category}
-                                    onChange={this.handleInputChange}
-                                    name="category"
-                                    placeholder="Category:"
-                                />
-                                <FormBtn
-                                    onClick={this.handleFormSubmit}
-                                >
-                                    Add item
-                        </FormBtn>
-                            </form>
+                            <Jumbotron pageName={this.state.activePageTitle} />
                         </div>
                     </div>
                     <div className='row'>
                         <div className='col-sm'>
-                            <List>
+
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div className='col-sm-4'>
+                            <select>
                                 {this.state.shopItems.map(shopItem => (
-                                    <ListItem key={shopItem._id}>
-                                        <span>
-                                            {shopItem.itemName}, {shopItem.quantity} {shopItem.quantityUnits}
-                                        </span>
-                                        <DeleteBtn onClick={() => this.deleteShopItem(shopItem._id)} />
-                                    </ListItem>
+                                    <option key={shopItem._id} value={shopItem.category}>
+                                        {shopItem.category}
+                                    </option>
                                 ))}
-                            </List>
+                            </select>
+                        </div>
+                        <div className='col-sm-8'>
+                            <div>
+                                <h4>List Title</h4>
+                                <List>
+                                    {this.state.shopItems.map(shopItem => (
+                                        <ListItem key={shopItem._id}>
+                                            <span>
+                                                {shopItem.itemName}, {shopItem.quantity} {shopItem.quantityUnits}
+                                            </span>
+                                            <DeleteBtn onClick={() => this.deleteShopItem(shopItem._id)} />
+                                        </ListItem>
+                                    ))}
+                                </List>
+                                <br />
+                                <form className="form-inline">
+                                    <Input
+                                        value={this.state.newItem}
+                                        onChange={this.handleInputChange}
+                                        name="newItem"
+                                        placeholder="Add an item:"
+                                        className="form-control list-input-1 form-control-sm"
+                                    />
+                                    <Input
+                                        value={this.state.quantity}
+                                        onChange={this.handleInputChange}
+                                        name="quantity"
+                                        placeholder="Quantity:"
+                                        className="form-control list-input-2 form-control-sm"
+                                    />
+                                    <Input
+                                        value={this.state.quantityUnits}
+                                        onChange={this.handleInputChange}
+                                        name="quantityUnits"
+                                        placeholder="Units:"
+                                        className="form-control form-control-sm"
+                                    />
+                                    <Input
+                                        value={this.state.category}
+                                        onChange={this.handleInputChange}
+                                        name="category"
+                                        placeholder="Category:"
+                                        className="form-control form-control-sm"
+                                    />
+                                    <FormBtn
+                                        onClick={this.handleFormSubmit}
+                                        className="form-control form-control-sm btn btn-primary list-submit-btn"
+                                    >
+                                        Add item
+                                    </FormBtn>
+                                </form>
+                                <br />
+                            </div>
                         </div>
                     </div>
 
