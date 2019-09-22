@@ -17,9 +17,19 @@ export default {
   starShopItem: function (id) {
     return axios.put("/api/shopItems/" + id);
   },
-  // Saves a bshopItem to the database
+  // Saves a shopItem to the database
   saveShopItem: function (shopItemData) {
-    console.log("shopItemDate", shopItemData);
+    console.log("shopItemData", shopItemData);
     return axios.post("/api/shopItems", shopItemData);
+  },
+  
+  // Gets all shopLists
+  getShopLists: function () {
+    return axios.get("/api/shopLists");
+  },
+  // Saves a shopList to the database
+  saveShopList: function (shopListData) {
+    console.log("shopListData", shopListData);
+    return axios.post("/api/shopLists", shopListData);
   }
 };

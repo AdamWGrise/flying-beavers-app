@@ -5,6 +5,8 @@ const passport = require('passport')
 const routes = require('./routes')
 const users = require('./routes/api/users')
 const shopItems = require('./routes/api/shopItems')
+const shopLists = require('./routes/api/shopLists')
+
 
 const PORT = process.env.PORT || 3001
 
@@ -45,6 +47,7 @@ require('./config/passport')(passport)
 // Routes
 app.use('/api/users', users);
 app.use("/api/shopItems", shopItems);
+app.use("/api/shopLists", shopLists);
 app.use(routes);
 
 // Send every request to the React app

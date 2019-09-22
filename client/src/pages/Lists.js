@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Footer from '../components/Footer';
-import ContentPanel from '../components/ContentPanel';
 import { Input, TextArea, FormBtn } from "../components/Form";
-import Jumbotron from '../components/Jumbotron';
 import API from "../utils/API";
 import DeleteBtn from "../components/DeleteBtn";
 import StarBtn from "../components/StarBtn";
@@ -15,26 +13,38 @@ class Lists extends Component {
         this.state = {
             activeListId: 0,
             activePageTitle: 'Lists',
-            // Below: Adding items for db parts of state
+            shopLists: [],
             shopItems: [],
             shoppingList: "",
             itemName: "",
             category: "",
             quantity: "1",
             quantityUnits: "",
-            newItem: ""
+            newShopItem: "",
+            newShopList: ""
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.handleFormSubmitList = this.handleFormSubmitList.bind(this);
+
     }
 
     // This group of functions: For Mongo connection stuff; Adam 9/19
     componentDidMount() {
+        this.loadShopLists();
         this.loadShopItems();
     }
 
+    loadShopLists = () => {
+        console.log("loading shopLists");
+        API.getShopLists()
+            .then(res => this.setState({ shopLists: res.data })
+            )
+            .catch(err => console.log(err));
+    };
+
     loadShopItems = () => {
-        console.log("loading shop items");
+        console.log("loading shopItems");
         API.getShopItems()
             .then(res => this.setState({ shopItems: res.data })
             )
@@ -56,6 +66,9 @@ class Lists extends Component {
     };
 
     handleInputChange = event => {
+        console.log("this.state.newShopItem", this.state.newShopItem);
+        console.log("this.state.newShopList", this.state.newShopList);
+
         const { name, value } = event.target;
         this.setState({
             [name]: value
@@ -65,9 +78,9 @@ class Lists extends Component {
     handleFormSubmit = event => {
         console.log("clicky create");
         event.preventDefault();
-        if (this.state.newItem) {
+        if (this.state.newShopItem) {
             API.saveShopItem({
-                itemName: this.state.newItem,
+                itemName: this.state.newShopItem,
                 shoppingList: this.state.shoppingList,
                 category: this.state.category,
                 quantity: this.state.quantity,
@@ -79,19 +92,50 @@ class Lists extends Component {
         }
     };
 
+    handleFormSubmitList = event => {
+        console.log("clicky create List");
+        event.preventDefault();
+        if (this.state.newShopList) {
+            API.saveShopList({
+                listName: this.state.newShopList
+            })
+                .then(res => this.loadShopLists())
+                .catch(err => console.log(err));
+        }
+    };
+
     render() {
         return (
             <div id='content'>
                 <div className='container'>
                     <div className='row'>
                         <div className='col-sm-4'>
-                            <select>
-                                {this.state.shopItems.map(shopItem => (
-                                    <option key={shopItem._id} value={shopItem.category}>
-                                        {shopItem.category}
+                            {/* <select>
+                                {this.state.shopLists.map(shopList => (
+                                    <option key={shopList._id} value={shopList._id} id={shopList._id}>
+                                        {shopList.listTitle}
                                     </option>
                                 ))}
-                            </select>
+                            </select> */}
+
+
+                            <form>
+                                <Input
+                                    value={this.state.newShopList}
+                                    onChange={this.handleInputChange}
+                                    name="newShopList"
+                                    placeholder="Create a new list"
+                                    className="form-control list-input-1 form-control-sm"
+                                />
+                                <FormBtn
+                                    onClick={this.handleFormSubmitList}
+                                    className="form-control form-control-sm btn btn-primary list-submit-btn"
+                                >
+                                    Add List
+                                    </FormBtn>
+                            </form>
+
+
                         </div>
                         <div className='col-sm-8'>
                             <div>
@@ -102,9 +146,9 @@ class Lists extends Component {
                                             <span>
                                                 {shopItem.itemName}, {shopItem.quantity} {shopItem.quantityUnits}
                                             </span>
-                                            <StarBtn 
-                                            onClick={() => this.starShopItem(shopItem._id)} 
-                                            starred={shopItem.starred}
+                                            <StarBtn
+                                                onClick={() => this.starShopItem(shopItem._id)}
+                                                starred={shopItem.starred}
                                             />
                                             <DeleteBtn onClick={() => this.deleteShopItem(shopItem._id)} />
                                         </ListItem>
@@ -113,13 +157,13 @@ class Lists extends Component {
                                 <br />
                                 <form>
                                     <Input
-                                        value={this.state.newItem}
+                                        value={this.state.newShopItem}
                                         onChange={this.handleInputChange}
-                                        name="newItem"
+                                        name="newShopItem"
                                         placeholder="Add an item:"
                                         className="form-control list-input-1 form-control-sm"
                                     />
-                                    {/* <Input
+                                    <Input
                                         value={this.state.quantity}
                                         onChange={this.handleInputChange}
                                         name="quantity"
@@ -139,7 +183,7 @@ class Lists extends Component {
                                         name="category"
                                         placeholder="Category:"
                                         className="form-control form-control-sm"
-                                    /> */}
+                                    />
                                     <FormBtn
                                         onClick={this.handleFormSubmit}
                                         className="form-control form-control-sm btn btn-primary list-submit-btn"
@@ -151,7 +195,6 @@ class Lists extends Component {
                             </div>
                         </div>
                     </div>
-
                     <div className='row'>
                         <div className='col-sm-12 my-3'>
                             <Footer />
@@ -161,6 +204,6 @@ class Lists extends Component {
             </div>
         );
     }
-}
+};
 
-export default Lists
+export default Lists;
