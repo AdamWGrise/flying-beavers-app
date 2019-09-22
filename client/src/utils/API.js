@@ -21,8 +21,7 @@ export default {
   saveShopItem: function (shopItemData) {
     console.log("shopItemData", shopItemData);
     return axios.post("/api/shopItems", shopItemData);
-  },
-  
+  },  
   // Gets all shopLists
   getShopLists: function () {
     return axios.get("/api/shopLists");

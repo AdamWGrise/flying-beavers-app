@@ -52,14 +52,14 @@ class Lists extends Component {
     };
 
     deleteShopItem = id => {
-        console.log("clicky delete");
+        console.log("*Click* - delete");
         API.deleteShopItem(id)
             .then(res => this.loadShopItems())
             .catch(err => console.log(err));
     };
 
     starShopItem = id => {
-        console.log("clicky update");
+        console.log("*Click* - update");
         API.starShopItem(id)
             .then(res => this.loadShopItems())
             .catch(err => console.log(err));
@@ -75,8 +75,9 @@ class Lists extends Component {
         });
     };
 
+    // Save new shopping ITEM to the database
     handleFormSubmit = event => {
-        console.log("clicky create");
+        console.log("*Click* - save new shopping item");
         event.preventDefault();
         if (this.state.newShopItem) {
             API.saveShopItem({
@@ -92,12 +93,14 @@ class Lists extends Component {
         }
     };
 
+    // Save new shopping LIST to the database
     handleFormSubmitList = event => {
-        console.log("clicky create List");
+        console.log("*Click* - Save new shopping list");
         event.preventDefault();
+        const newShopList = this.state.newShopList;
         if (this.state.newShopList) {
             API.saveShopList({
-                listName: this.state.newShopList
+                listName: newShopList
             })
                 .then(res => this.loadShopLists())
                 .catch(err => console.log(err));

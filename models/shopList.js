@@ -3,10 +3,10 @@ const Schema = mongoose.Schema
 
 // Item Schema
 const ListSchema = new Schema({
-    listTitle: {
+    listName: {
         type: String,
-        required: false
-    },
+        required: true
+    }
 })
 
 const ShopList = mongoose.model("ShopList", ListSchema)
