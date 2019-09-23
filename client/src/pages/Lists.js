@@ -5,6 +5,7 @@ import API from "../utils/API";
 import DeleteBtn from "../components/DeleteBtn";
 import StarBtn from "../components/StarBtn";
 import { List, ListItem } from "../components/List";
+import ListClick from "../components/ListClick";
 import "./styles.css";
 
 class Lists extends Component {
@@ -25,6 +26,7 @@ class Lists extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.handleFormSubmitList = this.handleFormSubmitList.bind(this);
+        this.handleListClick = this.handleListClick.bind(this);
     }
 
     // This group of functions: For Mongo connection stuff; Adam 9/19
@@ -79,6 +81,21 @@ class Lists extends Component {
         this.setState({
             [name]: value
         })
+    };
+
+    handleListClick = event => {
+        console.log("handleListClick event:", event.target.name, event.target.value);
+        const { name, value } = event.target;
+        const activeListId = value;
+        const activeListObject = this.state.shopLists.filter(function (list) {
+            return (list._id === activeListId);
+        });
+        const shoppingListName = activeListObject[0] ? activeListObject[0].listName : "All";
+        this.setState({
+            activeListId: activeListId,
+            activeListName: shoppingListName
+        });
+        this.loadShopItems();
     };
 
     handleSelectChange = event => {
@@ -138,6 +155,14 @@ class Lists extends Component {
                     <div className='row'>
                         <div className='col-sm-4'>
                             <h4>Your Lists</h4>
+
+
+                            <ListClick 
+                                list={this.state.shopLists}
+                                onClick={this.handleListClick}
+                            />
+
+
                             <form>
                                 <Select
                                     className="form-control form-control-sm"
