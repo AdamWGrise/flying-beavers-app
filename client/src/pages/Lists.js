@@ -15,7 +15,6 @@ class Lists extends Component {
             activeListName: "",
             shopLists: [],
             shopItems: [],
-            shoppingList: "",
             itemName: "",
             category: "",
             quantity: "1",
@@ -36,29 +35,26 @@ class Lists extends Component {
 
     // This function runs after ...? 
     componentDidUpdate() {
-        // console.log("componentDidUpdate");
-        // console.log("this.state.activeListId", this.state.activeListId);
-        // console.log("this.state.activeListName", this.state.activeListName);
-        // console.log("this.state.shopLists", this.state.shopLists);
-
-
-        // console.log("activeListObject:", activeListObject);
-        // console.log("activeListObject.listName:", activeListObject[0].listName);
-
     }
 
     loadShopLists = () => {
         console.log("loading shopLists");
         API.getShopLists()
-            .then(res => this.setState({ shopLists: res.data })
+            .then(res => this.setState({
+                shopLists: res.data,
+                activeListName: res.data[0] ? res.data[0].listName : "All",
+                activeListId: res.data[0] ? res.data[0]._id : 0
+            })
             )
             .catch(err => console.log(err));
     };
 
     loadShopItems = () => {
-        console.log("loading shopItems");
+        console.log("loading shopItems this.state.activeListId", this.state.activeListId);
         API.getShopItems()
-            .then(res => this.setState({ shopItems: res.data })
+            .then(res => this.setState({ shopItems: res.data.filter(shopItem => {
+                return shopItem.shoppingList == this.state.activeListId;
+            }) })
             )
             .catch(err => console.log(err));
     };
@@ -85,6 +81,21 @@ class Lists extends Component {
         })
     };
 
+    handleSelectChange = event => {
+        console.log("handleSelectChange event:", event);
+        const { name, value } = event.target;
+        const activeListId = value;
+        const activeListObject = this.state.shopLists.filter(function (list) {
+            return (list._id === activeListId);
+        });
+        const shoppingListName = activeListObject[0] ? activeListObject[0].listName : "All";
+        this.setState({
+            activeListId: activeListId,
+            activeListName: shoppingListName
+        });
+        this.loadShopItems();
+    };
+
     // Save new shopping ITEM to the database
     handleFormSubmit = event => {
         console.log("*Click* - Save new shopping ITEM");
@@ -92,7 +103,7 @@ class Lists extends Component {
         if (this.state.newShopItem) {
             API.saveShopItem({
                 itemName: this.state.newShopItem,
-                shoppingList: this.state.shoppingList,
+                shoppingList: this.state.activeListId,
                 category: this.state.category,
                 quantity: this.state.quantity,
                 quantityUnits: this.state.quantityUnits,
@@ -121,14 +132,6 @@ class Lists extends Component {
 
     render() {
 
-        const activeListId = this.state.activeListId;
-        console.log(":::HI:::", activeListId);
-        const activeListObject = this.state.shopLists.filter(function (list) {
-            return (list._id === activeListId);
-        });
-        console.log(":::HI:::", activeListObject[0] ? activeListObject[0].listName : "Fail");
-        const shoppingListName = activeListObject[0] ? activeListObject[0].listName : "All";
-
         return (
             <div id='content'>
                 <div className='container'>
@@ -138,14 +141,13 @@ class Lists extends Component {
                             <form>
                                 <Select
                                     className="form-control form-control-sm"
-                                    onChange={this.handleInputChange}
+                                    onChange={this.handleSelectChange}
                                     name="activeListId"
                                 >
                                     {this.state.shopLists.map(shopList => (
                                         <Option
                                             key={shopList._id}
                                             value={shopList._id}
-
                                         >
                                             {shopList.listName}
                                         </Option>
@@ -168,11 +170,9 @@ class Lists extends Component {
                                     Add List
                                     </FormBtn>
                             </form>
-
-
                         </div>
                         <div className='col-sm-8'>
-                            <h4>{shoppingListName}</h4>
+                            <h4>{this.state.activeListName}</h4>
                             <List>
                                 {this.state.shopItems.map(shopItem => (
                                     <ListItem key={shopItem._id}>
@@ -189,7 +189,6 @@ class Lists extends Component {
                             </List>
                             <br />
                             <div className="card">
-
                                 <form>
                                     <Input
                                         value={this.state.newShopItem}
