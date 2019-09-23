@@ -176,13 +176,13 @@ class Lists extends Component {
                             <List>
                                 {this.state.shopItems.map(shopItem => (
                                     <ListItem key={shopItem._id}>
-                                        <span>
-                                            {shopItem.itemName}, {shopItem.quantity} {shopItem.quantityUnits}
-                                        </span>
                                         <StarBtn
                                             onClick={() => this.starShopItem(shopItem._id)}
                                             starred={shopItem.starred}
                                         />
+                                        <span className="shoppinglist-item">
+                                            {shopItem.itemName}, {shopItem.quantity} {shopItem.quantityUnits}
+                                        </span>
                                         <DeleteBtn onClick={() => this.deleteShopItem(shopItem._id)} />
                                     </ListItem>
                                 ))}
