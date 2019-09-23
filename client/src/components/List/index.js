@@ -5,9 +5,9 @@ import "./style.css";
 
 export function List({ children }) {
   return (
-    <div>
-      <ul className="list-group">{children}</ul>
-    </div>
+    <>
+      <ul className="list-group list-group-flush">{children}</ul>
+    </>
   );
 }
 

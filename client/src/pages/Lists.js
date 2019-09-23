@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Footer from '../components/Footer';
-import { Input, TextArea, FormBtn } from "../components/Form";
+import { Select, Option, Input, TextArea, FormBtn } from "../components/Form";
 import API from "../utils/API";
 import DeleteBtn from "../components/DeleteBtn";
 import StarBtn from "../components/StarBtn";
@@ -12,7 +12,7 @@ class Lists extends Component {
         super(props)
         this.state = {
             activeListId: 0,
-            activePageTitle: 'Lists',
+            activeListName: "",
             shopLists: [],
             shopItems: [],
             shoppingList: "",
@@ -26,13 +26,18 @@ class Lists extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.handleFormSubmitList = this.handleFormSubmitList.bind(this);
-
     }
 
     // This group of functions: For Mongo connection stuff; Adam 9/19
     componentDidMount() {
         this.loadShopLists();
         this.loadShopItems();
+    }
+
+    // This function runs after ...? 
+    componentDidUpdate() {
+        console.log("Hi 7-7-7-7-7-");
+        console.log("this.state.activeListId", this.state.activeListId);
     }
 
     loadShopLists = () => {
@@ -66,9 +71,7 @@ class Lists extends Component {
     };
 
     handleInputChange = event => {
-        console.log("this.state.newShopItem", this.state.newShopItem);
-        console.log("this.state.newShopList", this.state.newShopList);
-
+        console.log("handleInputChange");
         const { name, value } = event.target;
         this.setState({
             [name]: value
@@ -107,27 +110,43 @@ class Lists extends Component {
         }
     };
 
+    
+
     render() {
+
+        const activeListId = this.state.activeListId;
+
         return (
             <div id='content'>
                 <div className='container'>
                     <div className='row'>
                         <div className='col-sm-4'>
                             <h4>Your Lists</h4>
-                            <select>
-                                {this.state.shopLists.map(shopList => (
-                                    <option key={shopList._id} value={shopList._id} id={shopList._id}>
-                                        {shopList.listName}
-                                    </option>
-                                ))}
-                            </select>
+                            <form>
+                                <Select
+                                    className="form-control form-control-sm"
+                                    onChange={this.handleInputChange}
+                                    name="activeListId"
+                                >
+                                    {this.state.shopLists.map(shopList => (
+                                        <Option
+                                            key={shopList._id}
+                                            value={shopList._id}
+                                            
+                                        >
+                                            {shopList.listName}
+                                        </Option>
+                                    ))}
+                                </Select>
+                            </form>
+                            <br />
                             <form>
                                 <Input
-                                    value={this.state.newShopList}
+                                    className="form-control list-input-1 form-control-sm"
                                     onChange={this.handleInputChange}
+                                    value={this.state.newShopList}
                                     name="newShopList"
                                     placeholder="Create a new list"
-                                    className="form-control list-input-1 form-control-sm"
                                 />
                                 <FormBtn
                                     onClick={this.handleFormSubmitList}
@@ -140,23 +159,24 @@ class Lists extends Component {
 
                         </div>
                         <div className='col-sm-8'>
-                            <div>
-                                <h4>List Title</h4>
-                                <List>
-                                    {this.state.shopItems.map(shopItem => (
-                                        <ListItem key={shopItem._id}>
-                                            <span>
-                                                {shopItem.itemName}, {shopItem.quantity} {shopItem.quantityUnits}
-                                            </span>
-                                            <StarBtn
-                                                onClick={() => this.starShopItem(shopItem._id)}
-                                                starred={shopItem.starred}
-                                            />
-                                            <DeleteBtn onClick={() => this.deleteShopItem(shopItem._id)} />
-                                        </ListItem>
-                                    ))}
-                                </List>
-                                <br />
+                            <h4>List Title</h4>
+                            <List>
+                                {this.state.shopItems.map(shopItem => (
+                                    <ListItem key={shopItem._id}>
+                                        <span>
+                                            {shopItem.itemName}, {shopItem.quantity} {shopItem.quantityUnits}
+                                        </span>
+                                        <StarBtn
+                                            onClick={() => this.starShopItem(shopItem._id)}
+                                            starred={shopItem.starred}
+                                        />
+                                        <DeleteBtn onClick={() => this.deleteShopItem(shopItem._id)} />
+                                    </ListItem>
+                                ))}
+                            </List>
+                            <br />
+                            <div className="card">
+
                                 <form>
                                     <Input
                                         value={this.state.newShopItem}
