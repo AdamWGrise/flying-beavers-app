@@ -36,8 +36,15 @@ class Lists extends Component {
 
     // This function runs after ...? 
     componentDidUpdate() {
-        console.log("Hi 7-7-7-7-7-");
-        console.log("this.state.activeListId", this.state.activeListId);
+        // console.log("componentDidUpdate");
+        // console.log("this.state.activeListId", this.state.activeListId);
+        // console.log("this.state.activeListName", this.state.activeListName);
+        // console.log("this.state.shopLists", this.state.shopLists);
+
+
+        // console.log("activeListObject:", activeListObject);
+        // console.log("activeListObject.listName:", activeListObject[0].listName);
+
     }
 
     loadShopLists = () => {
@@ -71,11 +78,11 @@ class Lists extends Component {
     };
 
     handleInputChange = event => {
-        console.log("handleInputChange");
+        console.log("handleInputChange event:", event);
         const { name, value } = event.target;
         this.setState({
             [name]: value
-        });
+        })
     };
 
     // Save new shopping ITEM to the database
@@ -110,11 +117,17 @@ class Lists extends Component {
         }
     };
 
-    
+
 
     render() {
 
         const activeListId = this.state.activeListId;
+        console.log(":::HI:::", activeListId);
+        const activeListObject = this.state.shopLists.filter(function (list) {
+            return (list._id === activeListId);
+        });
+        console.log(":::HI:::", activeListObject[0] ? activeListObject[0].listName : "Fail");
+        const shoppingListName = activeListObject[0] ? activeListObject[0].listName : "All";
 
         return (
             <div id='content'>
@@ -132,7 +145,7 @@ class Lists extends Component {
                                         <Option
                                             key={shopList._id}
                                             value={shopList._id}
-                                            
+
                                         >
                                             {shopList.listName}
                                         </Option>
@@ -159,7 +172,7 @@ class Lists extends Component {
 
                         </div>
                         <div className='col-sm-8'>
-                            <h4>List Title</h4>
+                            <h4>{shoppingListName}</h4>
                             <List>
                                 {this.state.shopItems.map(shopItem => (
                                     <ListItem key={shopItem._id}>
