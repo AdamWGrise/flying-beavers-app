@@ -3,7 +3,7 @@ import './styles.css'
 
 function FamilyInfoButton (props) {
   return (
-    <button value={props.value} name={props.name} datatext={props.datatext} onClick={props.onClick} className='btn'>
+    <button datatext={props.datatext} value={props.value} name={props.name} onClick={props.onClick} className='btn'>
       {props.name}
     </button>
   )

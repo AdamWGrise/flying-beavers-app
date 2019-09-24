@@ -16,6 +16,8 @@ class FamilyInfo extends Component {
             lastUpdated: ""
         };
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleListClick = this.handleListClick.bind(this);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
 
     // This group of functions: For Mongo connection stuff; Adam 9/19
@@ -59,7 +61,7 @@ class FamilyInfo extends Component {
         };
 
     handleListClick = event => {
-        console.log("====handleListClick: event.target.name, event.target.value, event.target.datatext====");
+        console.log("\n\n====handleListClick: event.target.name, event.target.value, event.target.datatext====");
         console.log(event.target.name, event.target.value, event.target.datatext);
         console.log("====Just event.target====");
         console.log(event.target);
