@@ -33,6 +33,11 @@ const ItemSchema = new Schema({
     required: false,
     default: false
   },
+  starred: {
+    type: Number,
+    required: false,
+    default: false
+  },
   date: {
     type: Date,
     default: Date.now

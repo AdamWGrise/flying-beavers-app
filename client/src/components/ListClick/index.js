@@ -5,12 +5,12 @@ import Button from '../Button'
 function ListClick (props) {
   return (
     <nav className='nav flex-column'>
-      {props.testLists.map((list, index) => (
+      {props.list.map((list, index) => (
         <Button
           key={index}
-          value={index}
-          name={list.title}
-          onClick={props.handleListClick}
+          value={list._id}
+          name={list.listName}
+          onClick={props.onClick}
         />
       ))}
     </nav>
