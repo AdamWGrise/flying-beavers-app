@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Footer from '../components/Footer';
-import ContentPanel from '../components/ContentPanel';
-import { Input, TextArea, FormBtn } from "../components/Form";
+// import ContentPanel from '../components/ContentPanel';
+import { Input, FormBtn } from "../components/Form";
 import Jumbotron from '../components/Jumbotron';
 import API from "../utils/API";
 import DeleteBtn from "../components/DeleteBtn";
