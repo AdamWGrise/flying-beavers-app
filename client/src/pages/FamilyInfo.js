@@ -53,7 +53,6 @@ class FamilyInfo extends Component {
             lastUpdated: new Date(Date.now())
         })
             .then(
-                this.loadFamilyInfos(),
                 alert("Saved!") //Replace this with an animation or something otherwise not dumb
                 )
             .catch(err => console.log(err));
