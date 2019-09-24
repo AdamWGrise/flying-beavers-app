@@ -22,7 +22,7 @@ class Home extends Component {
                         <div className='col'>
                             <ContentBlock
                                heading="You spend time with family,"
-                               heading2="we'll take care of the organizing" 
+                               heading2="We'll take care of the organizing" 
                                paragraph='When families are on the go it can be challenging to stay organized 
                                Time is wasted when trying to link schedules, calendars, lists, tasks which ends up being ineffective. 
                                Flying beavers simplifies the family life so you can spend more time together, and less time organizing. 
