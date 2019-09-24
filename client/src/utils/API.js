@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export default {
+  ///////////// Shop List API ////////////
   // Gets all shopItems
   getShopItems: function () {
     return axios.get("/api/shopItems");
@@ -30,5 +31,25 @@ export default {
   saveShopList: function (shopListData) {
     console.log("shopListData", shopListData);
     return axios.post("/api/shopLists", shopListData);
+  },
+  ////////// Family Info API ////////////
+  // Gets all familyInfos
+  getFamilyInfos: function () {
+    return axios.get("/api/familyInfos");
+  },
+  // Gets the familyInfo with the given id
+  getFamilyInfo: function (id) {
+    return axios.get("/api/familyInfos/" + id);
+  },
+  updateFamilyInfo: function (familyInfoData) {
+    return axios.put("/api/familyInfos/" + familyInfoData.id, familyInfoData);
+  },
+  // Deletes the familyInfo with the given id
+  deleteFamilyInfo: function (id) {
+    return axios.delete("/api/familyInfos/" + id);
+  },
+  // Saves a familyInfo to the database
+  saveFamilyInfo: function (familyInfoData) {
+    return axios.post("/api/familyInfos", familyInfoData);
   }
 };

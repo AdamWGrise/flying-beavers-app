@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Footer from '../components/Footer';
-import { Select, Option, Input, TextArea, FormBtn } from "../components/Form";
+import { Select, Option, Input, FormBtn } from "../components/Form";
 import API from "../utils/API";
 import DeleteBtn from "../components/DeleteBtn";
 import StarBtn from "../components/StarBtn";
@@ -55,7 +55,7 @@ class Lists extends Component {
         console.log("loading shopItems this.state.activeListId", this.state.activeListId);
         API.getShopItems()
             .then(res => this.setState({ shopItems: res.data.filter(shopItem => {
-                return shopItem.shoppingList == this.state.activeListId;
+                return shopItem.shoppingList === this.state.activeListId;
             }) })
             )
             .catch(err => console.log(err));
