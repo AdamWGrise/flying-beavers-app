@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Footer from '../components/Footer';
+import { TextArea, FormBtn } from "../components/Form";
+import FamilyInfoList from "../components/FamilyInfoList";
 import API from "../utils/API";
 import "./styles.css";
-import { TextArea, FormBtn } from '../components/Form';
 
 class FamilyInfo extends Component {
     constructor(props) {
@@ -11,7 +12,7 @@ class FamilyInfo extends Component {
             familyInfos: [],
             activeCategory: "",
             activeId: "",
-            information: "",
+            dataText: "",
             lastUpdated: ""
         };
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -28,7 +29,7 @@ class FamilyInfo extends Component {
             this.setState({
                 familyInfos: res.data,
                 activeId: res.data[0]._id,
-                information: res.data[0].dataText,
+                dataText: res.data[0].dataText,
                 activeCategory: res.data[0].category,
                 lastUpdated: res.data[0].lastUpdated
             })},
@@ -48,7 +49,7 @@ class FamilyInfo extends Component {
         API.updateFamilyInfo({
             id: this.state.activeId,
             category: this.state.activeCategory,
-            dataText: this.state.information,
+            dataText: this.state.dataText,
             lastUpdated: new Date(Date.now())
         })
             .then(
@@ -58,6 +59,19 @@ class FamilyInfo extends Component {
             .catch(err => console.log(err));
         };
 
+    handleListClick = event => {
+        console.log("====handleListClick: event.target.name, event.target.value, event.target.datatext====");
+        console.log(event.target.name, event.target.value, event.target.datatext);
+        console.log("====Just event.target====");
+        console.log(event.target);
+        const { name, value, datatext } = event.target;
+        this.setState({
+            activeId: value,
+            activeCategory: name,
+            dataText: datatext
+        });
+    };
+
     render() {
         return (
             <div id='content'>
@@ -65,18 +79,18 @@ class FamilyInfo extends Component {
                     <div className='row'>
                         <div className='col-sm-4'>
                             <h4>Family Info</h4>
-                            <div className="card">
-                                (List categories here to select from - "Members" is default)
-                            </div>
+                            <FamilyInfoList 
+                                list={this.state.familyInfos}
+                                onClick={this.handleListClick}
+                            />
                         </div>
                         <div className='col-sm-8'>
                             <h5>{this.state.activeCategory}</h5>
                             <div className="card">
                                 <form>
                                     <TextArea type="text"
-                                    value={this.state.information}
+                                    value={this.state.dataText}
                                     onChange={this.handleInputChange}
-                                    name="information"
                                     className="form-control form-control-sm"
                                     />
                                     <FormBtn
