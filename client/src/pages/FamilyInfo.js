@@ -61,11 +61,8 @@ class FamilyInfo extends Component {
         };
 
     handleListClick = event => {
-        console.log("\n\n====handleListClick: event.target.name, event.target.value, event.target.datatext====");
-        console.log(event.target.name, event.target.value, event.target.datatext);
-        console.log("====Just event.target====");
-        console.log(event.target);
-        const { name, value, datatext } = event.target;
+        const datatext = event.target.getAttribute('datatext')
+        const { name, value } = event.target;
         this.setState({
             activeId: value,
             activeCategory: name,
