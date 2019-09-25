@@ -50,7 +50,7 @@ class Lists extends Component {
                             <ContentPanel
                                 activeListId={this.state.activeListId}
                                 testLists={this.state.testLists}
-                            />
+                                />
                         </div>
                     </div>
                     
