@@ -54,9 +54,11 @@ class Lists extends Component {
     loadShopItems = () => {
         console.log("loading shopItems this.state.activeListId", this.state.activeListId);
         API.getShopItems()
-            .then(res => this.setState({ shopItems: res.data.filter(shopItem => {
-                return shopItem.shoppingList === this.state.activeListId;
-            }) })
+            .then(res => this.setState({
+                shopItems: res.data.filter(shopItem => {
+                    return shopItem.shoppingList === this.state.activeListId;
+                })
+            })
             )
             .catch(err => console.log(err));
     };
@@ -157,13 +159,13 @@ class Lists extends Component {
                             <h4>Your Lists</h4>
 
 
-                            <ListClick 
+                            <ListClick
                                 list={this.state.shopLists}
                                 onClick={this.handleListClick}
                             />
 
 
-                            <form>
+                            {/* <form>
                                 <Select
                                     className="form-control form-control-sm"
                                     onChange={this.handleSelectChange}
@@ -178,7 +180,9 @@ class Lists extends Component {
                                         </Option>
                                     ))}
                                 </Select>
-                            </form>
+                            </form> */}
+
+
                             <br />
                             <form>
                                 <Input
@@ -213,7 +217,7 @@ class Lists extends Component {
                                 ))}
                             </List>
                             <br />
-                            <div className="card">
+                            
                                 <form>
                                     <Input
                                         value={this.state.newShopItem}
@@ -251,7 +255,35 @@ class Lists extends Component {
                                     </FormBtn>
                                 </form>
                                 <br />
-                            </div>
+                                
+
+
+
+
+                            <form className="form-row">
+                                <div className="form-group col-sm-3 mb-2">
+                                    <label htmlFor="addListItem" className="sr-only">Add an item</label>
+                                    <input type="text" className="form-control" id="addListItem" placeholder="Add an item" />
+                                </div>
+                                <div className="form-group mb-2 col-sm-1">
+                                    <label htmlFor="listItemQuantity" className="sr-only">Quantity</label>
+                                    <input type="text" className="form-control" id="listItemQuantity" placeholder="Qty" />
+                                </div>
+                                <div className="form-group mb-2 col-sm-2">
+                                    <label htmlFor="listItemUnits" className="sr-only">Units</label>
+                                    <input type="text" className="form-control" id="listItemUnits" placeholder="Units" />
+                                </div>
+                                <div className="form-group mb-2 col-sm-2">
+                                    <label htmlFor="listItemCategory" className="sr-only">Category</label>
+                                    <input type="text" className="form-control" id="listItemCategory" placeholder="Category" />
+                                </div>
+                                <button type="submit" className="btn btn-primary mb-2 ml-2">Add Item</button>
+                            </form>
+
+
+
+
+
                         </div>
                     </div>
                     <div className='row'>
