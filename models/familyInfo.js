@@ -5,11 +5,13 @@ const Schema = mongoose.Schema
 const FamilyInfoSchema = new Schema({
     category: {
         type: String,
-        required: false
+        required: true,
+        default: "New Category"
     },
     dataText: {
         type: String,
-        required: false
+        required: true,
+        default: ""
     },
     lastUpdated: {
         type: Date,
