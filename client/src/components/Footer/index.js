@@ -1,11 +1,13 @@
-import React from "react";
+import React from 'react';
+import './styles.css';
 
-function Footer() {
+function Footer () {
   return (
-    <footer className="d-flex justify-content-center">
-      - The Flying Beavers| Roisin, Tara, Allison, Kiya, Adam, Jessica -
+    <footer className='d-flex justify-content-center'>
+      - Footer | Credits -
     </footer>
-  );
+  )
 }
 
-export default Footer;
+export default Footer
+
