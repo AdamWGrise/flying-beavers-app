@@ -70,7 +70,7 @@ class FamilyInfo extends Component {
             lastUpdated: new Date(Date.now())
         })
             .then(
-                // alert("Saved!") //Replace this with an animation or something otherwise not dumb
+                this.refreshData(),
                 store.addNotification({
                     title: this.state.activeCategory,
                     message: 'Saved.',
@@ -82,9 +82,6 @@ class FamilyInfo extends Component {
                         duration: 3000
                     }
                 })
-                )
-            .then(
-                this.refreshData()
             )
             .catch(err => console.log(err));
         };
