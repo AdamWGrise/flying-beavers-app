@@ -131,6 +131,14 @@ class Lists extends Component {
                 .then(res => this.loadShopItems())
                 .catch(err => console.log(err));
         }
+        // Clear the cooresponding state variables / input boxes 
+        console.log("Clearing states", this.state);
+        this.setState({
+            newShopItem: '',
+            category: '',
+            quantity: '',
+            quantityUnits: ''
+        });
     };
 
     // Save new shopping LIST to the database
@@ -147,24 +155,17 @@ class Lists extends Component {
         }
     };
 
-
-
     render() {
-
         return (
             <div id='content'>
                 <div className='container'>
                     <div className='row'>
                         <div className='col-sm-4'>
                             <h4>Your Lists</h4>
-
-
                             <ListClick
                                 list={this.state.shopLists}
                                 onClick={this.handleListClick}
                             />
-
-
                             {/* <form>
                                 <Select
                                     className="form-control form-control-sm"
@@ -181,8 +182,6 @@ class Lists extends Component {
                                     ))}
                                 </Select>
                             </form> */}
-
-
                             <br />
                             <form>
                                 <Input
@@ -197,7 +196,7 @@ class Lists extends Component {
                                     className="form-control form-control-sm btn btn-primary list-submit-btn"
                                 >
                                     Add List
-                                    </FormBtn>
+                                </FormBtn>
                             </form>
                         </div>
                         <div className='col-sm-8'>
@@ -217,73 +216,48 @@ class Lists extends Component {
                                 ))}
                             </List>
                             <br />
-                            
-                                <form>
-                                    <Input
-                                        value={this.state.newShopItem}
-                                        onChange={this.handleInputChange}
-                                        name="newShopItem"
-                                        placeholder="Add an item:"
-                                        className="form-control list-input-1 form-control-sm"
-                                    />
-                                    <Input
-                                        value={this.state.quantity}
-                                        onChange={this.handleInputChange}
-                                        name="quantity"
-                                        placeholder="Quantity:"
-                                        className="form-control list-input-2 form-control-sm"
-                                    />
-                                    <Input
-                                        value={this.state.quantityUnits}
-                                        onChange={this.handleInputChange}
-                                        name="quantityUnits"
-                                        placeholder="Units:"
-                                        className="form-control form-control-sm"
-                                    />
-                                    <Input
-                                        value={this.state.category}
-                                        onChange={this.handleInputChange}
-                                        name="category"
-                                        placeholder="Category:"
-                                        className="form-control form-control-sm"
-                                    />
-                                    <FormBtn
-                                        onClick={this.handleFormSubmit}
-                                        className="form-control form-control-sm btn btn-primary list-submit-btn"
-                                    >
-                                        Add item
+                            <form>
+                                <div className="input-group mb-3">
+                                    <div className="input-group-append">
+                                        <Input
+                                            value={this.state.newShopItem}
+                                            onChange={this.handleInputChange}
+                                            name="newShopItem"
+                                            placeholder="Add an item"
+                                            aria-label="Add an item"
+                                            aria-describedby="basic-addon2"
+                                            className="form-control form-control-sm"
+                                        />
+                                        <Input
+                                            value={this.state.quantity}
+                                            onChange={this.handleInputChange}
+                                            name="quantity"
+                                            placeholder="Quantity:"
+                                            className="form-control list-input-2 form-control-sm"
+                                        />
+                                        <Input
+                                            value={this.state.quantityUnits}
+                                            onChange={this.handleInputChange}
+                                            name="quantityUnits"
+                                            placeholder="Units:"
+                                            className="form-control form-control-sm"
+                                        />
+                                        <Input
+                                            value={this.state.category}
+                                            onChange={this.handleInputChange}
+                                            name="category"
+                                            placeholder="Category:"
+                                            className="form-control form-control-sm"
+                                        />
+                                        <FormBtn
+                                            onClick={this.handleFormSubmit}
+                                            className="form-control form-control-sm btn btn-success list-submit-btn"
+                                        >
+                                            Add item
                                     </FormBtn>
-                                </form>
-                                <br />
-                                
-
-
-
-
-                            <form className="form-row">
-                                <div className="form-group col-sm-3 mb-2">
-                                    <label htmlFor="addListItem" className="sr-only">Add an item</label>
-                                    <input type="text" className="form-control" id="addListItem" placeholder="Add an item" />
+                                    </div>
                                 </div>
-                                <div className="form-group mb-2 col-sm-1">
-                                    <label htmlFor="listItemQuantity" className="sr-only">Quantity</label>
-                                    <input type="text" className="form-control" id="listItemQuantity" placeholder="Qty" />
-                                </div>
-                                <div className="form-group mb-2 col-sm-2">
-                                    <label htmlFor="listItemUnits" className="sr-only">Units</label>
-                                    <input type="text" className="form-control" id="listItemUnits" placeholder="Units" />
-                                </div>
-                                <div className="form-group mb-2 col-sm-2">
-                                    <label htmlFor="listItemCategory" className="sr-only">Category</label>
-                                    <input type="text" className="form-control" id="listItemCategory" placeholder="Category" />
-                                </div>
-                                <button type="submit" className="btn btn-primary mb-2 ml-2">Add Item</button>
                             </form>
-
-
-
-
-
                         </div>
                     </div>
                     <div className='row'>
