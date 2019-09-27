@@ -8,12 +8,13 @@ import Nav from "./components/Nav";
 import './App.css';
 import Login from './pages/Login'
 import Register from './pages/Register'
-
+import ReactNotifications from 'react-notifications-component';
 
 function App () {
   return (
     <Router>
       <div>
+        <ReactNotifications />
         <Nav />
         <Switch>
 

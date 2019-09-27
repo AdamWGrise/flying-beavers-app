@@ -4,6 +4,9 @@ import { TextArea, FormBtn } from "../components/Form";
 import FamilyInfoList from "../components/FamilyInfoList";
 import API from "../utils/API";
 import "./styles.css";
+import { store } from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
+import 'animate.css';
 
 class FamilyInfo extends Component {
     constructor(props) {
@@ -25,13 +28,22 @@ class FamilyInfo extends Component {
         this.loadFamilyInfos();
     }
 
+    refreshData = () => {
+        API.getFamilyInfos()
+        .then(res => {
+            this.setState({
+                familyInfos:res.data
+            })
+        })
+    }
+
     loadFamilyInfos = () => {
         API.getFamilyInfos()
             .then(res => {
             this.setState({
                 familyInfos: res.data,
                 activeId: res.data[0]._id,
-                dataText: res.data[0].dataText,
+                dataText: res.data[0].dataText ? res.data[0].dataText : "",
                 activeCategory: res.data[0].category,
                 lastUpdated: res.data[0].lastUpdated
             })},
@@ -40,6 +52,8 @@ class FamilyInfo extends Component {
     };
 
     handleInputChange = event => {
+        console.log(event.target.name)
+        console.log(event.target.value)
         const { name, value } = event.target;
         this.setState({
             [name]: value
@@ -48,6 +62,7 @@ class FamilyInfo extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
+        console.log(this.state)
         API.updateFamilyInfo({
             id: this.state.activeId,
             category: this.state.activeCategory,
@@ -55,21 +70,30 @@ class FamilyInfo extends Component {
             lastUpdated: new Date(Date.now())
         })
             .then(
-                alert("Saved!") //Replace this with an animation or something otherwise not dumb
-                )
+                this.refreshData(),
+                store.addNotification({
+                    title: this.state.activeCategory,
+                    message: 'Saved.',
+                    type: 'success',
+                    container: 'bottom-right',
+                    animationIn: ["animated", "fadeIn"],
+                    animationOut: ["animated", "fadeOut"],
+                    dismiss: {
+                        duration: 3000
+                    }
+                })
+            )
             .catch(err => console.log(err));
         };
 
     handleListClick = event => {
-        console.log("\n\n====handleListClick: event.target.name, event.target.value, event.target.datatext====");
-        console.log(event.target.name, event.target.value, event.target.datatext);
-        console.log("====Just event.target====");
-        console.log(event.target);
-        const { name, value, datatext } = event.target;
+        this.handleFormSubmit(event)
+        const datatext = event.target.getAttribute('datatext')
+        const { name, value } = event.target;
         this.setState({
             activeId: value,
             activeCategory: name,
-            dataText: datatext
+            dataText: datatext ? datatext : ""
         });
     };
 
@@ -90,9 +114,11 @@ class FamilyInfo extends Component {
                             <div className="card">
                                 <form>
                                     <TextArea type="text"
-                                    value={this.state.dataText}
-                                    onChange={this.handleInputChange}
+                                    name="dataText"
                                     className="form-control form-control-sm"
+                                    value={this.state.dataText ? this.state.dataText : ""}
+                                    onChange={(event) => this.handleInputChange(event)}
+                                    placeholder="Add notes here!"
                                     />
                                     <FormBtn
                                         onClick={this.handleFormSubmit}
