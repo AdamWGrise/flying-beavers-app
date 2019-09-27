@@ -85,6 +85,38 @@ class FamilyInfo extends Component {
             .catch(err => console.log(err));
         };
 
+    handleFormDelete = event => {
+        event.preventDefault();
+        API.deleteFamilyInfo(this.state.activeId)
+            .then(
+                this.refreshData(),
+                store.addNotification({
+                    title: this.state.activeCategory,
+                    message: 'Category deleted.',
+                    type: 'danger',
+                    container: 'bottom-right',
+                    animationIn: ["animated", "fadeIn"],
+                    animationOut: ["animated", "fadeOut"],
+                    dismiss: {
+                        duration: 3000
+                    }
+                })
+            )
+            .then(res => {
+                this.setState({
+                    activeCategory: "",
+                    dataText: "",
+                    activeId: "",
+                    lastUpdated: "",
+                    activeCategory: ""
+                })},
+                )
+            .then(
+                    this.refreshData()
+                 )
+            .catch(err => console.log(err));
+        };
+
     handleListClick = event => {
         this.handleFormSubmit(event)
         const datatext = event.target.getAttribute('datatext')
@@ -147,12 +179,22 @@ class FamilyInfo extends Component {
                                     onChange={(event) => this.handleInputChange(event)}
                                     placeholder="Add notes here!"
                                     />
+                                    <span>
                                     <FormBtn
                                         onClick={this.handleFormSubmit}
                                         className="btn btn-primary"
                                     >
                                         Save    
                                     </FormBtn>
+                                    </span>
+                                    <span className="right">
+                                    <FormBtn
+                                        onClick={this.handleFormDelete}
+                                        className="btn btn-danger"
+                                    >
+                                        Delete    
+                                    </FormBtn>
+                                    </span>
                                     <p>Last updated: {new Intl.DateTimeFormat('en-US', {
                                         year: 'numeric',
                                         month: 'long',
