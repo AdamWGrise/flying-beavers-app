@@ -1,6 +1,6 @@
 const db = require("../models");
 
-// Defining methods for the shopItemsController
+// Defining methods for the familyInfosController
 module.exports = {
     findAll: function (req, res) {
         db.FamilyInfo
@@ -15,6 +15,7 @@ module.exports = {
         .catch(err => res.status(422).json(err));
     },
     create: function (req, res) {
+        console.log(req.body)
         db.FamilyInfo
         .create(req.body)
         .then(dbModel => res.json(dbModel))

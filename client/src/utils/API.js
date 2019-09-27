@@ -32,6 +32,7 @@ export default {
     console.log("shopListData", shopListData);
     return axios.post("/api/shopLists", shopListData);
   },
+
   ////////// Family Info API ////////////
   // Gets all familyInfos
   getFamilyInfos: function () {
@@ -40,6 +41,11 @@ export default {
   // Gets the familyInfo with the given id
   getFamilyInfo: function (id) {
     return axios.get("/api/familyInfos/" + id);
+  },
+  newFamilyInfo: function (data) {
+    console.log(data.category)
+    console.log(data.dataText)
+    return axios.post("/api/familyInfos", data);
   },
   updateFamilyInfo: function (familyInfoData) {
     return axios.put("/api/familyInfos/" + familyInfoData.id, familyInfoData);

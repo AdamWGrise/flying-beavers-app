@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Footer from '../components/Footer';
-import { TextArea, FormBtn } from "../components/Form";
+import { TextArea, FormBtn, Input } from "../components/Form";
 import FamilyInfoList from "../components/FamilyInfoList";
 import API from "../utils/API";
 import "./styles.css";
@@ -16,11 +16,13 @@ class FamilyInfo extends Component {
             activeCategory: "",
             activeId: "",
             dataText: "",
-            lastUpdated: ""
+            lastUpdated: "",
+            newCategory: ""
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleListClick = this.handleListClick.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.handleFormSubmitCategory = this.handleFormSubmitCategory.bind(this);
     }
 
     // This group of functions: For Mongo connection stuff; Adam 9/19
@@ -52,8 +54,6 @@ class FamilyInfo extends Component {
     };
 
     handleInputChange = event => {
-        console.log(event.target.name)
-        console.log(event.target.value)
         const { name, value } = event.target;
         this.setState({
             [name]: value
@@ -62,7 +62,6 @@ class FamilyInfo extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
-        console.log(this.state)
         API.updateFamilyInfo({
             id: this.state.activeId,
             category: this.state.activeCategory,
@@ -97,6 +96,18 @@ class FamilyInfo extends Component {
         });
     };
 
+    handleFormSubmitCategory = event => {
+        event.preventDefault();
+        if (this.state.newCategory) {
+            API.newFamilyInfo({
+                category: this.state.newCategory,
+                dataText: "(Enter data here)"
+            })
+                .then(res => this.loadFamilyInfos())
+                .catch(err => console.log(err));
+        }
+    };
+
     render() {
         return (
             <div id='content'>
@@ -108,6 +119,22 @@ class FamilyInfo extends Component {
                                 list={this.state.familyInfos}
                                 onClick={this.handleListClick}
                             />
+                            <br />
+                            <form>
+                                <Input
+                                    className="form-control list-input-1 form-control-sm"
+                                    onChange={this.handleInputChange}
+                                    value={this.state.newCategory}
+                                    name="newCategory"
+                                    placeholder="Add a new category"
+                                />
+                                <FormBtn
+                                    onClick={this.handleFormSubmitCategory}
+                                    className="form-control form-control-sm btn btn-primary list-submit-btn"
+                                >
+                                    Add category
+                                    </FormBtn>
+                            </form>
                         </div>
                         <div className='col-sm-8'>
                             <h5>{this.state.activeCategory}</h5>

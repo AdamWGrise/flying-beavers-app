@@ -11,7 +11,7 @@ const FamilyInfoSchema = new Schema({
     dataText: {
         type: String,
         required: true,
-        default: ""
+        default: "(Enter data here)"
     },
     lastUpdated: {
         type: Date,
