@@ -4,7 +4,7 @@ import './styles.css';
 function Footer () {
   return (
     <footer className='d-flex justify-content-center'>
-      - Footer | Credits -
+      - The Flying Beavers | Adam, Kiya, Allison, Roisin, Tara, & Jessica -
     </footer>
   )
 }
