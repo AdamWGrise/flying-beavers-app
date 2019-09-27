@@ -2,6 +2,11 @@
     padding: 10px;
 }
 
+.right {
+  position: absolute;
+  right: 10px;
+}
+
 .shoppinglist-item {
     padding-left: 10px;
     font-family: "Roboto", sans-serif;

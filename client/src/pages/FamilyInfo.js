@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Footer from '../components/Footer';
-import { TextArea, FormBtn } from "../components/Form";
+import { TextArea, FormBtn, Input } from "../components/Form";
 import FamilyInfoList from "../components/FamilyInfoList";
 import API from "../utils/API";
 import "./styles.css";
@@ -16,11 +16,13 @@ class FamilyInfo extends Component {
             activeCategory: "",
             activeId: "",
             dataText: "",
-            lastUpdated: ""
+            lastUpdated: "",
+            newCategory: ""
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleListClick = this.handleListClick.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.handleFormSubmitCategory = this.handleFormSubmitCategory.bind(this);
     }
 
     // This group of functions: For Mongo connection stuff; Adam 9/19
@@ -52,8 +54,6 @@ class FamilyInfo extends Component {
     };
 
     handleInputChange = event => {
-        console.log(event.target.name)
-        console.log(event.target.value)
         const { name, value } = event.target;
         this.setState({
             [name]: value
@@ -62,7 +62,6 @@ class FamilyInfo extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
-        console.log(this.state)
         API.updateFamilyInfo({
             id: this.state.activeId,
             category: this.state.activeCategory,
@@ -86,6 +85,38 @@ class FamilyInfo extends Component {
             .catch(err => console.log(err));
         };
 
+    handleFormDelete = event => {
+        event.preventDefault();
+        API.deleteFamilyInfo(this.state.activeId)
+            .then(
+                this.refreshData(),
+                store.addNotification({
+                    title: this.state.activeCategory,
+                    message: 'Category deleted.',
+                    type: 'danger',
+                    container: 'bottom-right',
+                    animationIn: ["animated", "fadeIn"],
+                    animationOut: ["animated", "fadeOut"],
+                    dismiss: {
+                        duration: 3000
+                    }
+                })
+            )
+            .then(res => {
+                this.setState({
+                    activeCategory: "",
+                    dataText: "",
+                    activeId: "",
+                    lastUpdated: "",
+                    activeCategory: ""
+                })},
+                )
+            .then(
+                    this.refreshData()
+                 )
+            .catch(err => console.log(err));
+        };
+
     handleListClick = event => {
         this.handleFormSubmit(event)
         const datatext = event.target.getAttribute('datatext')
@@ -95,6 +126,18 @@ class FamilyInfo extends Component {
             activeCategory: name,
             dataText: datatext ? datatext : ""
         });
+    };
+
+    handleFormSubmitCategory = event => {
+        event.preventDefault();
+        if (this.state.newCategory) {
+            API.newFamilyInfo({
+                category: this.state.newCategory,
+                dataText: "(Enter data here)"
+            })
+                .then(res => this.loadFamilyInfos())
+                .catch(err => console.log(err));
+        }
     };
 
     render() {
@@ -108,6 +151,22 @@ class FamilyInfo extends Component {
                                 list={this.state.familyInfos}
                                 onClick={this.handleListClick}
                             />
+                            <br />
+                            <form>
+                                <Input
+                                    className="form-control list-input-1 form-control-sm"
+                                    onChange={this.handleInputChange}
+                                    value={this.state.newCategory}
+                                    name="newCategory"
+                                    placeholder="Add a new category"
+                                />
+                                <FormBtn
+                                    onClick={this.handleFormSubmitCategory}
+                                    className="form-control form-control-sm btn btn-primary list-submit-btn"
+                                >
+                                    Add category
+                                    </FormBtn>
+                            </form>
                         </div>
                         <div className='col-sm-8'>
                             <h5>{this.state.activeCategory}</h5>
@@ -120,12 +179,22 @@ class FamilyInfo extends Component {
                                     onChange={(event) => this.handleInputChange(event)}
                                     placeholder="Add notes here!"
                                     />
+                                    <span>
                                     <FormBtn
                                         onClick={this.handleFormSubmit}
                                         className="btn btn-primary"
                                     >
                                         Save    
                                     </FormBtn>
+                                    </span>
+                                    <span className="right">
+                                    <FormBtn
+                                        onClick={this.handleFormDelete}
+                                        className="btn btn-danger"
+                                    >
+                                        Delete    
+                                    </FormBtn>
+                                    </span>
                                     <p>Last updated: {new Intl.DateTimeFormat('en-US', {
                                         year: 'numeric',
                                         month: 'long',
