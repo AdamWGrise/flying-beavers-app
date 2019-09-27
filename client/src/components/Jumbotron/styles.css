@@ -4,7 +4,7 @@
     color: #fff;
     max-height: 80px;
     padding: 10px !important;
-    margin: 20px 0;
+    /* margin: 20px 0; */
 }
 
 .jumbotron a, .jumbotron a:visited {

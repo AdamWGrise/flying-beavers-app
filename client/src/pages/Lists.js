@@ -1,70 +1,126 @@
 import React, { Component } from 'react';
 import Footer from '../components/Footer';
-import ContentPanel from '../components/ContentPanel';
-import { Input, TextArea, FormBtn } from "../components/Form";
-import Jumbotron from '../components/Jumbotron';
+import { Select, Option, Input, FormBtn } from "../components/Form";
 import API from "../utils/API";
 import DeleteBtn from "../components/DeleteBtn";
+import StarBtn from "../components/StarBtn";
 import { List, ListItem } from "../components/List";
+import ListClick from "../components/ListClick";
+import "./styles.css";
 
 class Lists extends Component {
     constructor(props) {
         super(props)
         this.state = {
             activeListId: 0,
-            activePageTitle: 'Lists',
-            // Below: Adding items for db parts of state
+            activeListName: "",
+            shopLists: [],
             shopItems: [],
-            shoppingList: "",
             itemName: "",
             category: "",
             quantity: "1",
             quantityUnits: "",
-            newItem: ""
+            newShopItem: "",
+            newShopList: ""
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.handleFormSubmitList = this.handleFormSubmitList.bind(this);
+        this.handleListClick = this.handleListClick.bind(this);
     }
 
     // This group of functions: For Mongo connection stuff; Adam 9/19
-
     componentDidMount() {
+        this.loadShopLists();
         this.loadShopItems();
     }
 
+    // This function runs after ...? 
+    componentDidUpdate() {
+    }
+
+    loadShopLists = () => {
+        console.log("loading shopLists");
+        API.getShopLists()
+            .then(res => this.setState({
+                shopLists: res.data,
+                activeListName: res.data[0] ? res.data[0].listName : "All",
+                activeListId: res.data[0] ? res.data[0]._id : 0
+            })
+            )
+            .catch(err => console.log(err));
+    };
+
     loadShopItems = () => {
-        console.log("loading shop items");
+        console.log("loading shopItems this.state.activeListId", this.state.activeListId);
         API.getShopItems()
-            .then(res => this.setState({ shopItems: res.data, shoppingList: "", itemName: "", category: "", quantity: "", quantityUnits: "" })
+            .then(res => this.setState({ shopItems: res.data.filter(shopItem => {
+                return shopItem.shoppingList === this.state.activeListId;
+            }) })
             )
             .catch(err => console.log(err));
     };
 
     deleteShopItem = id => {
+        console.log("*Click* - delete");
         API.deleteShopItem(id)
             .then(res => this.loadShopItems())
             .catch(err => console.log(err));
     };
 
-    handleInputChange = event => {
-        console.log("test");
-        const { name, value } = event.target;
-        console.log(event.target);
-
-        this.setState({
-            [name]: value
-        });
+    starShopItem = id => {
+        console.log("*Click* - update");
+        API.starShopItem(id)
+            .then(res => this.loadShopItems())
+            .catch(err => console.log(err));
     };
 
-    handleFormSubmit = event => {
-        console.log("clicky");
-        console.log("this.state.newItem", this.state.newItem);
-        event.preventDefault();
+    handleInputChange = event => {
+        console.log("handleInputChange event:", event);
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value
+        })
+    };
 
-        if (this.state.newItem) {
+    handleListClick = event => {
+        console.log("handleListClick event:", event.target.name, event.target.value);
+        const { name, value } = event.target;
+        const activeListId = value;
+        const activeListObject = this.state.shopLists.filter(function (list) {
+            return (list._id === activeListId);
+        });
+        const shoppingListName = activeListObject[0] ? activeListObject[0].listName : "All";
+        this.setState({
+            activeListId: activeListId,
+            activeListName: shoppingListName
+        });
+        this.loadShopItems();
+    };
+
+    handleSelectChange = event => {
+        console.log("handleSelectChange event:", event);
+        const { name, value } = event.target;
+        const activeListId = value;
+        const activeListObject = this.state.shopLists.filter(function (list) {
+            return (list._id === activeListId);
+        });
+        const shoppingListName = activeListObject[0] ? activeListObject[0].listName : "All";
+        this.setState({
+            activeListId: activeListId,
+            activeListName: shoppingListName
+        });
+        this.loadShopItems();
+    };
+
+    // Save new shopping ITEM to the database
+    handleFormSubmit = event => {
+        console.log("*Click* - Save new shopping ITEM");
+        event.preventDefault();
+        if (this.state.newShopItem) {
             API.saveShopItem({
-                itemName: this.state.newItem,
-                shoppingList: this.state.shoppingList,
+                itemName: this.state.newShopItem,
+                shoppingList: this.state.activeListId,
                 category: this.state.category,
                 quantity: this.state.quantity,
                 quantityUnits: this.state.quantityUnits,
@@ -72,72 +128,132 @@ class Lists extends Component {
             })
                 .then(res => this.loadShopItems())
                 .catch(err => console.log(err));
-        } else {
-            console.log("this.state", this.state);
         }
     };
 
+    // Save new shopping LIST to the database
+    handleFormSubmitList = event => {
+        console.log("*Click* - Save new shopping LIST");
+        event.preventDefault();
+        const newShopList = this.state.newShopList;
+        if (this.state.newShopList) {
+            API.saveShopList({
+                listName: newShopList
+            })
+                .then(res => this.loadShopLists())
+                .catch(err => console.log(err));
+        }
+    };
+
+
+
     render() {
+
         return (
             <div id='content'>
                 <div className='container'>
                     <div className='row'>
-                        <div className='col-sm'>
-                            <Jumbotron pageName={this.state.activePageTitle} />
-                        </div>
-                    </div>
+                        <div className='col-sm-4'>
+                            <h4>Your Lists</h4>
 
-                    <div className='row'>
-                        <div className='col-sm-3'>
+
+                            <ListClick 
+                                list={this.state.shopLists}
+                                onClick={this.handleListClick}
+                            />
+
+
+                            <form>
+                                <Select
+                                    className="form-control form-control-sm"
+                                    onChange={this.handleSelectChange}
+                                    name="activeListId"
+                                >
+                                    {this.state.shopLists.map(shopList => (
+                                        <Option
+                                            key={shopList._id}
+                                            value={shopList._id}
+                                        >
+                                            {shopList.listName}
+                                        </Option>
+                                    ))}
+                                </Select>
+                            </form>
+                            <br />
                             <form>
                                 <Input
-                                    value={this.state.newItem}
+                                    className="form-control list-input-1 form-control-sm"
                                     onChange={this.handleInputChange}
-                                    name="newItem"
-                                    placeholder="Add an item:"
-                                />
-                                <Input
-                                    value={this.state.quantity}
-                                    onChange={this.handleInputChange}
-                                    name="quantity"
-                                    placeholder="Quantity:"
-                                />
-                                <Input
-                                    value={this.state.quantityUnits}
-                                    onChange={this.handleInputChange}
-                                    name="quantityUnits"
-                                    placeholder="Units:"
-                                />
-                                <Input
-                                    value={this.state.category}
-                                    onChange={this.handleInputChange}
-                                    name="category"
-                                    placeholder="Category:"
+                                    value={this.state.newShopList}
+                                    name="newShopList"
+                                    placeholder="Create a new list"
                                 />
                                 <FormBtn
-                                    onClick={this.handleFormSubmit}
+                                    onClick={this.handleFormSubmitList}
+                                    className="form-control form-control-sm btn btn-primary list-submit-btn"
                                 >
-                                    Add item
-                        </FormBtn>
+                                    Add List
+                                    </FormBtn>
                             </form>
                         </div>
-                        <div className='col-sm-9'>
+                        <div className='col-sm-8'>
+                            <h4>{this.state.activeListName}</h4>
                             <List>
                                 {this.state.shopItems.map(shopItem => (
                                     <ListItem key={shopItem._id}>
-                                        <span>List: {shopItem.shoppingList}<br /></span>
-                                        <span>Category: {shopItem.category}<br /></span>
-                                        <h3>
+                                        <StarBtn
+                                            onClick={() => this.starShopItem(shopItem._id)}
+                                            starred={shopItem.starred}
+                                        />
+                                        <span className="shoppinglist-item">
                                             {shopItem.itemName}, {shopItem.quantity} {shopItem.quantityUnits}
-                                        </h3><br />
-                                        <small>{shopItem.date}</small>
+                                        </span>
                                         <DeleteBtn onClick={() => this.deleteShopItem(shopItem._id)} />
                                     </ListItem>
                                 ))}
                             </List>
+                            <br />
+                            <div className="card">
+                                <form>
+                                    <Input
+                                        value={this.state.newShopItem}
+                                        onChange={this.handleInputChange}
+                                        name="newShopItem"
+                                        placeholder="Add an item:"
+                                        className="form-control list-input-1 form-control-sm"
+                                    />
+                                    <Input
+                                        value={this.state.quantity}
+                                        onChange={this.handleInputChange}
+                                        name="quantity"
+                                        placeholder="Quantity:"
+                                        className="form-control list-input-2 form-control-sm"
+                                    />
+                                    <Input
+                                        value={this.state.quantityUnits}
+                                        onChange={this.handleInputChange}
+                                        name="quantityUnits"
+                                        placeholder="Units:"
+                                        className="form-control form-control-sm"
+                                    />
+                                    <Input
+                                        value={this.state.category}
+                                        onChange={this.handleInputChange}
+                                        name="category"
+                                        placeholder="Category:"
+                                        className="form-control form-control-sm"
+                                    />
+                                    <FormBtn
+                                        onClick={this.handleFormSubmit}
+                                        className="form-control form-control-sm btn btn-primary list-submit-btn"
+                                    >
+                                        Add item
+                                    </FormBtn>
+                                </form>
+                                <br />
+                            </div>
                         </div>
                     </div>
-                    
                     <div className='row'>
                         <div className='col-sm-12 my-3'>
                             <Footer />
@@ -147,6 +263,6 @@ class Lists extends Component {
             </div>
         );
     }
-}
+};
 
-export default Lists
+export default Lists;

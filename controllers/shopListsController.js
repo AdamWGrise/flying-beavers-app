@@ -1,35 +1,35 @@
 const db = require("../models");
 
-// Defining methods for the shopItemsController
+// Defining methods for the shopListsController
 module.exports = {
   findAll: function (req, res) {
-    db.ShopItem
+    db.ShopList
       .find(req.query)
       // .sort({ date: -1 })
-      .sort({ date: -1, category: 'asc' })
+      // .sort({ date: -1, category: 'asc' })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   findById: function (req, res) {
-    db.ShopItem
+    db.ShopList
       .findById(req.params.id)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   create: function (req, res) {
-    db.ShopItem
+    db.ShopList
       .create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   update: function (req, res) {
-    db.ShopItem
+    db.ShopList
       .findOneAndUpdate({ _id: req.params.id }, { $bit: { starred: { xor: 1 } } })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   remove: function (req, res) {
-    db.ShopItem
+    db.ShopList
       .findById({ _id: req.params.id })
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
