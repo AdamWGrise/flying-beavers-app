@@ -113,7 +113,7 @@ class FamilyInfo extends Component {
                 )
             .then(
                     this.refreshData()
-                 )
+                )
             .catch(err => console.log(err));
         };
 
