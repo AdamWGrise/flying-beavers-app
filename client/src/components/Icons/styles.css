@@ -1,5 +1,36 @@
 .fa-calendar{
-margin-left: 300px;
-/* margin-bottom: 200px;
-size: 50px; */
+margin-left: 900px;
+size: 50px;
 }
+
+.fa-edit{
+margin-left: 200px;
+size: 50px;
+
+}
+.tooltip {
+    position: relative;
+    display: inline-block;
+    color: black;
+    opacity: 1;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    /* text color */
+    color: pink;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+

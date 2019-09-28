@@ -3,22 +3,22 @@ const Schema = mongoose.Schema
 
 // Item Schema
 const FamilyInfoSchema = new Schema({
-    category: {
-        type: String,
-        required: true,
-        default: "New Category"
-    },
-    dataText: {
-        type: String,
-        required: true,
-        default: "(Enter data here)"
-    },
-    lastUpdated: {
-        type: Date,
-        default: Date.now
-    }
+  category: {
+    type: String,
+    required: true,
+    default: 'New Category'
+  },
+  dataText: {
+    type: String,
+    required: true,
+    default: '(Enter data here)'
+  },
+  lastUpdated: {
+    type: Date,
+    default: Date.now
+  }
 })
 
-const FamilyInfo = mongoose.model("FamilyInfo", FamilyInfoSchema)
+const FamilyInfo = mongoose.model('FamilyInfo', FamilyInfoSchema)
 
 module.exports = FamilyInfo
