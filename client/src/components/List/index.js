@@ -1,16 +1,16 @@
-import React from "react";
-import "./style.css";
+import React from 'react'
+import './style.css'
 
 // This file exports both the List and ListItem components
 
-export function List({ children }) {
+export function List ({ children }) {
   return (
     <>
-      <ul className="list-group list-group-flush">{children}</ul>
+      <ul className='list-group list-group-flush'>{children}</ul>
     </>
-  );
+  )
 }
 
-export function ListItem({ children }) {
-return <li className="list-group-item">{children}</li>;
+export function ListItem ({ children }) {
+  return <li className='list-group-item'>{children}</li>
 }
