@@ -18,3 +18,7 @@
     padding-left: 10px;
     font-family: "Roboto", sans-serif;
 }
+
+#calendar-wrap {
+    margin-top: 120px;
+}
