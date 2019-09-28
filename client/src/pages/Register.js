@@ -80,7 +80,7 @@ class Register extends Component {
                     <div className="row pt-5">
                         <div className="col-lg-4"></div>
                         <div className="col-lg-4">
-                            <div className="card card-body py-3 mb-3">
+                            {/* <div className="card card-body py-3 mb-3"> */}
                                 <div className="text-center mb-3"><i className="fa fa-user fa-2x text-primary"></i></div>
                                 <h3 className="text-center mb-4">Sign up</h3>
                                 <div className="row">
@@ -161,10 +161,10 @@ class Register extends Component {
                                         {error && <p className="text-danger mt-3 mb-2 text-center">{error}</p>}
                                     </div>
                                 </div>
-                            </div>
-                            <div className="card card-footer">
+                            {/* </div> */}
+                            {/* <div className="card card-footer"> */}
                                 <span className="text-center small">Have an account ? <Link to="/Login">Login</Link></span>
-                            </div>
+                            {/* </div> */}
                         </div>
                     </div>
                     <br />
