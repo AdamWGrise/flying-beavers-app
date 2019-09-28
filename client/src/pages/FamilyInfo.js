@@ -108,7 +108,6 @@ class FamilyInfo extends Component {
                     dataText: "",
                     activeId: "",
                     lastUpdated: "",
-                    activeCategory: ""
                 })},
                 )
             .then(

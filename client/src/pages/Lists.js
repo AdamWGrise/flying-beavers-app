@@ -40,7 +40,6 @@ class Lists extends Component {
     }
 
     loadShopLists = () => {
-        console.log("loading shopLists");
         API.getShopLists()
             .then(res => this.setState({
                 shopLists: res.data,
@@ -52,7 +51,6 @@ class Lists extends Component {
     };
 
     loadShopItems = () => {
-        console.log("loading shopItems this.state.activeListId", this.state.activeListId);
         API.getShopItems()
             .then(res => this.setState({ shopItems: res.data.filter(shopItem => {
                 return shopItem.shoppingList === this.state.activeListId;
@@ -85,7 +83,7 @@ class Lists extends Component {
 
     handleListClick = event => {
         console.log("handleListClick event:", event.target.name, event.target.value);
-        const { name, value } = event.target;
+        const { value } = event.target;
         const activeListId = value;
         const activeListObject = this.state.shopLists.filter(function (list) {
             return (list._id === activeListId);
@@ -100,7 +98,7 @@ class Lists extends Component {
 
     handleSelectChange = event => {
         console.log("handleSelectChange event:", event);
-        const { name, value } = event.target;
+        const { value } = event.target;
         const activeListId = value;
         const activeListObject = this.state.shopLists.filter(function (list) {
             return (list._id === activeListId);
