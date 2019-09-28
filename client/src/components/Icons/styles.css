@@ -1,36 +1,65 @@
-.fa-calendar{
-margin-left: 900px;
-size: 50px;
-}
-
-.fa-edit{
-margin-left: 200px;
-size: 50px;
+/* //calender position */
+.fa-3x {
+    font-size: 5em;
+    margin-left: 320px;
+    color: lightpink;
+    position: top;
+    margin-bottom: 20px;
+    margin-top: 30px;
+    margin-right: 10px;
 
 }
 .tooltip {
-    position: relative;
-    display: inline-block;
-    color: black;
-    opacity: 1;
-  }
-  
-  .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    /* text color */
+        position: relative;
+        display: inline-block;
+        color: grey;
+        opacity: 1;
+}
+      
+.tooltiptext {
+        visibility: hidden;
+        width: 100px;
+        height: 80px;
+        background-color: white;
+        color: grey;
+        text-align: center;
+        border-radius: 3px;
+        padding: 8px;
+        margin-bottom: 25px;
+        position: absolute; 
+        z-index: 1;
+        font-size: 14px;
+       
+}
+      
+.tooltip:hover .tooltiptext {
+        visibility: visible;
+        
+}
+.fa-3x-calender{
+        visibility: hidden;
+        width: 100px;
+        height: 80px;
+        background-color: white;
+        color: grey;
+        border-color: grey;
+        text-align: center;
+        border-radius: 3px;
+        padding: 8px;
+        margin-bottom: 25px;
+        position: absolute; 
+        z-index: 1;
+        font-size: 14px;
+        /* margin-left: 15px; */
+}
+
+.fa-address-card:before {
+    /* content: "\F2BB"; */
+    margin-right: 10px;
+    margin-top: 800px;
+    font-size: 2em;
     color: pink;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-  
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
-  }
-  
-  .tooltip:hover .tooltiptext {
-    visibility: visible;
-  }
+    font-size: 1em;
+    
+}
 
