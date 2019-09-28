@@ -217,28 +217,28 @@ class Lists extends Component {
                                         value={this.state.newShopItem}
                                         onChange={this.handleInputChange}
                                         name="newShopItem"
-                                        placeholder="Add an item:"
+                                        placeholder="(Add an item)"
                                         className="form-control list-input-1 form-control-sm"
                                     />
                                     <Input
                                         value={this.state.quantity}
                                         onChange={this.handleInputChange}
                                         name="quantity"
-                                        placeholder="Quantity:"
+                                        placeholder="(Quantity)"
                                         className="form-control list-input-2 form-control-sm"
                                     />
                                     <Input
                                         value={this.state.quantityUnits}
                                         onChange={this.handleInputChange}
                                         name="quantityUnits"
-                                        placeholder="Units:"
+                                        placeholder="(Units)"
                                         className="form-control form-control-sm"
                                     />
                                     <Input
                                         value={this.state.category}
                                         onChange={this.handleInputChange}
                                         name="category"
-                                        placeholder="Category:"
+                                        placeholder="(Category)"
                                         className="form-control form-control-sm"
                                     />
                                     <FormBtn
