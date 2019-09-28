@@ -1,5 +1,4 @@
 import React from 'react'
-import './styles.css'
 import FamilyInfoButton from '../FamilyInfoButton'
 
 function FamilyInfoList (props) {
