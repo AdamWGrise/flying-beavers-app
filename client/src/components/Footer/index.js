@@ -3,7 +3,7 @@ import React from 'react'
 function Footer () {
   return (
     <footer className='d-flex justify-content-center'>
-      -&ensp;<a href='https://github.com/AdamWGrise/flying-beavers-app' target='_blank'rel='noopener noreferrer'>The&ensp;Flying&ensp;Beavers&ensp;</a>,&ensp;|&ensp;
+      -&ensp;<a href='https://github.com/AdamWGrise/flying-beavers-app' target='_blank' rel='noopener noreferrer'>The&ensp;Flying&ensp;Beavers&ensp;</a>&ensp;|&ensp;
       <a href='https://adamwgrise.github.io/Portfolio' target='_blank'rel='noopener noreferrer'>Adam</a>,&ensp;
       <a href='https://kiyapedia.github.io/' target='_blank'rel='noopener noreferrer'>Kiya</a>,&ensp;
       <a href='https://allisonmchamplin.github.io/' target='_blank'rel='noopener noreferrer'>Allison</a>,&ensp;
