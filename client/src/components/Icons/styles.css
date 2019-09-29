@@ -1,65 +1,75 @@
 /* //calender position */
+.icon-set {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 25%;
+    margin-right: 25%
+}
+
 .fa-3x {
-    font-size: 5em;
-    margin-left: 320px;
     color: lightpink;
-    position: top;
-    margin-bottom: 20px;
-    margin-top: 30px;
-    margin-right: 10px;
+    /* position: top; */
+    /* font-size: 5em; */
+    /* margin-left: 320px; */
+    /* margin-bottom: 20px; */
+    /* margin-top: 30px; */
+    /* margin-right: 10px; */
 
 }
-.tooltip {
-        position: relative;
-        display: inline-block;
-        color: grey;
-        opacity: 1;
-}
-      
+
+/* .tooltip { */
+    /* position: relative; */
+    /* opacity: 1; */
+    /* color: grey; */
+    /* display: inline-block; */
+/* } */
+
 .tooltiptext {
-        visibility: hidden;
-        width: 100px;
-        height: 80px;
-        background-color: white;
-        color: grey;
-        text-align: center;
-        border-radius: 3px;
-        padding: 8px;
-        margin-bottom: 25px;
-        position: absolute; 
-        z-index: 1;
-        font-size: 14px;
-       
-}
-      
-.tooltip:hover .tooltiptext {
-        visibility: visible;
-        
-}
-.fa-3x-calender{
-        visibility: hidden;
-        width: 100px;
-        height: 80px;
-        background-color: white;
-        color: grey;
-        border-color: grey;
-        text-align: center;
-        border-radius: 3px;
-        padding: 8px;
-        margin-bottom: 25px;
-        position: absolute; 
-        z-index: 1;
-        font-size: 14px;
-        /* margin-left: 15px; */
+    visibility: hidden;
+    background-color: white;
+    font-size: 0.8rem;
+    bottom: 95px;
+    width: 105px;
+    color: grey;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+    position: absolute; 
+    /* height: 80px; */
+    /* padding: 8px; */
+    /* margin-bottom: 25px; */
+    /* z-index: 1; */
+    /* font-size: 14px; */
+
 }
 
-.fa-address-card:before {
+.icon:hover .tooltiptext {
+    visibility: visible;       
+}
+
+/* .fa-3x-calendar{ */
+    /* visibility: hidden;
+    background-color: white;
+    color: grey;
+    border-color: grey;
+    text-align: center; */
+    /* width: 100px;
+    height: 80px; */
+    /* border-radius: 3px; */
+    /* padding: 8px; */
+    /* margin-bottom: 25px; */
+    /* position: absolute;  */
+    /* z-index: 1; */
+    /* font-size: 14px; */
+    /* margin-left: 15px; */
+/* } */
+
+/* .fa-address-card:before { */
     /* content: "\F2BB"; */
-    margin-right: 10px;
-    margin-top: 800px;
-    font-size: 2em;
-    color: pink;
-    font-size: 1em;
-    
-}
+    /* margin-right: 10px; */
+    /* margin-top: 800px; */
+    /* font-size: 2em; */
+    /* color: pink; */
+    /* font-size: 1em; */
 
+/* } */
