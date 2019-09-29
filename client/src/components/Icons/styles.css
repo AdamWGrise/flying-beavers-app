@@ -1,4 +1,4 @@
-/* //calender position */
+/* ADAM 2019.09.28: This .icon-set class helps just center the icons and distribute them evenly. */
 .icon-set {
     display: flex;
     justify-content: space-between;
@@ -6,6 +6,7 @@
     margin-right: 25%
 }
 
+/* ADAM 2019.09.28: Just changing the color of the icons is all we really need; the icon-set stuff removes the need for the rest. */
 .fa-3x {
     color: lightpink;
     /* position: top; */
@@ -24,17 +25,21 @@
     /* display: inline-block; */
 /* } */
 
+/* ADAM 2019.09.28: The tooltips; needs the most CSS. */
 .tooltiptext {
     visibility: hidden;
-    background-color: white;
+    background-color: #ddd;
+    line-height: 13px;
     font-size: 0.8rem;
-    bottom: 95px;
-    width: 105px;
+    bottom: 75px;
+    left: 55px;
+    padding: 5px;
     color: grey;
     text-align: center;
-    border-radius: 5px;
-    border: 1px solid lightgrey;
-    position: absolute; 
+    display: flex;
+    border-radius: 8px;
+    position: relative; 
+    /* border: 1px solid lightgrey; */
     /* height: 80px; */
     /* padding: 8px; */
     /* margin-bottom: 25px; */
@@ -43,6 +48,7 @@
 
 }
 
+/* ADAM 2019.09.28: Shows the tooltip when hovering over the icon. */
 .icon:hover .tooltiptext {
     visibility: visible;       
 }
