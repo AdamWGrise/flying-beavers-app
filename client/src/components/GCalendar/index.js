@@ -30,7 +30,9 @@ function GCalendar(props) {
         defaultView="month"
         events={events}
         style={{ height: "64vh" }}
+        selectable={true}
         onSelectEvent={props.handleEventClick}
+        onSelectSlot={props.handleSlotSelect}
     />
 
     if (props.sign) {
