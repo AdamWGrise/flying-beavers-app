@@ -221,8 +221,8 @@ class Lists extends Component {
                                             value={this.state.newShopItem}
                                             onChange={this.handleInputChange}
                                             name="newShopItem"
-                                            placeholder="Add an item"
-                                            aria-label="Add an item"
+                                            placeholder="Item name"
+                                            aria-label="Item name"
                                             aria-describedby="basic-addon2"
                                             className="form-control form-control-sm"
                                         />
@@ -230,30 +230,30 @@ class Lists extends Component {
                                             value={this.state.quantity}
                                             onChange={this.handleInputChange}
                                             name="quantity"
-                                            placeholder="Quantity:"
+                                            placeholder="Qty"
                                             className="form-control list-input-2 form-control-sm"
                                         />
                                         <Input
                                             value={this.state.quantityUnits}
                                             onChange={this.handleInputChange}
                                             name="quantityUnits"
-                                            placeholder="Units:"
+                                            placeholder="Units"
                                             className="form-control form-control-sm"
                                         />
                                         <Input
                                             value={this.state.category}
                                             onChange={this.handleInputChange}
                                             name="category"
-                                            placeholder="Category:"
+                                            placeholder="Category"
                                             className="form-control form-control-sm"
                                         />
-                                        <FormBtn
-                                            onClick={this.handleFormSubmit}
-                                            className="form-control form-control-sm btn btn-success list-submit-btn"
-                                        >
-                                            Add item
-                                    </FormBtn>
                                     </div>
+                                    <FormBtn
+                                        onClick={this.handleFormSubmit}
+                                        className="form-control form-control-sm btn btn-primary list-submit-btn"
+                                        >
+                                        Add item
+                                    </FormBtn>
                                 </div>
                             </form>
                         </div>
