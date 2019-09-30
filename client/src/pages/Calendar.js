@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import Footer from '../components/Footer';
+import Footer from '../components/Footer';
 // import { TextArea, FormBtn, Input } from "../components/Form";
 import GCalendar from '../components/GCalendar';
 import ApiCalendar from 'react-google-calendar-api';
@@ -79,6 +79,11 @@ class CalendarPage extends Component {
                                 events={this.state.events}
                                 sign={this.state.sign}
                             />
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div className='col-sm-12 my-3'>
+                            <Footer />
                         </div>
                     </div>
                 </div>
