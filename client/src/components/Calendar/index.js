@@ -4,12 +4,23 @@ import './styles.css';
 
 function Calendar(props) {
     if (props.sign) {
-        return (
-            <div className="container">
-                test
-                    <div>test {props.events.length > 0 ? "events" : "no events"}</div>
-            </div>
-        );
+        if (props.events.length > 0) {
+            return (
+                <div className="container">
+                    <div>
+                        {props.events.map(event => (
+                            <div>{event.description}</div>
+                        ))}
+                    </div>
+                </div>
+            );
+        } else {
+            return (
+                <div className="container">
+                    <div>No events</div>
+                </div>
+            )
+        }
     } else {
         return (
             <div className="container">
