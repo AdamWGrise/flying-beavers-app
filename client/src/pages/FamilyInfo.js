@@ -73,14 +73,12 @@ class FamilyInfo extends Component {
                 store.addNotification({
                     title: this.state.activeCategory,
                     message: 'Saved.',
-                    type: 'info',
-                    backgroundColor: '#83c450',
-                    container: 'top-right',
-                    width: 250,
+                    type: 'success',
+                    container: 'bottom-right',
                     animationIn: ["animated", "fadeIn"],
                     animationOut: ["animated", "fadeOut"],
                     dismiss: {
-                        duration: 2500
+                        duration: 3000
                     }
                 })
             )
@@ -95,14 +93,12 @@ class FamilyInfo extends Component {
                 store.addNotification({
                     title: this.state.activeCategory,
                     message: 'Category deleted.',
-                    type: 'warning',
-                    backgroundColor: '#f9084c',
-                    container: 'top-right',
-                    width: 250,
+                    type: 'danger',
+                    container: 'bottom-right',
                     animationIn: ["animated", "fadeIn"],
                     animationOut: ["animated", "fadeOut"],
                     dismiss: {
-                        duration: 2500
+                        duration: 3000
                     }
                 })
             )
