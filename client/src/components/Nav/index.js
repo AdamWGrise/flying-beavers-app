@@ -20,7 +20,7 @@ class Nav extends Component {
                 <a className='nav-link' href='/lists' value='Shopping'>Shopping</a>
               </li>
               <li className='nav-item'>
-                <a className='nav-link' href='/lists' value='Calendar'>Calendar</a>
+                <a className='nav-link' href='/calendar' value='Calendar'>Calendar</a>
               </li>
               <li className='nav-item'>
                 <a className='nav-link' href='/family-info' value='Family Info'>Family Info</a>
