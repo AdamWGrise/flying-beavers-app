@@ -14,15 +14,14 @@ class CalendarPage extends Component {
             sign: ApiCalendar.sign,
             events: []
         };
-        this.handleItemClick = this.handleItemClick.bind(this);
-        this.signUpdate = this.signUpdate.bind(this);
+
         ApiCalendar.onLoad(() => {
             console.log("stuff");
             ApiCalendar.listenSign(this.signUpdate);
         });
     }
 
-    handleItemClick(event, name) {
+    handleItemClick = (event, name) => {
         if (name === 'sign-in') {
             ApiCalendar.handleAuthClick();
         } else if (name === 'sign-out') {
@@ -31,7 +30,11 @@ class CalendarPage extends Component {
         }
     }
 
-    signUpdate(sign) {
+    handleEventClick = (event) =>  {
+        console.log(this.state.events[event.id]);
+    }
+
+    signUpdate = (sign) => {
         let events = [];
         console.log("signUpdate");
         if (ApiCalendar.sign)
@@ -47,6 +50,7 @@ class CalendarPage extends Component {
     }
 
     render(props) {
+        console.log("render(props)");
         const eventList = this.state.events;
         return (
             <div id='content'>
@@ -78,6 +82,7 @@ class CalendarPage extends Component {
                             <GCalendar 
                                 events={this.state.events}
                                 sign={this.state.sign}
+                                handleEventClick={this.handleEventClick}
                             />
                         </div>
                     </div>

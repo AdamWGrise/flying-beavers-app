@@ -1,0 +1,13 @@
+.rbc-day-bg, .rbc-header, .rbc-month-view, .rbc-month-row {
+    border-color: #ccc;
+}
+
+.rbc-event {
+    background: #83c450 !important;
+}
+
+.rbc-toolbar-label {
+    color: #83c450 !important;
+    font-size: 32px;
+    font-weight: bold;
+}
