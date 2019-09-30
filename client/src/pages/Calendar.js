@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Footer from '../components/Footer';
-import { TextArea, FormBtn, Input } from "../components/Form";
-import Calendar from '../components/Calendar';
+// import Footer from '../components/Footer';
+// import { TextArea, FormBtn, Input } from "../components/Form";
+import GCalendar from '../components/GCalendar';
 import ApiCalendar from 'react-google-calendar-api';
-import API from "../utils/API";
+// import API from "../utils/API";
 import "./styles.css";
 
-class Calendar2 extends Component {
+class CalendarPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -75,7 +75,7 @@ class Calendar2 extends Component {
                     </div>
                     <div className="row my-3">
                         <div className="col">
-                            <Calendar 
+                            <GCalendar 
                                 events={this.state.events}
                                 sign={this.state.sign}
                             />
@@ -87,5 +87,5 @@ class Calendar2 extends Component {
     }
 };
 
-export default Calendar2
+export default CalendarPage
 

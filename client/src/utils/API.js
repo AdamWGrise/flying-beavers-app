@@ -57,5 +57,12 @@ export default {
   // Saves a familyInfo to the database
   saveFamilyInfo: function (familyInfoData) {
     return axios.post("/api/familyInfos", familyInfoData);
+  },
+
+  ////////// Calendar API ////////////
+  // Gets all events
+  getEvents: function () {
+    return axios.get("/api/events");
   }
+
 };
