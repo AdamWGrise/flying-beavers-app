@@ -1,5 +1,5 @@
 footer {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .card {
@@ -7,8 +7,8 @@ footer {
 }
 
 .right {
-  position: absolute;
-  right: 10px;
+    position: absolute;
+    right: 10px;
 }
 
 .shoppinglist-item {
@@ -17,58 +17,67 @@ footer {
 }
 
 .btn {
-  margin-bottom: 5px;
-  text-align: left;
-  font-size: .9em;
-  border: 1px solid #ccc;
+    margin-bottom: 5px;
+    text-align: left;
+    font-size: .9em;
+    border: 1px solid #ccc;
 }
 
 .btn-primary {
-  background-color: #83c450;
+    background-color: #83c450;
 }
 
 .btn-danger {
-  background-color: #f9084c;
+    background-color: #f9084c;
 }
 
 .btn-danger:hover {
-  background-color: #b80c3c;
-  color: #fff;
-  border: 1px solid #9e9e9e;
+    background-color: #b80c3c;
+    color: #fff;
+    border: 1px solid #9e9e9e;
 }
 
 .btn-primary:hover {
-  background-color: #53832e;
-  color: #fff;
-  border: 1px solid #9e9e9e
+    background-color: #53832e;
+    color: #fff;
+    border: 1px solid #9e9e9e
 }
 
 .btn-danger:focus {
-  background-color: #f9084c;
-  color: #fff;
-  border: 1px solid #9e9e9e !important;
+    background-color: #f9084c;
+    color: #fff;
+    border: 1px solid #9e9e9e !important;
 }
 
 .btn-primary:focus {
-  background-color: #83c450;
-  color: #fff;
-  border: 1px solid #9e9e9e !important;
+    background-color: #83c450;
+    color: #fff;
+    border: 1px solid #9e9e9e !important;
 }
 
 .btn-danger:active {
-  background-color: #e24874 !important;
-  color: #333 !important;
-  border: 1px solid #9e9e9e !important;
+    background-color: #e24874 !important;
+    color: #333 !important;
+    border: 1px solid #9e9e9e !important;
 }
 
 .btn-primary:active {
-  background-color: #9fc482 !important;
-  color: #333 !important;
-  border: 1px solid #9e9e9e !important;
+    background-color: #9fc482 !important;
+    color: #333 !important;
+    border: 1px solid #9e9e9e !important;
 }
 
 .list-click {
-  background: rgb(185, 185, 241);
-  padding: 10px;
-  border: 3px solid #fff;
+    background: rgb(185, 185, 241);
+    padding: 10px;
+    border: 3px solid #fff;
+}
+
+.shoppinglist-item {
+    padding-left: 10px;
+    font-family: "Roboto", sans-serif;
+}
+
+#calendar-wrap {
+    margin-top: 120px;
 }
