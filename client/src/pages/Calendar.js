@@ -70,16 +70,15 @@ class Calendar2 extends Component {
                             <div>
                                 You are signed {this.state.sign ? "in" : "out"}!
                     </div>
-                            <div>test {eventList.length > 0 ? "events" : "no events"}</div>
-                            <div>test {eventList.length > 0 ? eventList[0].summary : "no events"}</div>
-                            <div>test {eventList.length > 0 ? eventList[0].description : "no events"}</div>
-                            <div>test {eventList.length > 0 ? eventList[0].created : "no events"}</div>
-                            <div>test {eventList.length > 0 ? eventList[0].location : "no events"}</div>
+
                         </div>
                     </div>
                     <div className="row my-3">
                         <div className="col">
-                            <Calendar />
+                            <Calendar 
+                                events={this.state.events}
+                                sign={this.state.sign}
+                            />
                         </div>
                     </div>
                 </div>

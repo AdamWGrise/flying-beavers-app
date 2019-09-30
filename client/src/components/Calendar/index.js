@@ -2,17 +2,20 @@ import React from 'react';
 import ApiCalendar from 'react-google-calendar-api';
 import './styles.css';
 
-class Calendar extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
+function Calendar(props) {
+    if (props.sign) {
         return (
             <div className="container">
                 test
+                    <div>test {props.events.length > 0 ? "events" : "no events"}</div>
             </div>
         );
+    } else {
+        return (
+            <div className="container">
+                log in
+            </div>
+        )
     }
 }
 
