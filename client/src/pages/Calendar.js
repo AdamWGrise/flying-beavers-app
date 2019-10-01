@@ -17,7 +17,7 @@ function EditEventDialog(props) {
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5 className="modal-title" id="exampleModalLabel">
-                                    {props.events.length > 0 && props.modalEvent && <p>{props.events[0].id}</p>}
+                                    {props.events.length > 0 && <p>{props.events[0].summary}</p>}
                                 </h5>
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -47,7 +47,7 @@ function EditEventDialog(props) {
     } else {
         return (
             <>
-                <p>Amen</p>
+                <p className="modal">Amen</p>
             </>
             )
     }
@@ -64,14 +64,10 @@ class CalendarPage extends Component {
             slot: [],
             events: []
         };
-    }
-
-    componentDidMount = () => {
         ApiCalendar.onLoad(() => {
             console.log(" Calendar page: * * * ApiCalendar.onLoad");
             ApiCalendar.listenSign(this.signUpdate);
         });
-
     }
 
     handleItemClick = (event, name) => {
@@ -114,9 +110,10 @@ class CalendarPage extends Component {
 
     render(props) {
         console.log(" Calendar page: * * * render(props)");
+        // this.testest();
         return (
             <div id='content'>
-                <EditEventDialog event_idx={this.state.modalEvent} events={this.state.events} slot={this.state.slot} />
+                <EditEventDialog event_idx={this.state.modalEvent} events={this.state.events} slot={this.state.slot} sign={this.state.sign} />
                 {/* <AddEventModal /> */}
                 <div className="container">
                     <div className="row my-3">
@@ -131,7 +128,7 @@ class CalendarPage extends Component {
                                 name="signout"
                                 id="signout"
                             >Sign-out</button>
-                            <div>You are signed {this.state.sign ? "in" : "out"}!</div>
+                            <div>You are signed <h2>{this.state.sign ? "in" : "out"}</h2>!</div>
                         </div>
                     </div>
                     <div className="row my-3">
