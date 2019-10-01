@@ -1,14 +1,15 @@
 import React from 'react'
-import Button from '../Button'
+import FamilyInfoButton from '../FamilyInfoButton'
 
-function ListClick (props) {
+function FamilyInfoList (props) {
   return (
     <nav className='nav flex-column'>
       {props.list.map((list, index) => (
-        <Button
+        <FamilyInfoButton
           key={index}
           value={list._id}
-          name={list.listName}
+          name={list.category}
+          datatext={list.dataText}
           onClick={props.onClick}
         />
       ))}
@@ -16,4 +17,4 @@ function ListClick (props) {
   )
 }
 
-export default ListClick
+export default FamilyInfoList

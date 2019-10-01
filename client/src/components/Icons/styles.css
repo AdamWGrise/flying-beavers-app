@@ -1,65 +1,86 @@
-/* //calender position */
+/* ADAM 2019.09.28: This .icon-set class helps just center the icons and distribute them evenly. */
+.icon-set {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 25%;
+    margin-right: 25%
+}
+
+/* ADAM 2019.09.28: Just changing the color of the icons is all we really need; the icon-set stuff removes the need for the rest. */
 .fa-3x {
-    font-size: 5em;
-    margin-left: 320px;
     color: lightpink;
-    position: top;
-    margin-bottom: 20px;
-    margin-top: 30px;
-    margin-right: 10px;
+    /* position: top; */
+    /* font-size: 5em; */
+    /* margin-left: 320px; */
+    /* margin-bottom: 20px; */
+    /* margin-top: 30px; */
+    /* margin-right: 10px; */
 
 }
-.tooltip {
-        position: relative;
-        display: inline-block;
-        color: grey;
-        opacity: 1;
-}
-      
+
+/* .tooltip { */
+    /* position: relative; */
+    /* opacity: 1; */
+    /* color: grey; */
+    /* display: inline-block; */
+/* } */
+
+/* ADAM 2019.09.28: The tooltips; needs the most CSS. */
 .tooltiptext {
-        visibility: hidden;
-        width: 100px;
-        height: 80px;
-        background-color: white;
-        color: grey;
-        text-align: center;
-        border-radius: 3px;
-        padding: 8px;
-        margin-bottom: 25px;
-        position: absolute; 
-        z-index: 1;
-        font-size: 14px;
-       
-}
-      
-.tooltip:hover .tooltiptext {
-        visibility: visible;
-        
-}
-.fa-3x-calender{
-        visibility: hidden;
-        width: 100px;
-        height: 80px;
-        background-color: white;
-        color: grey;
-        border-color: grey;
-        text-align: center;
-        border-radius: 3px;
-        padding: 8px;
-        margin-bottom: 25px;
-        position: absolute; 
-        z-index: 1;
-        font-size: 14px;
-        /* margin-left: 15px; */
+    visibility: hidden;
+    background-color: #ddd;
+    line-height: 13px;
+    font-size: 0.8rem;
+    bottom: 75px;
+    left: 55px;
+    padding: 5px;
+    color: grey;
+    text-align: center;
+    display: flex;
+    border-radius: 8px;
+    position: relative;
+    text-decoration: none;
+    /* border: 1px solid lightgrey; */
+    /* height: 80px; */
+    /* padding: 8px; */
+    /* margin-bottom: 25px; */
+    /* z-index: 1; */
+    /* font-size: 14px; */
 }
 
-.fa-address-card:before {
+/* Remove the underlining from the icon tooltips */
+.icon-set a:hover {
+    text-decoration: none;
+}
+
+/* ADAM 2019.09.28: Shows the tooltip when hovering over the icon. */
+.icon:hover .tooltiptext {
+    visibility: visible;       
+}
+
+/* .fa-3x-calendar{ */
+    /* visibility: hidden;
+    background-color: white;
+    color: grey;
+    border-color: grey;
+    text-align: center; */
+    /* width: 100px;
+    height: 80px; */
+    /* border-radius: 3px; */
+    /* padding: 8px; */
+    /* margin-bottom: 25px; */
+    /* position: absolute;  */
+    /* z-index: 1; */
+    /* font-size: 14px; */
+    /* margin-left: 15px; */
+/* } */
+
+/* .fa-address-card:before { */
     /* content: "\F2BB"; */
-    margin-right: 10px;
-    margin-top: 800px;
-    font-size: 2em;
-    color: pink;
-    font-size: 1em;
-    
-}
+    /* margin-right: 10px; */
+    /* margin-top: 800px; */
+    /* font-size: 2em; */
+    /* color: pink; */
+    /* font-size: 1em; */
 
+/* } */

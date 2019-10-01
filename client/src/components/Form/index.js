@@ -1,27 +1,38 @@
-import React from "react";
+import React from 'react'
 
 // This file exports the Input, TextArea, and FormBtn components
+// Added Select, Option
 
-export function Input(props) {
+export function Select (props) {
   return (
-    <div className="form-group">
-      <input className="form-control" {...props} />
-    </div>
-  );
+    <select {...props}>{props.children}</select>
+  )
 }
 
-export function TextArea(props) {
-  return (
-    <div className="form-group">
-      <textarea className="form-control" rows="20" {...props} />
-    </div>
-  );
+export function Option (props) {
+  return <option {...props}>{props.children}</option>
 }
 
-export function FormBtn(props) {
+export function Input (props) {
   return (
-    <button {...props} style={{ float: "left" }} className="btn btn-success">
+    <div className='form-group'>
+      <input {...props} />
+    </div>
+  )
+}
+
+export function TextArea (props) {
+  return (
+    <div className='form-group'>
+      <textarea rows='20' {...props} />
+    </div>
+  )
+}
+
+export function FormBtn (props) {
+  return (
+    <button {...props} >
       {props.children}
     </button>
-  );
+  )
 }

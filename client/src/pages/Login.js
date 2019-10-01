@@ -45,7 +45,7 @@ export default class Login extends Component {
                     <div className="row pt-5">
                         <div className="col-lg-4"></div>
                         <div className="col-lg-4">
-                            <div className="card card-body py-3 mb-3">
+                            {/* <div className="card card-body py-3 mb-3"> */}
                                 <div className="text-center mb-3"><i className="fa fa-user fa-2x text-primary"></i></div>
                                 <h3 className="text-center mb-4">Sign In</h3>
                                 <div className="row">
@@ -87,10 +87,10 @@ export default class Login extends Component {
                                         {error && <p className="text-danger mt-3 mb-2 text-center">{error}</p>}
                                     </div>
                                 </div>
-                            </div>
-                            <div className="card card-footer">
+                            {/* </div> */}
+                            {/* <div className="card card-footer"> */}
                                 <span className="text-center small">Not have an account ? <Link to="/Register">Register</Link></span>
-                            </div>
+                            {/* </div> */}
                         </div>
                     </div>
                     <br />
