@@ -198,7 +198,7 @@ class FamilyInfo extends Component {
                                         year: 'numeric',
                                         month: 'long',
                                         day: '2-digit'
-                                        }).format(this.state.lastUpdated.toLocaleDateString)} by (INSERT NAME HERE)</p>
+                                        }).format(this.state.lastUpdated.toLocaleDateString)}, by (latest user here)</p>
                                 </form>
                             </div>
                         </div>
