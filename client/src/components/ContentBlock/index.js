@@ -6,7 +6,6 @@ function ContentBlock (props) {
     <div className='content-block'>
       <h1>{props.heading}</h1>
       <h1>{props.heading2}</h1>
-      <br />
       <p>{props.paragraph}</p>
 
     </div>
