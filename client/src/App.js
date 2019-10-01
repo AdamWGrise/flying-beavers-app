@@ -29,6 +29,9 @@ class App extends React.Component {
   }
   signUpdate = (sign) => {
     this.setState({sign});
+    if (sign === false) {
+      this.setState({events: []});
+    }
   }
   render() {
     return (
