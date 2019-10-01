@@ -107,3 +107,12 @@ footer {
   border-radius: 4px;
   /* border-bottom: 1px solid red !important; */
 }
+
+.list-style h5 {
+  padding: 5px 10px;
+  font-size: .9em;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  background: #83c450;
+  color: #fff;
+}
