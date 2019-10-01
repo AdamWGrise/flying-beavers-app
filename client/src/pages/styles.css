@@ -24,15 +24,15 @@ footer {
 }
 
 .btn-primary {
-  background-color: #83c450;
+  background-color: #8590A3;
 }
 
 .btn-danger {
-  background-color: #f9084c;
+  background-color: red;
 }
 
 .btn-danger:hover {
-  background-color: #b80c3c;
+  background-color: red;
   color: #fff;
   border: 1px solid #9e9e9e;
 }
@@ -56,7 +56,7 @@ footer {
 }
 
 .btn-danger:active {
-  background-color: #e24874 !important;
+  background-color: #878587 !important;
   color: #333 !important;
   border: 1px solid #9e9e9e !important;
 }
