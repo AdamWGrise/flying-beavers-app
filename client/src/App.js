@@ -10,7 +10,6 @@ import './App.css';
 import Login from './pages/Login'
 import Register from './pages/Register'
 import ReactNotifications from 'react-notifications-component';
-import GoogleLoginButtons from './components/GoogleLoginButtons';
 
 
 class App extends React.Component {
@@ -40,11 +39,6 @@ class App extends React.Component {
           <ReactNotifications />
           <Nav />
 
-          <GoogleLoginButtons
-            sign={this.state.sign}
-            signUpdate={this.signUpdate}
-            onEvents={this.onEvents}
-          />
           <Switch>
 
             <Route exact path="/" component={Home} />
@@ -54,7 +48,13 @@ class App extends React.Component {
               render={(props) => <Calendar sign={this.state.sign} events={this.state.events} onEvents = { this.onEvents } isAuthed={true} />}
             />
             <Route exact path="/family-info" component={FamilyInfo} />
-            <Route exact={true} path="/Login" component={Login} />
+
+           
+            <Route
+              exact={true}
+              path='/Login'
+              render={(props) => <Login sign={this.state.sign} signUpdate={this.signUpdate} onEvents = { this.onEvents }/>}
+            />          
             <Route path="/Register" component={Register} />
           </Switch>
         </div>

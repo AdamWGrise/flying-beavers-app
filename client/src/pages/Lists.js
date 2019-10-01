@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Footer from '../components/Footer';
-import { Select, Option, Input, FormBtn } from "../components/Form";
+import { Input, FormBtn } from "../components/Form";
 import API from "../utils/API";
 import DeleteBtn from "../components/DeleteBtn";
 import StarBtn from "../components/StarBtn";

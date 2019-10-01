@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import Footer from '../components/Footer';
-// import { TextArea, FormBtn, Input } from "../components/Form";
+import { FormBtn, Input } from "../components/Form";
 import GCalendar from '../components/GCalendar';
-import ApiCalendar from 'react-google-calendar-api';
-// import API from "../utils/API";
-import "./styles.css";
 
+import "./styles.css";
 
 function EditEventDialog(props) {
     // console.log(" Calendar page: * * * fn EditEventDialog(props)");
@@ -13,8 +11,7 @@ function EditEventDialog(props) {
     // (props.sign && props.events.length > 0 && props.modalEvent >= 0)
     var ev = {};
 
-    if (props.modalEvent >= 0)
-    {    
+    if (props.modalEvent >= 0 && props.events.length>0) {
         ev = {
             summary: props.events[props.modalEvent].summary,
             description: props.events[props.modalEvent].description,
@@ -25,10 +22,27 @@ function EditEventDialog(props) {
         ev = {
             summary: 'Create Event',
             description: '',
-            start: Date.now().toString(),
-            stop: Date.now().toString(),
+            start: props.newStart,
+            stop: props.newStop,
         };
     }
+
+    // If user is logged in to Google
+    // and modalEvent is not -1
+    let isNewEvent = props.modalEvent ===-1;
+    let saveButton;
+    if (isNewEvent) {
+        saveButton = 
+        <FormBtn
+            onClick={props.handleGCalendarEventSave}
+            className="form-control form-control-sm btn btn-primary list-submit-btn"
+        >
+            Save Event
+        </FormBtn>;        
+    } else {
+        saveButton = "";
+    }
+
     return (
         <>
             <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -42,19 +56,41 @@ function EditEventDialog(props) {
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div className="modal-body">
+                        <div className="modal-body">                     
                             <form>
-                                Description<br />
-                                <input type="text" name="description" defaultValue={ev.description}></input><br />
-                                Start<br />
-                                <input type="text" name="start" defaultValue={ev.start}></input><br />
-                                Stop<br />
-                                <input type="text" name="stop" defaultValue={ev.stop}></input><br />
+                                <br />Summary<br />
+                                <Input 
+                                    value={props.newEvent.summary} 
+                                    onChange={props.handleInputChange}
+                                    name="newSummary" 
+                                    placeholder="(Summary)"
+                                    className="form-control form-control-sm list-w-3"/>
+                                <br />Description<br />
+                                <Input 
+                                    value={props.newEvent.description} 
+                                    onChange={props.handleInputChange}
+                                    name="newDescription" 
+                                    placeholder="(Description)"
+                                    className="form-control form-control-sm list-w-3"/>
+                                <br />Start<br />
+                                <Input 
+                                    value={props.newEvent.start} 
+                                    onChange={props.handleInputChange}
+                                    name="newStart" 
+                                    placeholder="(Start Time)"
+                                    className="form-control form-control-sm list-w-3"/>
+                                <br />Stop<br />
+                                <Input 
+                                    value={props.newEvent.stop} 
+                                    onChange={props.handleInputChange}
+                                    name="newStop" 
+                                    placeholder="(Stop Time)"
+                                    className="form-control form-control-sm list-w-3"/>
                             </form>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                            {/* <button type="button" className="btn btn-primary">Save changes</button> */}
+                            {saveButton}
                         </div>
                     </div>
                 </div>
@@ -69,29 +105,97 @@ class CalendarPage extends Component {
         super(props)
         this.state = {
             modalEvent: -1,
-            slot: []
+            slot: [],
+            newDescription:"",
+            newStart:new Date(), 
+            newStop:new Date(), 
+            newSummary:""
         };
+        // this.handleGCalendarEventSave = this.handleGCalendarEventSave.bind(this);
     }
 
     handleEventClick = (event) => {
-        console.log("Clicky - handleEventClick");
-        this.setState({ modalEvent: event.id })
-        window.$("#exampleModal").modal();
+        console.log("Clicky - handleEventClick", event);    
+
+        this.setState(
+            { 
+                modalEvent: event.id, 
+                newSummary: event.title,
+                newDescription:event.description,
+                newStart:event.start,
+                newStop:event.end,
+                slot:[]
+            }
+        );
+        if (this.props.sign) {
+            window.$("#exampleModal").modal();
+        }
     }
 
     handleSlotSelect = (slot) => {
-        console.log("Clicky - handleSlotSelect");
-        this.setState({ modalEvent: -1, slot: slot })
-        window.$("#exampleModal").modal();
+        console.log("Clicky - handleSlotSelect", slot);
+        this.setState(
+            { 
+                modalEvent: -1, 
+                newSummary: "",
+                newDescription:"",
+                newStart:slot.start,
+                newStop:slot.end,
+                slot:slot
+            }
+        );        
+        if (false && this.props.sign) {
+            window.$("#exampleModal").modal();
+        }
     }
+
+    handleInputChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value
+        })
+    }
+
+    // Save new event to user's GCalendar
+    handleGCalendarEventSave = event => {
+        console.log("*Click* - Save new EVENT");
+        event.preventDefault();
+        const newEvent = 
+        {
+            summary:this.state.newSummary,
+            description:this.state.newDescription,
+            start:new Date(this.state.newStart),
+            stop:new Date(this.state.newStop),
+        };
+
+        console.log("Save this event!", newEvent); 
+
+//        ApiCalendar.createEventFromNow({summary:"hi there event", time: 480});
+//        ApiCalendar.createEvent(newEvent);
+
+    };
 
     render() {
         // console.log(" Calendar page: * * * render(props)");
         // this.testest();
         // window.$("#exampleModal").modal();
+        const newEvent = 
+        {
+            summary:this.state.newSummary,
+            description:this.state.newDescription,
+            start:this.state.newStart,
+            stop:this.state.newStop,
+        };        
         return (
             <div id='content'>
-                <EditEventDialog modalEvent={this.state.modalEvent} events={this.props.events} slot={this.state.slot} sign={this.props.sign} />
+                <EditEventDialog 
+                    handleInputChange={this.handleInputChange} 
+                    newEvent={newEvent}
+                    handleGCalendarEventSave={this.handleGCalendarEventSave} 
+                    modalEvent={this.state.modalEvent} 
+                    events={this.props.events} 
+                    slot={this.state.slot} 
+                    sign={this.props.sign} />
 
                 <div className="container">
                     <div className="row my-3">
