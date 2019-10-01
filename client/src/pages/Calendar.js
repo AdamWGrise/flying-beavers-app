@@ -6,6 +6,7 @@ import ApiCalendar from 'react-google-calendar-api';
 // import API from "../utils/API";
 import "./styles.css";
 
+
 function EditEventDialog(props) {
     console.log(" Calendar page: * * * fn EditEventDialog(props)");
     console.log(" props.sign: ", props.sign);
@@ -49,7 +50,7 @@ function EditEventDialog(props) {
             <>
                 <p className="modal">Amen</p>
             </>
-            )
+        )
     }
 }
 
@@ -58,26 +59,9 @@ class CalendarPage extends Component {
         console.log(" Calendar page: * * * CalendarPage constructor");
         super(props)
         this.state = {
-            testState: 0,
-            sign: false,
             modalEvent: -1,
-            slot: [],
-            events: []
+            slot: []
         };
-        ApiCalendar.onLoad(() => {
-            console.log(" Calendar page: * * * ApiCalendar.onLoad");
-            ApiCalendar.listenSign(this.signUpdate);
-        });
-    }
-
-    handleItemClick = (event, name) => {
-        console.log(" Calendar page: * * * Clicky - handleItemClick");
-        if (name === 'sign-in') {
-            ApiCalendar.handleAuthClick();
-        } else if (name === 'sign-out') {
-            this.setState({ events: [] });
-            ApiCalendar.handleSignoutClick();
-        }
     }
 
     handleEventClick = (event) => {
@@ -93,48 +77,21 @@ class CalendarPage extends Component {
         window.$("#exampleModal").modal();
     }
 
-    signUpdate = (sign) => {
-        console.log(" Calendar page: * * * signUpdate");
-        let events = [];
-        if (ApiCalendar.sign)
-            ApiCalendar.listUpcomingEvents(10)
-                .then(({ result }) => {
-                    console.log(result.items);
-                    events = JSON.parse(JSON.stringify(result.items));
-                    this.setState({ events: events });
-                });
-        this.setState({
-            sign: sign
-        })
-    }
 
-    render(props) {
+
+    render() {
         console.log(" Calendar page: * * * render(props)");
         // this.testest();
         return (
             <div id='content'>
-                <EditEventDialog event_idx={this.state.modalEvent} events={this.state.events} slot={this.state.slot} sign={this.state.sign} />
+                <EditEventDialog event_idx={this.state.modalEvent} events={this.props.events} slot={this.state.slot} sign={this.props.sign} />
                 {/* <AddEventModal /> */}
+
                 <div className="container">
                     <div className="row my-3">
                         <div className="col">
-                            <button
-                                onClick={(e) => this.handleItemClick(e, 'sign-in')}
-                                name="signin"
-                                id="signin"
-                            >Sign-in</button>
-                            <button
-                                onClick={(e) => this.handleItemClick(e, 'sign-out')}
-                                name="signout"
-                                id="signout"
-                            >Sign-out</button>
-                            <div>You are signed <h2>{this.state.sign ? "in" : "out"}</h2>!</div>
-                        </div>
-                    </div>
-                    <div className="row my-3">
-                        <div className="col">
                             <GCalendar
-                                events={this.state.events}
+                                events={this.props.events} 
                                 sign={this.state.sign}
                                 handleEventClick={this.handleEventClick}
                                 handleSlotSelect={this.handleSlotSelect}

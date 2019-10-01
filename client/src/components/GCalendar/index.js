@@ -57,7 +57,6 @@ function GCalendar(props) {
     } else {
         return (
             <div className="container">
-                <div>Log in</div>
                 {cal}
             </div>
         )
