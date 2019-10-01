@@ -196,12 +196,12 @@ class Lists extends Component {
                                     </FormBtn>
                             </form>
                         </div>
-                        <div className='col-sm-8'>
+                        <div className='col-sm-8 list-style'>
                             <h4>{this.state.activeListName}</h4>
                             <List>
                             {Object.entries(groupeditems).map((group,index) =>
                             (<ListItem key={group[0]}>
-                                <h5>{group[0]}</h5>
+                                <h5>{group[0] ? group[0] : "Uncategorized"}</h5>
                             <List>
                                 {group[1].map(shopItem => (
                                     <ListItem key={shopItem._id}>

@@ -93,3 +93,26 @@ footer {
 .fa:hover {
   cursor: pointer;
 }
+
+.list-style ul li.list-group-item {
+  border: none;
+  /* border: 1px solid#ccc !important; */
+  /* background: #f5f5f5; */
+}
+
+.list-style ul li.list-group-item ul li.list-group-item {
+  background: #f5f5f5;
+  margin: 2px 0;
+  border: none;
+  border-radius: 4px;
+  /* border-bottom: 1px solid red !important; */
+}
+
+.list-style h5 {
+  padding: 5px 10px;
+  font-size: .9em;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  background: #83c450;
+  color: #fff;
+}
