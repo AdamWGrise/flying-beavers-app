@@ -24,7 +24,7 @@ const ItemSchema = new Schema({
     required: false
   },
   needed: {
-    type: Boolean,
+    type: Number,
     required: false,
     default: true
   },

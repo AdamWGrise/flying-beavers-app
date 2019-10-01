@@ -16,13 +16,17 @@ export default {
   },
   // Stars the shopItem with the given id
   starShopItem: function (id) {
-    return axios.put("/api/shopItems/" + id);
+    return axios.put("/api/shopItems/star/" + id);
+  },
+  // Checks/Needed the shopItem with the given id
+  checkShopItem: function (id) {
+    return axios.put("/api/shopItems/check/" + id);
   },
   // Saves a shopItem to the database
   saveShopItem: function (shopItemData) {
     console.log("shopItemData", shopItemData);
     return axios.post("/api/shopItems", shopItemData);
-  },  
+  },
   // Gets all shopLists
   getShopLists: function () {
     return axios.get("/api/shopLists");
