@@ -15,8 +15,8 @@ function Carousel () {
           <div className='carousel-item max-height active'>
             <img src='planner.jpg' className='d-block w-100' alt='...' />
             <div className='carousel-caption d-none d-md-block'>
-              <h5 className='car-1'>Share your lists</h5>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <h5 className='car-1'>Share your shopping lists</h5>
+              <p>Keep the home shopping lists in one place in the cloud - everyone in the family can add items, then remove them while shopping.</p>
             </div>
           </div>
           {/* Second item */}
@@ -24,15 +24,15 @@ function Carousel () {
             <img src='indoors-3203076_1280.jpg' className='d-block w-100' alt='...' />
             <div className='carousel-caption d-none d-md-block'>
               <h5 className='car-1'>Share your schedules</h5>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <p>Show the family's calendars in one place for easier logistics and planning.</p>
             </div>
           </div>
           {/* Third item */}
           <div className='carousel-item max-height'>
             <img src='todo.jpg' className='d-block w-100' alt='...' />
             <div className='carousel-caption d-none d-md-block'>
-              <h5 className='car-1'>Share your important information</h5>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <h5 className='car-1'>Share your family info</h5>
+              <p>One unified place to store everything from health insurance information to details on your cell phone warranty; family locations like schools and workplaces to electrical schematics of your home - any data you want can go here.</p>
             </div>
           </div>
         </div>
