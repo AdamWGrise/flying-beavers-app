@@ -72,3 +72,24 @@ footer {
   padding: 10px;
   border: 3px solid #fff;
 }
+
+.list-w-1 {
+  width: 50px;
+}
+
+.list-w-2 {
+  width: 100px;
+}
+
+.list-w-3 {
+  width: 100%;
+}
+
+.star-btn {
+  float: right;
+  margin: 0 20px;
+}
+
+.fa:hover {
+  cursor: pointer;
+}

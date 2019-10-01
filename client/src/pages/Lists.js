@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Footer from '../components/Footer';
-import { Select, Option, Input, FormBtn } from "../components/Form";
+import { Input, FormBtn } from "../components/Form";
 import API from "../utils/API";
 import DeleteBtn from "../components/DeleteBtn";
 import StarBtn from "../components/StarBtn";
+import CheckBtn from "../components/CheckBtn";
+
 import { List, ListItem } from "../components/List";
 import ListClick from "../components/ListClick";
 import "./styles.css";
@@ -44,7 +46,8 @@ class Lists extends Component {
             .then(res => this.setState({
                 shopLists: res.data,
                 activeListName: res.data[0] ? res.data[0].listName : "All",
-                activeListId: res.data[0] ? res.data[0]._id : 0
+                activeListId: res.data[0] ? res.data[0]._id : 0,
+                newShopList: ""
             })
             )
             .catch(err => console.log(err));
@@ -52,9 +55,15 @@ class Lists extends Component {
 
     loadShopItems = () => {
         API.getShopItems()
-            .then(res => this.setState({ shopItems: res.data.filter(shopItem => {
-                return shopItem.shoppingList === this.state.activeListId;
-            }) })
+            .then(res => this.setState({
+                shopItems: res.data.filter(shopItem => {
+                    return shopItem.shoppingList === this.state.activeListId;
+                }),
+                newShopItem: "",
+                category: "",
+                quantity: "1",
+                quantityUnits: "",
+            })
             )
             .catch(err => console.log(err));
     };
@@ -69,6 +78,13 @@ class Lists extends Component {
     starShopItem = id => {
         console.log("*Click* - update");
         API.starShopItem(id)
+            .then(res => this.loadShopItems())
+            .catch(err => console.log(err));
+    };
+
+    checkShopItem = id => {
+        console.log("*Click* - update");
+        API.checkShopItem(id)
             .then(res => this.loadShopItems())
             .catch(err => console.log(err));
     };
@@ -96,20 +112,20 @@ class Lists extends Component {
         this.loadShopItems();
     };
 
-    handleSelectChange = event => {
-        console.log("handleSelectChange event:", event);
-        const { value } = event.target;
-        const activeListId = value;
-        const activeListObject = this.state.shopLists.filter(function (list) {
-            return (list._id === activeListId);
-        });
-        const shoppingListName = activeListObject[0] ? activeListObject[0].listName : "All";
-        this.setState({
-            activeListId: activeListId,
-            activeListName: shoppingListName
-        });
-        this.loadShopItems();
-    };
+    // handleSelectChange = event => {
+    //     console.log("handleSelectChange event:", event);
+    //     const { value } = event.target;
+    //     const activeListId = value;
+    //     const activeListObject = this.state.shopLists.filter(function (list) {
+    //         return (list._id === activeListId);
+    //     });
+    //     const shoppingListName = activeListObject[0] ? activeListObject[0].listName : "All";
+    //     this.setState({
+    //         activeListId: activeListId,
+    //         activeListName: shoppingListName
+    //     });
+    //     this.loadShopItems();
+    // };
 
     // Save new shopping ITEM to the database
     handleFormSubmit = event => {
@@ -153,30 +169,10 @@ class Lists extends Component {
                     <div className='row'>
                         <div className='col-sm-4'>
                             <h4>Your Lists</h4>
-
-
-                            <ListClick 
+                            <ListClick
                                 list={this.state.shopLists}
                                 onClick={this.handleListClick}
                             />
-
-
-                            <form>
-                                <Select
-                                    className="form-control form-control-sm"
-                                    onChange={this.handleSelectChange}
-                                    name="activeListId"
-                                >
-                                    {this.state.shopLists.map(shopList => (
-                                        <Option
-                                            key={shopList._id}
-                                            value={shopList._id}
-                                        >
-                                            {shopList.listName}
-                                        </Option>
-                                    ))}
-                                </Select>
-                            </form>
                             <br />
                             <form>
                                 <Input
@@ -199,57 +195,79 @@ class Lists extends Component {
                             <List>
                                 {this.state.shopItems.map(shopItem => (
                                     <ListItem key={shopItem._id}>
-                                        <StarBtn
-                                            onClick={() => this.starShopItem(shopItem._id)}
-                                            starred={shopItem.starred}
+                                        <CheckBtn
+                                            onClick={() => this.checkShopItem(shopItem._id)}
+                                            checked={shopItem.needed}
                                         />
                                         <span className="shoppinglist-item">
                                             {shopItem.itemName}, {shopItem.quantity} {shopItem.quantityUnits}
                                         </span>
                                         <DeleteBtn onClick={() => this.deleteShopItem(shopItem._id)} />
+                                        <StarBtn
+                                            onClick={() => this.starShopItem(shopItem._id)}
+                                            starred={shopItem.starred}
+                                        />
                                     </ListItem>
                                 ))}
                             </List>
                             <br />
-                            <div className="card">
+
+
+                            {/* Add List Item */}
+                            {/* <div className="card"> */}
+                            <div className="d-flex justify-content-center">
                                 <form>
-                                    <Input
-                                        value={this.state.newShopItem}
-                                        onChange={this.handleInputChange}
-                                        name="newShopItem"
-                                        placeholder="(Add an item)"
-                                        className="form-control list-input-1 form-control-sm"
-                                    />
-                                    <Input
-                                        value={this.state.quantity}
-                                        onChange={this.handleInputChange}
-                                        name="quantity"
-                                        placeholder="(Quantity)"
-                                        className="form-control list-input-2 form-control-sm"
-                                    />
-                                    <Input
-                                        value={this.state.quantityUnits}
-                                        onChange={this.handleInputChange}
-                                        name="quantityUnits"
-                                        placeholder="(Units)"
-                                        className="form-control form-control-sm"
-                                    />
-                                    <Input
-                                        value={this.state.category}
-                                        onChange={this.handleInputChange}
-                                        name="category"
-                                        placeholder="(Category)"
-                                        className="form-control form-control-sm"
-                                    />
-                                    <FormBtn
-                                        onClick={this.handleFormSubmit}
-                                        className="form-control form-control-sm btn btn-primary list-submit-btn"
-                                    >
-                                        Add item
-                                    </FormBtn>
+                                    <div className="form-row">
+                                        <div className="col-auto">
+                                            <Input
+                                                value={this.state.newShopItem}
+                                                onChange={this.handleInputChange}
+                                                name="newShopItem"
+                                                placeholder="(Add an item)"
+                                                className="form-control form-control-sm list-w-3"
+                                            />
+                                        </div>
+                                        <div className="col-auto">
+                                            <Input
+                                                value={this.state.quantity}
+                                                onChange={this.handleInputChange}
+                                                name="quantity"
+                                                placeholder="(Quantity)"
+                                                className="form-control form-control-sm list-w-1"
+                                            />
+                                        </div>
+                                        <div className="col-auto">
+                                            <Input
+                                                value={this.state.quantityUnits}
+                                                onChange={this.handleInputChange}
+                                                name="quantityUnits"
+                                                placeholder="(Units)"
+                                                className="form-control form-control-sm list-w-2"
+                                            />
+                                        </div>
+                                        <div className="col-auto">
+                                            <Input
+                                                value={this.state.category}
+                                                onChange={this.handleInputChange}
+                                                name="category"
+                                                placeholder="(Category)"
+                                                className="form-control form-control-sm list-w-3"
+                                            />
+                                        </div>
+                                        <div className="col-auto">
+                                            <FormBtn
+                                                onClick={this.handleFormSubmit}
+                                                className="form-control form-control-sm btn btn-primary list-w-3"
+                                            >Add item</FormBtn>
+                                        </div>
+                                    </div>
                                 </form>
                                 <br />
                             </div>
+                            {/* </div> */}
+                            {/* End Add List Item */}
+
+
                         </div>
                     </div>
                     <div className='row'>
@@ -258,7 +276,7 @@ class Lists extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         );
     }
 };
