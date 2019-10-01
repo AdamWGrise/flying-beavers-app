@@ -159,9 +159,15 @@ class Lists extends Component {
         }
     };
 
-
+    groupBy = (xs, key) => {
+        return xs.reduce(function(rv, x) {
+            (rv[x[key]] = rv[x[key]] || []).push(x);
+            return rv;
+          }, {});        
+    }
 
     render() {
+        let groupeditems = this.groupBy(this.state.shopItems, 'category');
 
         return (
             <div id='content'>
@@ -193,7 +199,11 @@ class Lists extends Component {
                         <div className='col-sm-8'>
                             <h4>{this.state.activeListName}</h4>
                             <List>
-                                {this.state.shopItems.map(shopItem => (
+                            {Object.entries(groupeditems).map((group,index) =>
+                            (<ListItem key={group[0]}>
+                                <h5>{group[0]}</h5>
+                            <List>
+                                {group[1].map(shopItem => (
                                     <ListItem key={shopItem._id}>
                                         <CheckBtn
                                             onClick={() => this.checkShopItem(shopItem._id)}
@@ -202,6 +212,7 @@ class Lists extends Component {
                                         <span className="shoppinglist-item">
                                             {shopItem.itemName}, {shopItem.quantity} {shopItem.quantityUnits}
                                         </span>
+                                        
                                         <DeleteBtn onClick={() => this.deleteShopItem(shopItem._id)} />
                                         <StarBtn
                                             onClick={() => this.starShopItem(shopItem._id)}
@@ -211,7 +222,8 @@ class Lists extends Component {
                                 ))}
                             </List>
                             <br />
-
+                            </ListItem>))}
+                            </List>
 
                             {/* Add List Item */}
                             {/* <div className="card"> */}
