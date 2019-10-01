@@ -15,8 +15,8 @@ function Carousel () {
           <div className='carousel-item max-height active'>
             <img src='planner.jpg' className='d-block w-100' alt='...' />
             <div className='carousel-caption d-none d-md-block'>
-              <h5 className='car-1'>Share your lists</h5>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <h5 className='car-1'>Share your to-do lists</h5>
+              <p>"ClanManager shares the family to-do lists so no one forgets about grocery shopping or taking out the trash"</p>
             </div>
           </div>
           {/* Second item */}
@@ -24,7 +24,7 @@ function Carousel () {
             <img src='indoors-3203076_1280.jpg' className='d-block w-100' alt='...' />
             <div className='carousel-caption d-none d-md-block'>
               <h5 className='car-1'>Share your schedules</h5>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit".</p>
             </div>
           </div>
           {/* Third item */}
