@@ -6,7 +6,7 @@ import moment from "moment";
 import './styles.css';
 
 const localizer = momentLocalizer(moment);
-const now = new Date();
+// const now = new Date();
 
 function convertEvents(events) {
     let r = [];
@@ -34,7 +34,6 @@ function GCalendar(props) {
         onSelectEvent={props.handleEventClick}
         onSelectSlot={props.handleSlotSelect}
     />
-
     if (props.sign) {
         if (props.events.length > 0) {
             return (
@@ -58,7 +57,7 @@ function GCalendar(props) {
     } else {
         return (
             <div className="container">
-                <div>log in</div>
+                <div>Log in</div>
                 {cal}
             </div>
         )

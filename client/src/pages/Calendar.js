@@ -6,21 +6,76 @@ import ApiCalendar from 'react-google-calendar-api';
 // import API from "../utils/API";
 import "./styles.css";
 
+function EditEventDialog(props) {
+    console.log(" Calendar page: * * * fn EditEventDialog(props)");
+    console.log(" props.sign: ", props.sign);
+    if (props.sign) {
+        return (
+            <>
+                <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="exampleModalLabel">
+                                    {props.events.length > 0 && props.modalEvent && <p>{props.events[0].id}</p>}
+                                </h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                <form>
+                                    Title<br />
+                                    <input type="text" name="summary" defaultValue="Title"></input><br />
+                                    Description<br />
+                                    <input type="text" name="description" defaultValue="Description"></input><br />
+                                    Start<br />
+                                    <input type="text" name="start" defaultValue="Start"></input><br />
+                                    Stop<br />
+                                    <input type="text" name="stop" defaultValue="Stop"></input><br />
+                                </form>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" className="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </>
+        )
+    } else {
+        return (
+            <>
+                <p>Amen</p>
+            </>
+            )
+    }
+}
+
 class CalendarPage extends Component {
     constructor(props) {
+        console.log(" Calendar page: * * * CalendarPage constructor");
         super(props)
         this.state = {
             testState: 0,
-            sign: ApiCalendar.sign,
+            sign: false,
+            modalEvent: -1,
+            slot: [],
             events: []
         };
+    }
+
+    componentDidMount = () => {
         ApiCalendar.onLoad(() => {
-            console.log("stuff");
+            console.log(" Calendar page: * * * ApiCalendar.onLoad");
             ApiCalendar.listenSign(this.signUpdate);
         });
+
     }
 
     handleItemClick = (event, name) => {
+        console.log(" Calendar page: * * * Clicky - handleItemClick");
         if (name === 'sign-in') {
             ApiCalendar.handleAuthClick();
         } else if (name === 'sign-out') {
@@ -30,17 +85,21 @@ class CalendarPage extends Component {
     }
 
     handleEventClick = (event) => {
-        console.log(this.state.events[event.id]);
+        console.log(" Calendar page: * * * Clicky - handleEventClick");
+        this.setState({ modalEvent: event.id })
         window.$("#exampleModal").modal();
     }
+
     handleSlotSelect = (slot) => {
-        console.log(slot);
+        console.log(" Calendar page: * * * Clicky - handleSlotSelect");
+        this.setState({ modalEvent: -1 })
+        this.setState({ slot })
         window.$("#exampleModal").modal();
     }
 
     signUpdate = (sign) => {
+        console.log(" Calendar page: * * * signUpdate");
         let events = [];
-        console.log("signUpdate");
         if (ApiCalendar.sign)
             ApiCalendar.listUpcomingEvents(10)
                 .then(({ result }) => {
@@ -54,30 +113,10 @@ class CalendarPage extends Component {
     }
 
     render(props) {
-        console.log("render(props)");
-        const eventList = this.state.events;
+        console.log(" Calendar page: * * * render(props)");
         return (
             <div id='content'>
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                ...
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                <EditEventDialog event_idx={this.state.modalEvent} events={this.state.events} slot={this.state.slot} />
                 {/* <AddEventModal /> */}
                 <div className="container">
                     <div className="row my-3">
@@ -86,20 +125,13 @@ class CalendarPage extends Component {
                                 onClick={(e) => this.handleItemClick(e, 'sign-in')}
                                 name="signin"
                                 id="signin"
-                            >
-                                Sign-in
-                </button>
+                            >Sign-in</button>
                             <button
                                 onClick={(e) => this.handleItemClick(e, 'sign-out')}
                                 name="signout"
                                 id="signout"
-                            >
-                                Sign-out
-                </button>
-                            <div>
-                                You are signed {this.state.sign ? "in" : "out"}!
-                    </div>
-
+                            >Sign-out</button>
+                            <div>You are signed {this.state.sign ? "in" : "out"}!</div>
                         </div>
                     </div>
                     <div className="row my-3">
