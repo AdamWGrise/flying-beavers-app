@@ -29,12 +29,5 @@ Our app is a full stack MERN application that has the following features:
 
 # Technologies Utilized
 
-Express
-Google Calendar API
-Heroku
-Mongoose
-MLab
-Node.js
-React 
-React Router
+Express, Google Calendar API, Heroku, Mongoose, MLab, Node.js, React, React Router
 
