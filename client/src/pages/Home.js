@@ -26,7 +26,7 @@ class Home extends Component {
                                 paragraph='When families are on the go, it can be challenging to stay organized. 
                                 Time is wasted when working tirelessly to link schedules, calendars, lists, and tasks. 
                                 ClanManager simplifies the busy parts of life so you can spend more time together, and less time organizing. 
-                                ClanManager syncs all the important household information so everyone can always stay on the same page!'
+                                We&#39;ll sync all the important household information, so everyone can always stay on the same page.'
                             />
                         </div>
                     </div>
