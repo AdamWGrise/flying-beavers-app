@@ -4,6 +4,10 @@
 
 Kiya Abdulahi, Allison Champlin, Adam Grise, Róisín Hayes Owens, Tara James, and Jessica LaPage
 
+## Note
+
+A database is not currently connected to this app as of January 2020. Lists and calendars aren't going to work as intended - but the React components and navigation are still functional for demonstration purposes. -Adam
+
 # Pitch
 
 Clan Manager is an one-stop-shop family application that allows families to share information!  Family members can use the app to view a shared calendar, shopping lists, and information about eachother including birthdays and emergency information. 
