@@ -16,16 +16,22 @@ function Carousel () {
             <img src='planner.jpg' className='d-block w-100' alt='...' />
             <div className='carousel-caption d-none d-md-block'>
               <h5 className='car-1'>Share your to-do lists</h5>
-              <p>Use our cloud based lists that updates when items are added and removed.</p>
-              <p>Rest easy, there's milk in the fridge.</p>
+
+              <p>"ClanManager shares the family to-do lists so no one forgets about grocery shopping or taking out the trash"</p>
+              <h5 className='car-1'>Share your shopping lists</h5>
+              <p>Keep the home shopping lists in one place in the cloud - everyone in the family can add items, then remove them while shopping.</p>
+
             </div>
           </div>
           {/* Second item */}
           <div className='carousel-item max-height active'>
             <img src='indoors-3203076_1280.jpg' className='d-block w-100' alt='...' />
             <div className='carousel-caption d-none d-md-block'>
-              <h5 className='car-2'>Share your schedules</h5>
-              <p>Keep everyone on the same page, you'll always remember to grab the kids from soccer practice.</p>
+
+              <h5 className='car-1'>Share your schedules</h5>
+              <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit".</p>
+              <p>Show the family's calendars in one place for easier logistics and planning.</p>
+
             </div>
           </div>
           {/* Third item */}
