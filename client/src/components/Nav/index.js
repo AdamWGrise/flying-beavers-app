@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 import './style.css'
 
 class Nav extends Component {
@@ -14,19 +15,19 @@ class Nav extends Component {
           <div className='collapse navbar-collapse justify-content-end' id='navbarNavDropdown'>
             <ul className='navbar-nav'>
               <li className='nav-item'>
-                <a className='nav-link' href='/' value='Home'> Home</a>
+                <Link className='nav-link' to='/' value='Home'> Home</Link>
               </li>
               <li className='nav-item'>
-                <a className='nav-link' href='/lists' value='Shopping'>Shopping</a>
+                <Link className='nav-link' to='/lists' value='Shopping'>Shopping</Link>
               </li>
               <li className='nav-item'>
-                <a className='nav-link' href='/lists' value='Calendar'>Calendar</a>
+                <Link className='nav-link' to='/calendar' value='Calendar'>Calendar</Link>
               </li>
               <li className='nav-item'>
-                <a className='nav-link' href='/family-info' value='Family Info'>Family Info</a>
+                <Link className='nav-link' to='/family-info' value='Family Info'>Family Info</Link>
               </li>
               <li className='nav-item'>
-                <a className='nav-link' href='/Login' value='Register'>Register/Login</a>
+                <Link className='nav-link' to='/Login' value='Register'>Register/Login</Link>
               </li>
             </ul>
           </div>

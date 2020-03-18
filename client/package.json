@@ -7,8 +7,11 @@
     "animate.css": "^3.7.2",
     "axios": "^0.19.0",
     "font-awesome": "^4.7.0",
+    "moment": "^2.24.0",
     "react": "^16.9.0",
+    "react-big-calendar": "^0.22.1",
     "react-dom": "^16.8.2",
+    "react-google-calendar-api": "^1.0.10",
     "react-notifications-component": "^2.1.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "^2.1.1"

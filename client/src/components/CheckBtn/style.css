@@ -1,0 +1,12 @@
+.delete-btn {
+  float: right;
+  color: #e74944;
+}
+
+.gold {
+  color: goldenrod;
+}
+
+.disabled {
+  color: #ccc;
+}
